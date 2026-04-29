@@ -1,16 +1,23 @@
 version: 2
+# Security-only mode: open-pull-requests-limit: 0 disables routine version-bump PRs.
+# GitHub's security advisory feed still raises Dependabot alerts and opens PRs
+# for vulnerabilities even with the limit at 0 — that's the supported pattern.
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#open-pull-requests-limit
 updates:
   - package-ecosystem: pip
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 0
     labels:
       - dependencies
+      - security
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    open-pull-requests-limit: 0
     labels:
       - dependencies
+      - security
