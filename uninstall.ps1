@@ -25,7 +25,8 @@ function Main {
         "ads-audit", "ads-google", "ads-meta", "ads-youtube",
         "ads-linkedin", "ads-tiktok", "ads-microsoft", "ads-creative",
         "ads-landing", "ads-budget", "ads-plan", "ads-competitor", "ads-apple",
-        "ads-dna", "ads-create", "ads-generate", "ads-photoshoot"
+        "ads-dna", "ads-create", "ads-generate", "ads-photoshoot",
+        "ads-math", "ads-test", "ads-update"
     )
     foreach ($skill in $SubSkills) {
         $SkillPath = Join-Path $ClaudeDir "skills\$skill"

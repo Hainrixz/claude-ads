@@ -8,7 +8,7 @@ main() {
     rm -rf "${HOME}/.claude/skills/ads"
 
     # Remove sub-skills
-    for skill in ads-audit ads-google ads-meta ads-youtube ads-linkedin ads-tiktok ads-microsoft ads-creative ads-landing ads-budget ads-plan ads-competitor ads-apple ads-dna ads-create ads-generate ads-photoshoot; do
+    for skill in ads-audit ads-google ads-meta ads-youtube ads-linkedin ads-tiktok ads-microsoft ads-creative ads-landing ads-budget ads-plan ads-competitor ads-apple ads-dna ads-create ads-generate ads-photoshoot ads-math ads-test ads-update; do
         rm -rf "${HOME}/.claude/skills/${skill}"
     done
 
