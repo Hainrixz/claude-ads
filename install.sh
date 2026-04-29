@@ -59,7 +59,8 @@ main() {
     if [ -d "${TEMP_DIR}/claude-ads/scripts" ]; then
         echo "→ Installing Python scripts..."
         mkdir -p "${SCRIPTS_DIR}"
-        cp "${TEMP_DIR}/claude-ads/scripts/"*.py "${SCRIPTS_DIR}/"
+        # Recursive copy so scripts/lib/ (vendored research pipeline) is included
+        cp -R "${TEMP_DIR}/claude-ads/scripts/." "${SCRIPTS_DIR}/"
         cp "${TEMP_DIR}/claude-ads/requirements.txt" "${SKILL_DIR}/requirements.txt"
     fi
 

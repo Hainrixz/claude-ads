@@ -73,7 +73,8 @@ function Main {
             Write-Host "Installing Python scripts..."
             $ScriptsDir = Join-Path $SkillDir "scripts"
             New-Item -ItemType Directory -Path $ScriptsDir -Force | Out-Null
-            Copy-Item "$ScriptsSource\*.py" -Destination "$ScriptsDir\" -Force
+            # Recursive copy so scripts\lib\ (vendored research pipeline) is included
+            Copy-Item "$ScriptsSource\*" -Destination "$ScriptsDir\" -Recurse -Force
             Copy-Item "$TempDir\claude-ads\requirements.txt" -Destination "$SkillDir\requirements.txt" -Force
         }
 

@@ -18,7 +18,7 @@ This skill regenerates per-platform reference files with what has actually chang
 
 **Before doing anything else**, you MUST:
 
-1. Read the contents of `references/update-cost-warning.md` and print it verbatim to the user.
+1. Read the contents of `ads/references/update-cost-warning.md` and print it verbatim to the user.
 2. Compute the estimated token cost for the requested platform(s):
    - Single platform: **~50,000–150,000 tokens** at default depth
    - `all`: **~500,000+ tokens** at default depth
@@ -129,7 +129,7 @@ print(json.dumps([{'source': i.source, 'title': i.title, 'url': i.url, 'publishe
 
 ## Step 5 — Render the digest
 
-Write the output to `references/<platform>-changelog-30d.md` (overwrite if it exists). Use this exact structure:
+Write the output to `ads/references/<platform>-changelog-30d.md` (overwrite if it exists). Use this exact structure:
 
 ```markdown
 # <Display Name> — Last 30 Days
@@ -164,7 +164,7 @@ If a section has no items, print: `_No items found in the last 30 days from this
 
 ## Step 6 — Append to existing platform audit
 
-After writing the changelog file, **append** (do not overwrite) a "Recent Updates" appendix to `references/<platform>-audit.md`. Keep it short — top 5 most-impactful items only:
+After writing the changelog file, **append** (do not overwrite) a "Recent Updates" appendix to `ads/references/<platform>-audit.md`. Keep it short — top 5 most-impactful items only:
 
 ```markdown
 
@@ -172,7 +172,7 @@ After writing the changelog file, **append** (do not overwrite) a "Recent Update
 
 ## Recent Updates (Last 30 Days)
 
-_Auto-appended by `/ads update <platform>` on <YYYY-MM-DD>. See `references/<platform>-changelog-30d.md` for the full digest._
+_Auto-appended by `/ads update <platform>` on <YYYY-MM-DD>. See `ads/references/<platform>-changelog-30d.md` for the full digest._
 
 1. <impact> — [<title>](<url>) — <YYYY-MM-DD>
 2. ...
@@ -187,7 +187,7 @@ If the audit file already has a "Recent Updates" appendix from a prior run, **re
 Print a one-line summary:
 
 ```
-✓ /ads update <platform> complete — wrote references/<platform>-changelog-30d.md (<N> items) and appended top 5 to references/<platform>-audit.md.
+✓ /ads update <platform> complete — wrote ads/references/<platform>-changelog-30d.md (<N> items) and appended top 5 to ads/references/<platform>-audit.md.
 ```
 
 For `all` mode, print this once per platform as you complete it, and a final summary line:

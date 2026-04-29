@@ -154,8 +154,8 @@ def main() -> None:
     g.add_argument("--prep", action="store_true", help="Write changelog stub files for the skill prompt to fill")
     p.add_argument(
         "--out-dir",
-        default="references",
-        help="Output directory for stub files (default: references)",
+        default="ads/references",
+        help="Output directory for stub files (default: ads/references)",
     )
     args = p.parse_args()
 

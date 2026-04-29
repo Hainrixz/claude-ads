@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/web-tododeia.com-1f6feb)](https://tododeia.com)
 [![Instagram](https://img.shields.io/badge/IG-%40soyenriquerocha-E4405F?logo=instagram)](https://instagram.com/soyenriquerocha)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.0.0-blue)](https://github.com/Hainrixz/claude-ads/releases)
+[![Version](https://img.shields.io/badge/version-2.0.1-blue)](https://github.com/Hainrixz/claude-ads/releases)
 [![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://claude.ai/claude-code)
 
 Comprehensive paid advertising audit and optimization skill for Claude Code. Covers Google Ads, Meta Ads, YouTube Ads, LinkedIn Ads, TikTok Ads, Microsoft Ads, and Apple Ads with **250+ audit checks**, industry-specific templates, parallel subagent delegation, PPC financial modeling, A/B test design, PDF report generation, and — new in v2.0 — **`/ads update`**, a self-refreshing knowledge layer that pulls the last 30 days of platform changes (features, deprecations, policy updates) directly from Reddit, Hacker News, official changelogs, and the open web.
@@ -169,7 +169,7 @@ Generates a unified **Ads Health Score (0-100)** with prioritized action plan.
 
 ### `/ads update <platform|all>` (NEW in v2.0)
 
-**Self-refreshing platform knowledge.** Ad platforms ship API changes, deprecations, and new features almost weekly — your audit is only as good as your reference data. `/ads update` regenerates the per-platform reference files in `references/<platform>-changelog-30d.md` (and appends a "Recent Updates" block to `references/<platform>-audit.md`) by aggregating the last 30 days of changes from:
+**Self-refreshing platform knowledge.** Ad platforms ship API changes, deprecations, and new features almost weekly — your audit is only as good as your reference data. `/ads update` regenerates the per-platform reference files in `ads/references/<platform>-changelog-30d.md` (and appends a "Recent Updates" block to `ads/references/<platform>-audit.md`) by aggregating the last 30 days of changes from:
 
 - **Official platform changelogs** (Google Ads release notes, Meta Marketing API changelog, TikTok / LinkedIn / Microsoft / Apple Ads release pages)
 - **Practitioner discussion** (r/PPC, r/GoogleAds, r/FacebookAds, r/TikTokAds, r/LinkedInAds, r/adops, Hacker News)
@@ -241,7 +241,7 @@ Comprehensive coverage across all platforms with weighted severity scoring:
 
 ### Self-Updating References (NEW in v2.0)
 
-Ad platforms move fast. The seven `references/<platform>-audit.md` files ship with curated checks, but `/ads update` keeps them current by digesting the last 30 days of changes per platform — official changelogs, practitioner discussion, and industry press — into dated `references/<platform>-changelog-30d.md` files. Run monthly to stay current without re-cloning.
+Ad platforms move fast. The seven `ads/references/<platform>-audit.md` files ship with curated checks, but `/ads update` keeps them current by digesting the last 30 days of changes per platform — official changelogs, practitioner discussion, and industry press — into dated `ads/references/<platform>-changelog-30d.md` files. Run monthly to stay current without re-cloning.
 
 ### Ads Health Score (0-100)
 Weighted scoring algorithm with severity multipliers:

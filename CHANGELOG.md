@@ -5,6 +5,15 @@ All notable changes to claude-ads are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2026-04-29
+
+### Fixed
+
+- **Install path coverage** — `install.sh` and `install.ps1` now recursively copy `scripts/` so the vendored `scripts/lib/` (dates, signals, dedupe, story) actually deploys. Previously, only top-level `*.py` files were copied, which would have caused `from lib import ...` to fail at runtime on installed environments.
+- **Reference file location** — moved the 8 new reference files (7 platform changelogs + `update-cost-warning.md`) from top-level `references/` to `ads/references/`, matching the existing convention and the install scripts' source path. Updated all path references in `README.md`, `CHANGELOG.md`, `skills/ads-update/SKILL.md`, and `scripts/run_update.py` accordingly.
+
+These were structural bugs in v2.0.0 that would have made `/ads update` fail for any user installing via the install scripts. Pure filesystem-layout fix; no behavior changes.
+
 ## [2.0.0] - 2026-04-28
 
 This release is a community fork. Maintained by [tododeia.com](https://tododeia.com).
@@ -16,7 +25,7 @@ This release is a community fork. Maintained by [tododeia.com](https://tododeia.
 - Vendored time-bounded research pipeline at `scripts/lib/` (dates, signals, dedupe + `Story` dataclass) — adapted from [last30days-skill](https://github.com/mvanhorn/last30days-skill) (MIT, by Matt Van Horn). Full attribution at `scripts/lib/THIRD_PARTY_NOTICES.md`.
 - Per-platform source configuration at `scripts/ads_sources.py` (7 platforms, 23 subreddits, 17 official changelog URLs).
 - CLI helper `scripts/run_update.py` with `--dry-run` and `--prep` modes.
-- Canonical credit-cost warning at `references/update-cost-warning.md`, surfaced in README, `ads/SKILL.md`, and the new ads-update skill.
+- Canonical credit-cost warning at `ads/references/update-cost-warning.md`, surfaced in README, `ads/SKILL.md`, and the new ads-update skill.
 - README now leads with a "Cost & Credits" section explaining the per-platform vs `all` cost tradeoff and recommending Sonnet over Opus for `/ads update` runs.
 
 ### Changed
