@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250" width="900" height="250" font-family="'Space Grotesk', system-ui, sans-serif">
+  <rect width="900" height="250" fill="#0A0A0A" rx="16"/>
+  <text x="450" y="28" text-anchor="middle" fill="#F5F5F0" font-size="16" font-weight="700">Audit Lifecycle</text>
+  <line x1="80" y1="100" x2="820" y2="100" stroke="#2D2D2D" stroke-width="2"/>
+  <circle cx="80.0" cy="100" r="20" fill="#E07850" opacity="0.08"/>
+  <circle cx="80.0" cy="100" r="14" fill="#E07850"/>
+  <text x="80.0" y="104" text-anchor="middle" fill="#0A0A0A" font-size="11" font-weight="700">1</text>
+  <text x="80.0" y="68" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">Setup</text>
+  <line x1="80.0" y1="116" x2="80.0" y2="134" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="20.0" y="136" width="120" height="52" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <text x="80.0" y="158" text-anchor="middle" fill="#888888" font-size="9">Provide industry,</text>
+  <text x="80.0" y="174" text-anchor="middle" fill="#888888" font-size="9">budget, data</text>
+  <line x1="96.0" y1="100" x2="212.0" y2="100" stroke="#2D2D2D" stroke-width="2"/>
+  <polygon points="208.0,96 214.0,100 208.0,104" fill="#2D2D2D"/>
+  <circle cx="228.0" cy="100" r="20" fill="#E07850" opacity="0.08"/>
+  <circle cx="228.0" cy="100" r="14" fill="#E07850"/>
+  <text x="228.0" y="104" text-anchor="middle" fill="#0A0A0A" font-size="11" font-weight="700">2</text>
+  <text x="228.0" y="68" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">Detect</text>
+  <line x1="228.0" y1="116" x2="228.0" y2="134" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="168.0" y="136" width="120" height="52" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <text x="228.0" y="158" text-anchor="middle" fill="#888888" font-size="9">Auto-detect</text>
+  <text x="228.0" y="174" text-anchor="middle" fill="#888888" font-size="9">business type</text>
+  <line x1="244.0" y1="100" x2="360.0" y2="100" stroke="#2D2D2D" stroke-width="2"/>
+  <polygon points="356.0,96 362.0,100 356.0,104" fill="#2D2D2D"/>
+  <circle cx="376.0" cy="100" r="20" fill="#E07850" opacity="0.08"/>
+  <circle cx="376.0" cy="100" r="14" fill="#E07850"/>
+  <text x="376.0" y="104" text-anchor="middle" fill="#0A0A0A" font-size="11" font-weight="700">3</text>
+  <text x="376.0" y="68" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">Analyze</text>
+  <line x1="376.0" y1="116" x2="376.0" y2="134" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="316.0" y="136" width="120" height="52" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <text x="376.0" y="158" text-anchor="middle" fill="#888888" font-size="9">6 parallel agents,</text>
+  <text x="376.0" y="174" text-anchor="middle" fill="#888888" font-size="9">250+ checks</text>
+  <line x1="392.0" y1="100" x2="508.0" y2="100" stroke="#2D2D2D" stroke-width="2"/>
+  <polygon points="504.0,96 510.0,100 504.0,104" fill="#2D2D2D"/>
+  <circle cx="524.0" cy="100" r="20" fill="#E07850" opacity="0.08"/>
+  <circle cx="524.0" cy="100" r="14" fill="#E07850"/>
+  <text x="524.0" y="104" text-anchor="middle" fill="#0A0A0A" font-size="11" font-weight="700">4</text>
+  <text x="524.0" y="68" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">Score</text>
+  <line x1="524.0" y1="116" x2="524.0" y2="134" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="464.0" y="136" width="120" height="52" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <text x="524.0" y="158" text-anchor="middle" fill="#888888" font-size="9">Weighted algorithm,</text>
+  <text x="524.0" y="174" text-anchor="middle" fill="#888888" font-size="9">A-F grade</text>
+  <line x1="540.0" y1="100" x2="656.0" y2="100" stroke="#2D2D2D" stroke-width="2"/>
+  <polygon points="652.0,96 658.0,100 652.0,104" fill="#2D2D2D"/>
+  <circle cx="672.0" cy="100" r="20" fill="#E07850" opacity="0.08"/>
+  <circle cx="672.0" cy="100" r="14" fill="#E07850"/>
+  <text x="672.0" y="104" text-anchor="middle" fill="#0A0A0A" font-size="11" font-weight="700">5</text>
+  <text x="672.0" y="68" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">Prioritize</text>
+  <line x1="672.0" y1="116" x2="672.0" y2="134" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="612.0" y="136" width="120" height="52" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <text x="672.0" y="158" text-anchor="middle" fill="#888888" font-size="9">Critical > High ></text>
+  <text x="672.0" y="174" text-anchor="middle" fill="#888888" font-size="9">Medium > Low</text>
+  <line x1="688.0" y1="100" x2="804.0" y2="100" stroke="#2D2D2D" stroke-width="2"/>
+  <polygon points="800.0,96 806.0,100 800.0,104" fill="#2D2D2D"/>
+  <circle cx="820.0" cy="100" r="20" fill="#E07850" opacity="0.08"/>
+  <circle cx="820.0" cy="100" r="14" fill="#E07850"/>
+  <text x="820.0" y="104" text-anchor="middle" fill="#0A0A0A" font-size="11" font-weight="700">6</text>
+  <text x="820.0" y="68" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">Deliver</text>
+  <line x1="820.0" y1="116" x2="820.0" y2="134" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="760.0" y="136" width="120" height="52" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <text x="820.0" y="158" text-anchor="middle" fill="#888888" font-size="9">Action plan +</text>
+  <text x="820.0" y="174" text-anchor="middle" fill="#888888" font-size="9">PDF report</text>
+  <text x="450" y="238" text-anchor="middle" fill="#888888" font-size="10">End-to-end in a single /ads audit invocation</text>
+</svg>

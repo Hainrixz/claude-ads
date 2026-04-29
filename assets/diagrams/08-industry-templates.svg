@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <title>Strategic Ad Planning - Industry Templates</title>
+  <style>text { font-family: 'Space Grotesk', system-ui, sans-serif; }</style>
+  <rect width="800" height="500" fill="#0A0A0A" rx="16"/>
+  <!-- Title -->
+  <text x="400" y="30" font-size="17" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Strategic Ad Planning</text>
+  <line x1="330" y1="42" x2="470" y2="42" stroke="#E07850" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Diamond -->
+  <polygon points="400,60 480,90 400,120 320,90" fill="#0A0A0A" stroke="#E07850" stroke-width="2"/>
+  <text x="400" y="90" font-size="12" fill="#F5F5F0" text-anchor="middle" font-weight="600" dominant-baseline="central">Business Type?</text>
+  <!-- Industry cards -->
+  <rect x="55" y="145" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="55" y="145" width="220" height="70" rx="6" fill="#60A5FA" opacity="0.06" stroke="none"/>
+  <line x1="55" y1="148" x2="55" y2="212" stroke="#60A5FA" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="165.0" y="171" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">SaaS</text>
+  <text x="165.0" y="193" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Google + LinkedIn</text>
+  <rect x="285" y="145" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="285" y="145" width="220" height="70" rx="6" fill="#60A5FA" opacity="0.06" stroke="none"/>
+  <line x1="285" y1="148" x2="285" y2="212" stroke="#60A5FA" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="395.0" y="171" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">E-commerce</text>
+  <text x="395.0" y="193" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Shopping + PMax</text>
+  <rect x="515" y="145" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="515" y="145" width="220" height="70" rx="6" fill="#60A5FA" opacity="0.06" stroke="none"/>
+  <line x1="515" y1="148" x2="515" y2="212" stroke="#60A5FA" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="625.0" y="171" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Local Service</text>
+  <text x="625.0" y="193" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Search + LSA</text>
+  <rect x="55" y="228" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="55" y="228" width="220" height="70" rx="6" fill="#60A5FA" opacity="0.06" stroke="none"/>
+  <line x1="55" y1="231" x2="55" y2="295" stroke="#60A5FA" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="165.0" y="254" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">B2B Enterprise</text>
+  <text x="165.0" y="276" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">LinkedIn ABM</text>
+  <rect x="285" y="228" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="285" y="228" width="220" height="70" rx="6" fill="#4ADE80" opacity="0.06" stroke="none"/>
+  <line x1="285" y1="231" x2="285" y2="295" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="395.0" y="254" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Info Products</text>
+  <text x="395.0" y="276" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Meta + YouTube</text>
+  <rect x="515" y="228" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="515" y="228" width="220" height="70" rx="6" fill="#4ADE80" opacity="0.06" stroke="none"/>
+  <line x1="515" y1="231" x2="515" y2="295" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="625.0" y="254" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Mobile App</text>
+  <text x="625.0" y="276" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">UAC + Meta</text>
+  <rect x="55" y="311" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="55" y="311" width="220" height="70" rx="6" fill="#F0A830" opacity="0.06" stroke="none"/>
+  <line x1="55" y1="314" x2="55" y2="378" stroke="#F0A830" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="165.0" y="337" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Real Estate</text>
+  <text x="165.0" y="359" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Special Category</text>
+  <rect x="285" y="311" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="285" y="311" width="220" height="70" rx="6" fill="#F0A830" opacity="0.06" stroke="none"/>
+  <line x1="285" y1="314" x2="285" y2="378" stroke="#F0A830" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="395.0" y="337" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Healthcare</text>
+  <text x="395.0" y="359" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">HIPAA</text>
+  <rect x="515" y="311" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="515" y="311" width="220" height="70" rx="6" fill="#F0A830" opacity="0.06" stroke="none"/>
+  <line x1="515" y1="314" x2="515" y2="378" stroke="#F0A830" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="625.0" y="337" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Finance</text>
+  <text x="625.0" y="359" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Special Category</text>
+  <rect x="170" y="394" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="170" y="394" width="220" height="70" rx="6" fill="#4ADE80" opacity="0.06" stroke="none"/>
+  <line x1="170" y1="397" x2="170" y2="461" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="280.0" y="420" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Agency</text>
+  <text x="280.0" y="442" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Multi-client</text>
+  <rect x="410" y="394" width="220" height="70" rx="6" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+  <rect x="410" y="394" width="220" height="70" rx="6" fill="#888888" opacity="0.06" stroke="none"/>
+  <line x1="410" y1="397" x2="410" y2="461" stroke="#888888" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="520.0" y="420" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Generic</text>
+  <text x="520.0" y="442" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Universal</text>
+  <line x1="400" y1="118" x2="165.0" y2="145" stroke="#2D2D2D" stroke-width="1"/>
+  <line x1="400" y1="118" x2="395.0" y2="145" stroke="#2D2D2D" stroke-width="1"/>
+  <line x1="400" y1="118" x2="625.0" y2="145" stroke="#2D2D2D" stroke-width="1"/>
+
+  <!-- Legend -->
+  <circle cx="170" cy="478" r="5" fill="#60A5FA"/>
+  <text x="182" y="478" font-size="10" fill="#888888" text-anchor="start" dominant-baseline="central">Platform-heavy</text>
+  <circle cx="320" cy="478" r="5" fill="#F0A830"/>
+  <text x="332" y="478" font-size="10" fill="#888888" text-anchor="start" dominant-baseline="central">Regulated</text>
+  <circle cx="450" cy="478" r="5" fill="#4ADE80"/>
+  <text x="462" y="478" font-size="10" fill="#888888" text-anchor="start" dominant-baseline="central">Growth</text>
+  <circle cx="560" cy="478" r="5" fill="#888888"/>
+  <text x="572" y="478" font-size="10" fill="#888888" text-anchor="start" dominant-baseline="central">Universal</text>
+</svg>

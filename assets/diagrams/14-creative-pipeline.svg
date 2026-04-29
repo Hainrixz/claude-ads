@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250" width="900" height="250">
+  <title>Creative Pipeline - 5 Stages</title>
+  <style>text { font-family: 'Space Grotesk', system-ui, sans-serif; }</style>
+  <rect width="900" height="250" fill="#0A0A0A" rx="16"/>
+  <text x="450" y="24" font-size="17" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Creative Pipeline</text>
+  <line x1="380" y1="36" x2="520" y2="36" stroke="#E07850" stroke-width="2.5" stroke-linecap="round"/>
+
+  <rect x="68" y="60" width="140" height="140" rx="9" fill="#111111" stroke="#60A5FA" stroke-width="2"/>
+  <circle cx="138" cy="60" r="14" fill="#0A0A0A" stroke="#60A5FA" stroke-width="1.5"/>
+  <text x="138" y="60" font-size="12" fill="#60A5FA" text-anchor="middle" font-weight="bold" dominant-baseline="central">1</text>
+  <text x="138" y="96" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Brand DNA</text>
+  <text x="138" y="116" font-size="9" fill="#60A5FA" text-anchor="middle" dominant-baseline="central">ads-dna</text>
+  <text x="138" y="140" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Extract brand</text>
+  <text x="138" y="156" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">identity + voice</text>
+  <line x1="210" y1="130" x2="222" y2="130" stroke="#E07850" stroke-width="2.5"/>
+  <polygon points="222,126 228,130 222,134" fill="#E07850"/>
+  <rect x="224" y="60" width="140" height="140" rx="9" fill="#111111" stroke="#8b5cf6" stroke-width="2"/>
+  <circle cx="294" cy="60" r="14" fill="#0A0A0A" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="294" y="60" font-size="12" fill="#8b5cf6" text-anchor="middle" font-weight="bold" dominant-baseline="central">2</text>
+  <text x="294" y="96" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Strategy</text>
+  <text x="294" y="116" font-size="9" fill="#8b5cf6" text-anchor="middle" dominant-baseline="central">creative-strategist</text>
+  <text x="294" y="140" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Campaign concepts</text>
+  <text x="294" y="156" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">+ messaging</text>
+  <line x1="366" y1="130" x2="378" y2="130" stroke="#E07850" stroke-width="2.5"/>
+  <polygon points="378,126 384,130 378,134" fill="#E07850"/>
+  <rect x="380" y="60" width="140" height="140" rx="9" fill="#111111" stroke="#E07850" stroke-width="2"/>
+  <circle cx="450" cy="60" r="14" fill="#0A0A0A" stroke="#E07850" stroke-width="1.5"/>
+  <text x="450" y="60" font-size="12" fill="#E07850" text-anchor="middle" font-weight="bold" dominant-baseline="central">3</text>
+  <text x="450" y="96" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Visuals</text>
+  <text x="450" y="116" font-size="9" fill="#E07850" text-anchor="middle" dominant-baseline="central">visual-designer</text>
+  <text x="450" y="140" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Image direction</text>
+  <text x="450" y="156" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">+ specifications</text>
+  <line x1="522" y1="130" x2="534" y2="130" stroke="#E07850" stroke-width="2.5"/>
+  <polygon points="534,126 540,130 534,134" fill="#E07850"/>
+  <rect x="536" y="60" width="140" height="140" rx="9" fill="#111111" stroke="#FF6B35" stroke-width="2"/>
+  <circle cx="606" cy="60" r="14" fill="#0A0A0A" stroke="#FF6B35" stroke-width="1.5"/>
+  <text x="606" y="60" font-size="12" fill="#FF6B35" text-anchor="middle" font-weight="bold" dominant-baseline="central">4</text>
+  <text x="606" y="96" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Copy</text>
+  <text x="606" y="116" font-size="9" fill="#FF6B35" text-anchor="middle" dominant-baseline="central">copy-writer</text>
+  <text x="606" y="140" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Ad headlines,</text>
+  <text x="606" y="156" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">descriptions</text>
+  <line x1="678" y1="130" x2="690" y2="130" stroke="#E07850" stroke-width="2.5"/>
+  <polygon points="690,126 696,130 690,134" fill="#E07850"/>
+  <rect x="692" y="60" width="140" height="140" rx="9" fill="#111111" stroke="#4ADE80" stroke-width="2"/>
+  <circle cx="762" cy="60" r="14" fill="#0A0A0A" stroke="#4ADE80" stroke-width="1.5"/>
+  <text x="762" y="60" font-size="12" fill="#4ADE80" text-anchor="middle" font-weight="bold" dominant-baseline="central">5</text>
+  <text x="762" y="96" font-size="13" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Validate</text>
+  <text x="762" y="116" font-size="9" fill="#4ADE80" text-anchor="middle" dominant-baseline="central">format-adapter</text>
+  <text x="762" y="140" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Platform specs</text>
+  <text x="762" y="156" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">+ compliance</text>
+
+  <!-- Footer -->
+  <text x="450" y="230" font-size="10" fill="#888888" text-anchor="middle" dominant-baseline="central">Each agent runs as a forked Task — parallel where possible, sequential where dependent</text>
+</svg>

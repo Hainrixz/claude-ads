@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6
+        with:
+          python-version: "3.12"
+
+      - name: Check Python syntax
+        run: |
+          find . -name "*.py" -not -path "./.git/*" -not -path "./.github-audit/*" | while read -r f; do
+            python3 -m py_compile "$f" && echo "OK: $f"
+          done
+
+      - name: Validate JSON files
+        run: |
+          for f in .claude-plugin/plugin.json; do
+            python3 -m json.tool "$f" > /dev/null && echo "OK: $f"
+          done
+
+      - name: Check shell script syntax
+        run: |
+          bash -n install.sh && echo "OK: install.sh"
+          bash -n uninstall.sh && echo "OK: uninstall.sh"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Audit dependencies for known vulnerabilities
+        run: |
+          pip install pip-audit==2.10.0
+          pip-audit -r requirements.txt

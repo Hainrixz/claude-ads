@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350" width="800" height="350" font-family="'Space Grotesk', system-ui, sans-serif">
+  <rect width="800" height="350" fill="#0A0A0A" rx="16"/>
+  <text x="400" y="30" text-anchor="middle" fill="#F5F5F0" font-size="16" font-weight="700">Installation Methods</text>
+  <rect x="30" y="50" width="230" height="270" rx="16" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="95" y="38" width="100" height="24" rx="12" fill="#E07850"/>
+  <text x="145" y="53" text-anchor="middle" fill="#0A0A0A" font-size="10" font-weight="700">RECOMMENDED</text>
+  <text x="145" y="88" text-anchor="middle" fill="#F5F5F0" font-size="13" font-weight="700">Plugin Install</text>
+  <text x="46" y="116" fill="#E07850" font-size="10" font-weight="600">Steps</text>
+  <rect x="42" y="124" width="206" height="24" rx="6" fill="#1A1A1A"/>
+  <text x="52" y="140" fill="#888888" font-size="9" font-family="monospace">/plugin marketplace add</text>
+  <rect x="42" y="154" width="206" height="24" rx="6" fill="#1A1A1A"/>
+  <text x="52" y="170" fill="#888888" font-size="9" font-family="monospace">/plugin install claude-ads</text>
+  <text x="46" y="208" fill="#E07850" font-size="10" font-weight="600">Benefits</text>
+  <circle cx="54" cy="224" r="7" fill="#E07850" opacity="0.12"/>
+  <text x="54" y="228" text-anchor="middle" fill="#E07850" font-size="10">✓</text>
+  <text x="68" y="228" fill="#888888" font-size="10">Auto-updates</text>
+  <circle cx="54" cy="248" r="7" fill="#E07850" opacity="0.12"/>
+  <text x="54" y="252" text-anchor="middle" fill="#E07850" font-size="10">✓</text>
+  <text x="68" y="252" fill="#888888" font-size="10">Namespace isolation</text>
+  <circle cx="54" cy="272" r="7" fill="#E07850" opacity="0.12"/>
+  <text x="54" y="276" text-anchor="middle" fill="#E07850" font-size="10">✓</text>
+  <text x="68" y="276" fill="#888888" font-size="10">Version management</text>
+  <rect x="285" y="50" width="230" height="270" rx="16" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <text x="400" y="88" text-anchor="middle" fill="#F5F5F0" font-size="13" font-weight="700">One-Command</text>
+  <text x="301" y="116" fill="#60A5FA" font-size="10" font-weight="600">Steps</text>
+  <rect x="297" y="124" width="206" height="24" rx="6" fill="#1A1A1A"/>
+  <text x="307" y="140" fill="#888888" font-size="9" font-family="monospace">curl -fsSL ... | bash</text>
+  <rect x="297" y="154" width="206" height="24" rx="6" fill="#1A1A1A"/>
+  <text x="307" y="170" fill="#888888" font-size="9" font-family="monospace">(or iwr ... | iex on Win)</text>
+  <text x="301" y="208" fill="#60A5FA" font-size="10" font-weight="600">Benefits</text>
+  <circle cx="309" cy="224" r="7" fill="#60A5FA" opacity="0.12"/>
+  <text x="309" y="228" text-anchor="middle" fill="#60A5FA" font-size="10">✓</text>
+  <text x="323" y="228" fill="#888888" font-size="10">Simple</text>
+  <circle cx="309" cy="248" r="7" fill="#60A5FA" opacity="0.12"/>
+  <text x="309" y="252" text-anchor="middle" fill="#60A5FA" font-size="10">✓</text>
+  <text x="323" y="252" fill="#888888" font-size="10">Fast</text>
+  <circle cx="309" cy="272" r="7" fill="#60A5FA" opacity="0.12"/>
+  <text x="309" y="276" text-anchor="middle" fill="#60A5FA" font-size="10">✓</text>
+  <text x="323" y="276" fill="#888888" font-size="10">Cross-platform</text>
+  <rect x="540" y="50" width="230" height="270" rx="16" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <text x="655" y="88" text-anchor="middle" fill="#F5F5F0" font-size="13" font-weight="700">Manual</text>
+  <text x="556" y="116" fill="#8b5cf6" font-size="10" font-weight="600">Steps</text>
+  <rect x="552" y="124" width="206" height="24" rx="6" fill="#1A1A1A"/>
+  <text x="562" y="140" fill="#888888" font-size="9" font-family="monospace">git clone &lt;repo&gt;</text>
+  <rect x="552" y="154" width="206" height="24" rx="6" fill="#1A1A1A"/>
+  <text x="562" y="170" fill="#888888" font-size="9" font-family="monospace">cd claude-ads &amp;&amp; ./install.sh</text>
+  <text x="556" y="208" fill="#8b5cf6" font-size="10" font-weight="600">Benefits</text>
+  <circle cx="564" cy="224" r="7" fill="#8b5cf6" opacity="0.12"/>
+  <text x="564" y="228" text-anchor="middle" fill="#8b5cf6" font-size="10">✓</text>
+  <text x="578" y="228" fill="#888888" font-size="10">Full control</text>
+  <circle cx="564" cy="248" r="7" fill="#8b5cf6" opacity="0.12"/>
+  <text x="564" y="252" text-anchor="middle" fill="#8b5cf6" font-size="10">✓</text>
+  <text x="578" y="252" fill="#888888" font-size="10">Offline install</text>
+  <circle cx="564" cy="272" r="7" fill="#8b5cf6" opacity="0.12"/>
+  <text x="564" y="276" text-anchor="middle" fill="#8b5cf6" font-size="10">✓</text>
+  <text x="578" y="276" fill="#888888" font-size="10">Audit source</text>
+  <text x="400" y="342" text-anchor="middle" fill="#888888" font-size="10">All methods work on macOS, Linux, and Windows</text>
+</svg>

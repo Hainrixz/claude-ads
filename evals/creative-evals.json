@@ -1,0 +1,170 @@
+[
+  {
+    "id": "dna-001",
+    "prompt": "extract the brand DNA from acme.com",
+    "expected_skill": "ads-dna",
+    "should_trigger": true,
+    "notes": "Explicit 'brand DNA' phrase"
+  },
+  {
+    "id": "dna-002",
+    "prompt": "build a brand profile for my website https://example.com",
+    "expected_skill": "ads-dna",
+    "should_trigger": true,
+    "notes": "Brand profile extraction with URL"
+  },
+  {
+    "id": "dna-003",
+    "prompt": "what's the brand identity of shopify.com",
+    "expected_skill": "ads-dna",
+    "should_trigger": true,
+    "notes": "Brand identity analysis trigger"
+  },
+  {
+    "id": "dna-004",
+    "prompt": "analyze the brand style and colors of my website",
+    "expected_skill": "ads-dna",
+    "should_trigger": true,
+    "notes": "Brand style/colors extraction"
+  },
+  {
+    "id": "dna-005",
+    "prompt": "I need a brand profile before creating my ads",
+    "expected_skill": "ads-dna",
+    "should_trigger": true,
+    "notes": "Explicit intent to create brand profile for ads"
+  },
+  {
+    "id": "create-001",
+    "prompt": "create a campaign brief for my summer sale",
+    "expected_skill": "ads-create",
+    "should_trigger": true,
+    "notes": "Explicit 'campaign brief' request"
+  },
+  {
+    "id": "create-002",
+    "prompt": "write ad copy for my SaaS product",
+    "expected_skill": "ads-create",
+    "should_trigger": true,
+    "notes": "Ad copy writing request"
+  },
+  {
+    "id": "create-003",
+    "prompt": "generate campaign concepts using my brand profile",
+    "expected_skill": "ads-create",
+    "should_trigger": true,
+    "notes": "Campaign concepts with brand profile reference"
+  },
+  {
+    "id": "create-004",
+    "prompt": "I have brand-profile.json, create a campaign for Meta and Google",
+    "expected_skill": "ads-create",
+    "should_trigger": true,
+    "notes": "Explicit reference to brand-profile.json with campaign intent"
+  },
+  {
+    "id": "create-005",
+    "prompt": "I need creative briefs and ad messaging for my e-commerce store",
+    "expected_skill": "ads-create",
+    "should_trigger": true,
+    "notes": "Creative brief + messaging request"
+  },
+  {
+    "id": "generate-001",
+    "prompt": "generate the ad images from the campaign brief",
+    "expected_skill": "ads-generate",
+    "should_trigger": true,
+    "notes": "Explicit image generation from campaign brief"
+  },
+  {
+    "id": "generate-002",
+    "prompt": "create ad creatives for my Meta campaign",
+    "expected_skill": "ads-generate",
+    "should_trigger": true,
+    "notes": "Ad creative generation, Meta specific"
+  },
+  {
+    "id": "generate-003",
+    "prompt": "make ad images using my brand profile",
+    "expected_skill": "ads-generate",
+    "should_trigger": true,
+    "notes": "Image generation with brand profile reference"
+  },
+  {
+    "id": "generate-004",
+    "prompt": "generate visuals for TikTok and Instagram ads",
+    "expected_skill": "ads-generate",
+    "should_trigger": true,
+    "notes": "Visual generation for specific platforms"
+  },
+  {
+    "id": "photoshoot-001",
+    "prompt": "create a professional product photo for my sneaker",
+    "expected_skill": "ads-photoshoot",
+    "should_trigger": true,
+    "notes": "Product photo creation trigger"
+  },
+  {
+    "id": "photoshoot-002",
+    "prompt": "photoshoot my product in 5 styles",
+    "expected_skill": "ads-photoshoot",
+    "should_trigger": true,
+    "notes": "Explicit photoshoot with 5 styles"
+  },
+  {
+    "id": "photoshoot-003",
+    "prompt": "enhance my product image for ads",
+    "expected_skill": "ads-photoshoot",
+    "should_trigger": true,
+    "notes": "Product image enhancement for ad use"
+  },
+  {
+    "id": "photoshoot-004",
+    "prompt": "generate studio and lifestyle shots of my product",
+    "expected_skill": "ads-photoshoot",
+    "should_trigger": true,
+    "notes": "Named style types (studio, lifestyle) are photoshoot triggers"
+  },
+  {
+    "id": "negative-001",
+    "prompt": "audit my Google Ads account, I spend $10k/mo on SaaS",
+    "expected_skill": "ads-audit",
+    "should_trigger": false,
+    "notes": "Audit command. Must NOT trigger any creative skills"
+  },
+  {
+    "id": "negative-002",
+    "prompt": "what's my ROAS on Meta this month?",
+    "expected_skill": "ads-meta",
+    "should_trigger": false,
+    "notes": "Performance analysis. Must NOT trigger ads-generate or ads-create"
+  },
+  {
+    "id": "negative-003",
+    "prompt": "check my conversion tracking setup",
+    "expected_skill": "ads-audit",
+    "should_trigger": false,
+    "notes": "Technical audit. Must NOT trigger creative skills"
+  },
+  {
+    "id": "negative-004",
+    "prompt": "my TikTok ads have low CTR, what should I fix?",
+    "expected_skill": "ads-tiktok",
+    "should_trigger": false,
+    "notes": "Performance issue analysis. Must NOT trigger ads-generate"
+  },
+  {
+    "id": "negative-005",
+    "prompt": "analyze my ad budget allocation across platforms",
+    "expected_skill": "ads-budget",
+    "should_trigger": false,
+    "notes": "Budget analysis. Must NOT trigger creative skills"
+  },
+  {
+    "id": "negative-006",
+    "prompt": "I need a landing page audit for my ads campaign",
+    "expected_skill": "ads-landing",
+    "should_trigger": false,
+    "notes": "Landing page audit. Must NOT trigger ads-dna or ads-create"
+  }
+]

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 350" width="700" height="350">
+  <defs>
+    <style>
+      text { font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+  <rect width="700" height="350" fill="#0A0A0A"/>
+
+  <!-- Title -->
+  <text x="350" y="40" fill="#F5F5F0" font-size="20" font-weight="700" text-anchor="middle">250+ Audit Checks</text>
+  <rect x="295" y="50" width="110" height="3" rx="1.5" fill="#E07850"/>
+
+  <!-- Bars -->
+  <text x="175" y="94" fill="#F5F5F0" font-size="13" font-weight="500" text-anchor="end">Google Ads</text>
+  <rect x="190" y="75" width="430" height="28" rx="6" fill="#E07850" opacity="0.85"/>
+  <text x="632.0" y="94" fill="#E07850" font-size="13" font-weight="700">80</text>
+  <text x="175" y="132" fill="#F5F5F0" font-size="13" font-weight="500" text-anchor="end">Meta Ads</text>
+  <rect x="190" y="113" width="269" height="28" rx="6" fill="#8b5cf6" opacity="0.85"/>
+  <text x="470.75" y="132" fill="#8b5cf6" font-size="13" font-weight="700">50</text>
+  <text x="175" y="170" fill="#F5F5F0" font-size="13" font-weight="500" text-anchor="end">Apple Ads</text>
+  <rect x="190" y="151" width="188" height="28" rx="6" fill="#60A5FA" opacity="0.85"/>
+  <text x="390.125" y="170" fill="#60A5FA" font-size="13" font-weight="700">35+</text>
+  <text x="175" y="208" fill="#F5F5F0" font-size="13" font-weight="500" text-anchor="end">TikTok Ads</text>
+  <rect x="190" y="189" width="150" height="28" rx="6" fill="#06b6d4" opacity="0.85"/>
+  <text x="352.5" y="208" fill="#06b6d4" font-size="13" font-weight="700">28</text>
+  <text x="175" y="246" fill="#F5F5F0" font-size="13" font-weight="500" text-anchor="end">LinkedIn Ads</text>
+  <rect x="190" y="227" width="145" height="28" rx="6" fill="#3B82F6" opacity="0.85"/>
+  <text x="347.125" y="246" fill="#3B82F6" font-size="13" font-weight="700">27</text>
+  <text x="175" y="284" fill="#F5F5F0" font-size="13" font-weight="500" text-anchor="end">Microsoft Ads</text>
+  <rect x="190" y="265" width="129" height="28" rx="6" fill="#FF6B35" opacity="0.85"/>
+  <text x="331.0" y="284" fill="#FF6B35" font-size="13" font-weight="700">24</text>
+  <text x="175" y="322" fill="#F5F5F0" font-size="13" font-weight="500" text-anchor="end">Cross-platform</text>
+  <rect x="190" y="303" width="16" height="28" rx="6" fill="#4ADE80" opacity="0.85"/>
+  <text x="218.125" y="322" fill="#4ADE80" font-size="13" font-weight="700">3</text>
+
+</svg>

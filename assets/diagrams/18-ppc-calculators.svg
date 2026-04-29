@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350" width="800" height="350" font-family="'Space Grotesk', system-ui, sans-serif">
+  <rect width="800" height="350" fill="#0A0A0A" rx="16"/>
+  <text x="400" y="30" text-anchor="middle" fill="#F5F5F0" font-size="16" font-weight="700">PPC Financial Calculators</text>
+  <rect x="30" y="55" width="170" height="100" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="30" y="63" width="4" height="84" rx="2" fill="#E07850" clip-path="url(#la-0)"/>
+  <clipPath id="la-0"><rect x="30" y="55" width="8" height="100" rx="9"/></clipPath>
+  <text x="48" y="90" fill="#F5F5F0" font-size="11" font-weight="700">CPA Calculator</text>
+  <text x="48" y="113" fill="#888888" font-size="9">Cost per acquisition analysis</text>
+  <rect x="220" y="55" width="170" height="100" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="220" y="63" width="4" height="84" rx="2" fill="#FF6B35" clip-path="url(#la-1)"/>
+  <clipPath id="la-1"><rect x="220" y="55" width="8" height="100" rx="9"/></clipPath>
+  <text x="238" y="90" fill="#F5F5F0" font-size="11" font-weight="700">ROAS Calculator</text>
+  <text x="238" y="113" fill="#888888" font-size="9">Return on ad spend modeling</text>
+  <rect x="410" y="55" width="170" height="100" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="410" y="63" width="4" height="84" rx="2" fill="#F0A830" clip-path="url(#la-2)"/>
+  <clipPath id="la-2"><rect x="410" y="55" width="8" height="100" rx="9"/></clipPath>
+  <text x="428" y="90" fill="#F5F5F0" font-size="11" font-weight="700">Break-Even Analysis</text>
+  <text x="428" y="113" fill="#888888" font-size="9">Revenue vs cost breakpoint</text>
+  <rect x="600" y="55" width="170" height="100" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="600" y="63" width="4" height="84" rx="2" fill="#60A5FA" clip-path="url(#la-3)"/>
+  <clipPath id="la-3"><rect x="600" y="55" width="8" height="100" rx="9"/></clipPath>
+  <text x="618" y="90" fill="#F5F5F0" font-size="11" font-weight="700">Impression Share</text>
+  <text x="618" y="113" fill="#888888" font-size="9">Opportunity sizing</text>
+  <rect x="125" y="175" width="170" height="100" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="125" y="183" width="4" height="84" rx="2" fill="#8b5cf6" clip-path="url(#la-4)"/>
+  <clipPath id="la-4"><rect x="125" y="175" width="8" height="100" rx="9"/></clipPath>
+  <text x="143" y="210" fill="#F5F5F0" font-size="11" font-weight="700">Budget Forecasting</text>
+  <text x="143" y="233" fill="#888888" font-size="9">Spend projection modeling</text>
+  <rect x="315" y="175" width="170" height="100" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="315" y="183" width="4" height="84" rx="2" fill="#06b6d4" clip-path="url(#la-5)"/>
+  <clipPath id="la-5"><rect x="315" y="175" width="8" height="100" rx="9"/></clipPath>
+  <text x="333" y="210" fill="#F5F5F0" font-size="11" font-weight="700">LTV:CAC Ratio</text>
+  <text x="333" y="233" fill="#888888" font-size="9">Lifetime value vs acquisition cost</text>
+  <rect x="505" y="175" width="170" height="100" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <rect x="505" y="183" width="4" height="84" rx="2" fill="#4ADE80" clip-path="url(#la-6)"/>
+  <clipPath id="la-6"><rect x="505" y="175" width="8" height="100" rx="9"/></clipPath>
+  <text x="523" y="210" fill="#F5F5F0" font-size="11" font-weight="700">MER Assessment</text>
+  <text x="523" y="233" fill="#888888" font-size="9">Marketing efficiency ratio</text>
+  <text x="400" y="330" text-anchor="middle" fill="#888888" font-size="10">Works offline with pasted data</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <title>MCP Hybrid Data Workflow</title>
+  <style>text { font-family: 'Space Grotesk', system-ui, sans-serif; }</style>
+  <defs>
+    <marker id="arrow10" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#E07850"/>
+    </marker>
+  </defs>
+  <rect width="800" height="400" fill="#0A0A0A" rx="16"/>
+  <text x="400" y="30" font-size="17" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">MCP Hybrid Data Workflow</text>
+  <line x1="310" y1="42" x2="490" y2="42" stroke="#E07850" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Left: Manual Data -->
+  <rect x="40" y="65" width="240" height="200" rx="9" fill="#111111" stroke="#60A5FA" stroke-width="2"/>
+  <text x="160" y="92" font-size="14" fill="#60A5FA" text-anchor="middle" font-weight="bold" dominant-baseline="central">Manual Data</text>
+  <!-- Icon: clipboard -->
+  <rect x="65" y="82" width="14" height="16" rx="2" fill="none" stroke="#60A5FA" stroke-width="1.5"/>
+  <line x1="69" y1="79" x2="77" y2="79" stroke="#60A5FA" stroke-width="1.5"/>
+  <text x="160" y="130" font-size="12" fill="#888888" text-anchor="middle" dominant-baseline="central">CSV / Excel Exports</text>
+  <text x="160" y="165" font-size="12" fill="#888888" text-anchor="middle" dominant-baseline="central">Screenshots</text>
+  <text x="160" y="200" font-size="12" fill="#888888" text-anchor="middle" dominant-baseline="central">Pasted Metrics</text>
+
+  <!-- Right: MCP Live Data -->
+  <rect x="520" y="65" width="240" height="200" rx="9" fill="#111111" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="640" y="92" font-size="14" fill="#8b5cf6" text-anchor="middle" font-weight="bold" dominant-baseline="central">MCP Live Data</text>
+  <rect x="540" y="115" width="200" height="32" rx="6" fill="#1A1A1A" stroke="#4ADE80" stroke-width="1"/>
+  <text x="640" y="131" font-size="11" fill="#F5F5F0" text-anchor="middle" dominant-baseline="central">Google Ads MCP</text>
+  <rect x="540" y="157" width="200" height="32" rx="6" fill="#1A1A1A" stroke="#60A5FA" stroke-width="1"/>
+  <text x="640" y="173" font-size="11" fill="#F5F5F0" text-anchor="middle" dominant-baseline="central">Adspirer (Meta)</text>
+  <rect x="540" y="199" width="200" height="32" rx="6" fill="#1A1A1A" stroke="#60A5FA" stroke-width="1"/>
+  <text x="640" y="215" font-size="11" fill="#F5F5F0" text-anchor="middle" dominant-baseline="central">GrowthSpree (LinkedIn)</text>
+
+  <!-- Center: Unified Analysis -->
+  <rect x="255" y="295" width="290" height="55" rx="9" fill="#111111" stroke="#E07850" stroke-width="2.5"/>
+  <text x="400" y="315" font-size="14" fill="#E07850" text-anchor="middle" font-weight="bold" dominant-baseline="central">claude-ads</text>
+  <text x="400" y="335" font-size="11" fill="#888888" text-anchor="middle" dominant-baseline="central">Unified Analysis Engine</text>
+
+  <!-- Arrows from left and right into center -->
+  <path d="M270,220 L350,295" fill="none" stroke="#60A5FA" stroke-width="2" marker-end="url(#arrow10)"/>
+  <path d="M530,220 L450,295" fill="none" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow10)"/>
+
+  <!-- Bottom label -->
+  <rect x="170" y="362" width="460" height="28" rx="6" fill="#1A1A1A" stroke="#4ADE80" stroke-width="1.5"/>
+  <circle cx="192" cy="376" r="5" fill="#4ADE80"/>
+  <text x="410" y="376" font-size="12" fill="#4ADE80" text-anchor="middle" font-weight="600" dominant-baseline="central">Same Health Score regardless of data source</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" width="900" height="220" font-family="'Space Grotesk', system-ui, sans-serif">
+  <rect width="900" height="220" fill="#0A0A0A" rx="16"/>
+  <text x="450" y="28" text-anchor="middle" fill="#F5F5F0" font-size="16" font-weight="700">PDF Report Generation Pipeline</text>
+  <rect x="40" y="55" width="110" height="110" rx="6" fill="#111111" stroke="#60A5FA" stroke-width="1.5"/>
+  <rect x="40" y="55" width="4" height="110" rx="0" fill="#60A5FA" clip-path="url(#lc-0)"/>
+  <clipPath id="lc-0"><rect x="40" y="55" width="8" height="110" rx="6"/></clipPath>
+  <text x="138" y="71" text-anchor="middle" fill="#60A5FA" font-size="9" font-weight="700" opacity="0.6">1</text>
+  <circle cx="95" cy="87" r="14" fill="#60A5FA" opacity="0.12"/>
+  <g transform="translate(85,77) scale(0.83)"><path d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm2 4h10m-10 4h10m-10 4h6" stroke="#60A5FA" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <text x="95" y="120" text-anchor="middle" fill="#F5F5F0" font-size="10" font-weight="600">Audit Results</text>
+  <text x="95" y="137" text-anchor="middle" fill="#888888" font-size="9">Markdown file</text>
+  <line x1="153" y1="110" x2="175" y2="110" stroke="#E07850" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="171,107 177,110 171,113" fill="#E07850"/>
+  <rect x="178" y="55" width="110" height="110" rx="6" fill="#111111" stroke="#8b5cf6" stroke-width="1.5"/>
+  <rect x="178" y="55" width="4" height="110" rx="0" fill="#8b5cf6" clip-path="url(#lc-1)"/>
+  <clipPath id="lc-1"><rect x="178" y="55" width="8" height="110" rx="6"/></clipPath>
+  <text x="276" y="71" text-anchor="middle" fill="#8b5cf6" font-size="9" font-weight="700" opacity="0.6">2</text>
+  <circle cx="233" cy="87" r="14" fill="#8b5cf6" opacity="0.12"/>
+  <g transform="translate(223,77) scale(0.83)"><path d="M4 6h16M4 12h16M4 18h8" stroke="#8b5cf6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <text x="233" y="120" text-anchor="middle" fill="#F5F5F0" font-size="10" font-weight="600">Parser</text>
+  <text x="233" y="137" text-anchor="middle" fill="#888888" font-size="9">State machine</text>
+  <line x1="291" y1="110" x2="313" y2="110" stroke="#E07850" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="309,107 315,110 309,113" fill="#E07850"/>
+  <rect x="316" y="55" width="110" height="110" rx="6" fill="#111111" stroke="#E07850" stroke-width="1.5"/>
+  <rect x="316" y="55" width="4" height="110" rx="0" fill="#E07850" clip-path="url(#lc-2)"/>
+  <clipPath id="lc-2"><rect x="316" y="55" width="8" height="110" rx="6"/></clipPath>
+  <text x="414" y="71" text-anchor="middle" fill="#E07850" font-size="9" font-weight="700" opacity="0.6">3</text>
+  <circle cx="371" cy="87" r="14" fill="#E07850" opacity="0.12"/>
+  <g transform="translate(361,77) scale(0.83)"><path d="M3 3v18h18M9 17V9m4 8V5m4 12v-4" stroke="#E07850" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <text x="371" y="120" text-anchor="middle" fill="#F5F5F0" font-size="10" font-weight="600">Charts</text>
+  <text x="371" y="137" text-anchor="middle" fill="#888888" font-size="9">Gauge + bar + donut</text>
+  <line x1="429" y1="110" x2="451" y2="110" stroke="#E07850" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="447,107 453,110 447,113" fill="#E07850"/>
+  <rect x="454" y="55" width="110" height="110" rx="6" fill="#111111" stroke="#FF6B35" stroke-width="1.5"/>
+  <rect x="454" y="55" width="4" height="110" rx="0" fill="#FF6B35" clip-path="url(#lc-3)"/>
+  <clipPath id="lc-3"><rect x="454" y="55" width="8" height="110" rx="6"/></clipPath>
+  <text x="552" y="71" text-anchor="middle" fill="#FF6B35" font-size="9" font-weight="700" opacity="0.6">4</text>
+  <circle cx="509" cy="87" r="14" fill="#FF6B35" opacity="0.12"/>
+  <g transform="translate(499,77) scale(0.83)"><path d="M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1zM4 9h16M10 9v10" stroke="#FF6B35" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <text x="509" y="120" text-anchor="middle" fill="#F5F5F0" font-size="10" font-weight="600">Layout</text>
+  <text x="509" y="137" text-anchor="middle" fill="#888888" font-size="9">Tables + sections</text>
+  <line x1="567" y1="110" x2="589" y2="110" stroke="#E07850" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="585,107 591,110 585,113" fill="#E07850"/>
+  <rect x="592" y="55" width="110" height="110" rx="6" fill="#111111" stroke="#F0A830" stroke-width="1.5"/>
+  <rect x="592" y="55" width="4" height="110" rx="0" fill="#F0A830" clip-path="url(#lc-4)"/>
+  <clipPath id="lc-4"><rect x="592" y="55" width="8" height="110" rx="6"/></clipPath>
+  <text x="690" y="71" text-anchor="middle" fill="#F0A830" font-size="9" font-weight="700" opacity="0.6">5</text>
+  <circle cx="647" cy="87" r="14" fill="#F0A830" opacity="0.12"/>
+  <g transform="translate(637,77) scale(0.83)"><path d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#F0A830" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <text x="647" y="120" text-anchor="middle" fill="#F5F5F0" font-size="10" font-weight="600">Guardrail</text>
+  <text x="647" y="137" text-anchor="middle" fill="#888888" font-size="9">Quality check</text>
+  <line x1="705" y1="110" x2="727" y2="110" stroke="#E07850" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="723,107 729,110 723,113" fill="#E07850"/>
+  <rect x="730" y="55" width="110" height="110" rx="6" fill="#111111" stroke="#4ADE80" stroke-width="1.5"/>
+  <rect x="730" y="55" width="4" height="110" rx="0" fill="#4ADE80" clip-path="url(#lc-5)"/>
+  <clipPath id="lc-5"><rect x="730" y="55" width="8" height="110" rx="6"/></clipPath>
+  <text x="828" y="71" text-anchor="middle" fill="#4ADE80" font-size="9" font-weight="700" opacity="0.6">6</text>
+  <circle cx="785" cy="87" r="14" fill="#4ADE80" opacity="0.12"/>
+  <g transform="translate(775,77) scale(0.83)"><path d="M7 21h10a2 2 0 002-2V9l-5-5H7a2 2 0 00-2 2v13a2 2 0 002 2z" stroke="#4ADE80" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <text x="785" y="120" text-anchor="middle" fill="#F5F5F0" font-size="10" font-weight="600">PDF Report</text>
+  <text x="785" y="137" text-anchor="middle" fill="#888888" font-size="9">Output</text>
+  <text x="450" y="205" text-anchor="middle" fill="#888888" font-size="10">Fully offline -- no API keys needed for report generation</text>
+</svg>

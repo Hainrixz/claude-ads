@@ -1,0 +1,2 @@
+*.md linguist-documentation=false
+*.ps1 linguist-vendored

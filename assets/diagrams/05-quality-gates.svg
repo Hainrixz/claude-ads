@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="600" height="500">
+  <defs>
+    <style>
+      text { font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+  <rect width="600" height="500" fill="#0A0A0A"/>
+
+  <!-- Card -->
+  <rect x="30" y="25" width="540" height="455" rx="16" fill="#111111" stroke="#2D2D2D" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="300" y="62" fill="#F5F5F0" font-size="20" font-weight="700" text-anchor="middle">Quality Gates</text>
+  <rect x="245" y="72" width="110" height="3" rx="1.5" fill="#E07850"/>
+
+  <!-- Gate rows -->
+  <circle cx="72" cy="100" r="12" fill="#4ADE80" opacity="0.15"/>
+  <text x="72" y="105" fill="#4ADE80" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+  <text x="100" y="105" fill="#F5F5F0" font-size="13" font-weight="500">No Broad Match without Smart Bidding</text>
+  <line x1="55" y1="120" x2="540" y2="120" stroke="#2D2D2D" stroke-width="0.5"/>
+  <circle cx="72" cy="140" r="12" fill="#4ADE80" opacity="0.15"/>
+  <text x="72" y="145" fill="#4ADE80" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+  <text x="100" y="145" fill="#F5F5F0" font-size="13" font-weight="500">3x Kill Rule (CPA > 3x target)</text>
+  <line x1="55" y1="160" x2="540" y2="160" stroke="#2D2D2D" stroke-width="0.5"/>
+  <circle cx="72" cy="180" r="12" fill="#4ADE80" opacity="0.15"/>
+  <text x="72" y="185" fill="#4ADE80" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+  <text x="100" y="185" fill="#F5F5F0" font-size="13" font-weight="500">Budget sufficiency gates</text>
+  <line x1="55" y1="200" x2="540" y2="200" stroke="#2D2D2D" stroke-width="0.5"/>
+  <circle cx="72" cy="220" r="12" fill="#4ADE80" opacity="0.15"/>
+  <text x="72" y="225" fill="#4ADE80" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+  <text x="100" y="225" fill="#F5F5F0" font-size="13" font-weight="500">Learning phase protection</text>
+  <line x1="55" y1="240" x2="540" y2="240" stroke="#2D2D2D" stroke-width="0.5"/>
+  <circle cx="72" cy="260" r="12" fill="#4ADE80" opacity="0.15"/>
+  <text x="72" y="265" fill="#4ADE80" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+  <text x="100" y="265" fill="#F5F5F0" font-size="13" font-weight="500">Special Ad Categories compliance</text>
+  <line x1="55" y1="280" x2="540" y2="280" stroke="#2D2D2D" stroke-width="0.5"/>
+  <circle cx="72" cy="300" r="12" fill="#4ADE80" opacity="0.15"/>
+  <text x="72" y="305" fill="#4ADE80" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+  <text x="100" y="305" fill="#F5F5F0" font-size="13" font-weight="500">Silent video detection</text>
+  <line x1="55" y1="320" x2="540" y2="320" stroke="#2D2D2D" stroke-width="0.5"/>
+  <circle cx="72" cy="340" r="12" fill="#4ADE80" opacity="0.15"/>
+  <text x="72" y="345" fill="#4ADE80" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+  <text x="100" y="345" fill="#F5F5F0" font-size="13" font-weight="500">Attribution model verification</text>
+  <line x1="55" y1="360" x2="540" y2="360" stroke="#2D2D2D" stroke-width="0.5"/>
+  <circle cx="72" cy="380" r="12" fill="#4ADE80" opacity="0.15"/>
+  <text x="72" y="385" fill="#4ADE80" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+  <text x="100" y="385" fill="#F5F5F0" font-size="13" font-weight="500">Andromeda creative diversity</text>
+  <line x1="55" y1="400" x2="540" y2="400" stroke="#2D2D2D" stroke-width="0.5"/>
+  <circle cx="72" cy="420" r="12" fill="#4ADE80" opacity="0.15"/>
+  <text x="72" y="425" fill="#4ADE80" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+  <text x="100" y="425" fill="#F5F5F0" font-size="13" font-weight="500">Privacy infrastructure gate</text>
+  <line x1="55" y1="440" x2="540" y2="440" stroke="#2D2D2D" stroke-width="0.5"/>
+  <circle cx="72" cy="460" r="12" fill="#4ADE80" opacity="0.15"/>
+  <text x="72" y="465" fill="#4ADE80" font-size="14" font-weight="700" text-anchor="middle">✓</text>
+  <text x="100" y="465" fill="#F5F5F0" font-size="13" font-weight="500">PDF report quality gate</text>
+
+</svg>

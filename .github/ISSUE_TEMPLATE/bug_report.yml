@@ -1,0 +1,63 @@
+name: Bug Report
+description: Something isn't working as expected
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill in as much detail as you can.
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - Linux
+        - macOS
+        - Windows
+    validations:
+      required: true
+
+  - type: input
+    id: python_version
+    attributes:
+      label: Python Version
+      description: Run `python3 --version` and paste the output
+      placeholder: "e.g. 3.12.4"
+    validations:
+      required: false
+
+  - type: input
+    id: command
+    attributes:
+      label: Command That Failed
+      description: The exact Claude Code command you ran
+      placeholder: "e.g. /ads google"
+    validations:
+      required: true
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Full Error Output
+      description: Copy and paste the complete error from your terminal
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Ad Platform and Account Context
+      description: Which ad platform? Any relevant account setup details that help reproduce the issue?
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: false

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 400" width="750" height="400" font-family="'Space Grotesk', system-ui, sans-serif">
+  <rect width="750" height="400" fill="#0A0A0A" rx="16"/>
+  <text x="375" y="30" text-anchor="middle" fill="#F5F5F0" font-size="16" font-weight="700">A/B Test Design Framework</text>
+  <rect x="35" y="52" width="210" height="120" rx="9" fill="#111111" stroke="#60A5FA" stroke-width="2"/>
+  <rect x="118" y="40" width="42" height="24" rx="12" fill="#60A5FA"/>
+  <text x="139" y="56" text-anchor="middle" fill="#0A0A0A" font-size="12" font-weight="700">IF</text>
+  <text x="140" y="88" text-anchor="middle" fill="#F5F5F0" font-size="11" font-weight="600">Change this variable</text>
+  <text x="140" y="110" text-anchor="middle" fill="#888888" font-size="10">Ad headline variant B</text>
+  <text x="140" y="128" text-anchor="middle" fill="#888888" font-size="10">CTA, image, bid strategy</text>
+  <line x1="248" y1="112" x2="268" y2="112" stroke="#E07850" stroke-width="1.5"/>
+  <polygon points="268,108 274,112 268,116" fill="#E07850"/>
+  <rect x="271" y="52" width="210" height="120" rx="9" fill="#111111" stroke="#4ADE80" stroke-width="2"/>
+  <rect x="340" y="40" width="72" height="24" rx="12" fill="#4ADE80"/>
+  <text x="376" y="56" text-anchor="middle" fill="#0A0A0A" font-size="12" font-weight="700">THEN</text>
+  <text x="376" y="88" text-anchor="middle" fill="#F5F5F0" font-size="11" font-weight="600">Expect this outcome</text>
+  <text x="376" y="110" text-anchor="middle" fill="#888888" font-size="10">+10% CTR</text>
+  <text x="376" y="128" text-anchor="middle" fill="#888888" font-size="10">Higher conversion rate</text>
+  <line x1="484" y1="112" x2="504" y2="112" stroke="#E07850" stroke-width="1.5"/>
+  <polygon points="504,108 510,112 504,116" fill="#E07850"/>
+  <rect x="507" y="52" width="210" height="120" rx="9" fill="#111111" stroke="#8b5cf6" stroke-width="2"/>
+  <rect x="556" y="40" width="112" height="24" rx="12" fill="#8b5cf6"/>
+  <text x="612" y="56" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">BECAUSE</text>
+  <text x="612" y="88" text-anchor="middle" fill="#F5F5F0" font-size="11" font-weight="600">Based on this hypothesis</text>
+  <text x="612" y="110" text-anchor="middle" fill="#888888" font-size="10">Shorter headlines get</text>
+  <text x="612" y="128" text-anchor="middle" fill="#888888" font-size="10">more clicks on mobile</text>
+  <text x="375" y="208" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="600">Sample Size Requirements (per variation, 80% power)</text>
+  <rect x="75" y="222" width="600" height="26" rx="6" fill="#1A1A1A"/>
+  <text x="135" y="239" text-anchor="middle" fill="#E07850" font-size="10" font-weight="600">Baseline CVR</text>
+  <text x="255" y="239" text-anchor="middle" fill="#E07850" font-size="10" font-weight="600">5% MDE</text>
+  <text x="375" y="239" text-anchor="middle" fill="#E07850" font-size="10" font-weight="600">10% MDE</text>
+  <text x="495" y="239" text-anchor="middle" fill="#E07850" font-size="10" font-weight="600">20% MDE</text>
+  <text x="615" y="239" text-anchor="middle" fill="#E07850" font-size="10" font-weight="600">30% MDE</text>
+  <rect x="75" y="248" width="600" height="28" fill="#111111"/>
+  <text x="135" y="266" text-anchor="middle" fill="#F5F5F0" font-size="10" font-weight="600">2%</text>
+  <text x="255" y="266" text-anchor="middle" fill="#888888" font-size="10">125,000</text>
+  <text x="375" y="266" text-anchor="middle" fill="#888888" font-size="10">31,000</text>
+  <text x="495" y="266" text-anchor="middle" fill="#888888" font-size="10">8,000</text>
+  <text x="615" y="266" text-anchor="middle" fill="#888888" font-size="10">3,500</text>
+  <rect x="75" y="276" width="600" height="28" fill="#0A0A0A"/>
+  <text x="135" y="294" text-anchor="middle" fill="#F5F5F0" font-size="10" font-weight="600">5%</text>
+  <text x="255" y="294" text-anchor="middle" fill="#888888" font-size="10">48,000</text>
+  <text x="375" y="294" text-anchor="middle" fill="#888888" font-size="10">12,000</text>
+  <text x="495" y="294" text-anchor="middle" fill="#888888" font-size="10">3,100</text>
+  <text x="615" y="294" text-anchor="middle" fill="#888888" font-size="10">1,400</text>
+  <rect x="75" y="304" width="600" height="28" fill="#111111"/>
+  <text x="135" y="322" text-anchor="middle" fill="#F5F5F0" font-size="10" font-weight="600">10%</text>
+  <text x="255" y="322" text-anchor="middle" fill="#888888" font-size="10">23,000</text>
+  <text x="375" y="322" text-anchor="middle" fill="#888888" font-size="10">5,800</text>
+  <text x="495" y="322" text-anchor="middle" fill="#888888" font-size="10">1,500</text>
+  <text x="615" y="322" text-anchor="middle" fill="#888888" font-size="10">680</text>
+  <rect x="75" y="332" width="600" height="28" fill="#0A0A0A"/>
+  <text x="135" y="350" text-anchor="middle" fill="#F5F5F0" font-size="10" font-weight="600">20%</text>
+  <text x="255" y="350" text-anchor="middle" fill="#888888" font-size="10">11,000</text>
+  <text x="375" y="350" text-anchor="middle" fill="#888888" font-size="10">2,800</text>
+  <text x="495" y="350" text-anchor="middle" fill="#888888" font-size="10">720</text>
+  <text x="615" y="350" text-anchor="middle" fill="#888888" font-size="10">330</text>
+  <line x1="75" y1="248" x2="675" y2="248" stroke="#2D2D2D" stroke-width="1"/>
+  <text x="375" y="388" text-anchor="middle" fill="#888888" font-size="9">MDE = Minimum Detectable Effect | Two-tailed test at 95% confidence</text>
+</svg>

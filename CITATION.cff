@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software in your work, please cite it using the metadata below."
+type: software
+title: "Claude Ads"
+abstract: >
+  Self-updating multi-platform paid advertising audit and optimization skill for
+  Claude Code. Covers Google Ads, Meta Ads, YouTube Ads, LinkedIn Ads, TikTok Ads,
+  Microsoft Ads, and Apple Ads with 250+ audit checks, industry-specific templates,
+  parallel subagent delegation, and /ads update for refreshing platform references
+  with the last 30 days of changes.
+authors:
+  - alias: tododeia
+    website: "https://tododeia.com"
+repository-code: "https://github.com/Hainrixz/claude-ads"
+url: "https://tododeia.com"
+license: MIT
+version: "2.0.0"
+date-released: "2026-04-28"
+keywords:
+  - paid advertising
+  - google ads
+  - meta ads
+  - ppc
+  - advertising audit
+  - claude code
+  - llm tool
+  - self-updating

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 350" width="900" height="350" font-family="'Space Grotesk', system-ui, sans-serif">
+  <rect width="900" height="350" fill="#0A0A0A" rx="16"/>
+  <text x="450" y="32" text-anchor="middle" fill="#F5F5F0" font-size="16" font-weight="700">Platform Coverage Grid</text>
+  <text x="450" y="52" text-anchor="middle" fill="#888888" font-size="11">250+ weighted audit checks across 7 advertising platforms</text>
+  <rect x="55" y="70" width="190" height="140" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <clipPath id="rt-55-70"><rect x="55" y="70" width="190" height="9" rx="9"/></clipPath>
+  <rect x="55" y="70" width="190" height="4" fill="#60A5FA" clip-path="url(#rt-55-70)"/>
+  <text x="150" y="110" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">Google Ads</text>
+  <text x="150" y="130" text-anchor="middle" fill="#E07850" font-size="11" font-weight="600">80 checks</text>
+  <text x="150" y="150" text-anchor="middle" fill="#888888" font-size="10">Search</text>
+  <text x="150" y="166" text-anchor="middle" fill="#888888" font-size="10">PMax</text>
+  <text x="150" y="182" text-anchor="middle" fill="#888888" font-size="10">AI Max</text>
+  <rect x="255" y="70" width="190" height="140" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <clipPath id="rt-255-70"><rect x="255" y="70" width="190" height="9" rx="9"/></clipPath>
+  <rect x="255" y="70" width="190" height="4" fill="#8b5cf6" clip-path="url(#rt-255-70)"/>
+  <text x="350" y="110" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">Meta Ads</text>
+  <text x="350" y="130" text-anchor="middle" fill="#E07850" font-size="11" font-weight="600">50 checks</text>
+  <text x="350" y="150" text-anchor="middle" fill="#888888" font-size="10">Pixel/CAPI</text>
+  <text x="350" y="166" text-anchor="middle" fill="#888888" font-size="10">Andromeda</text>
+  <rect x="455" y="70" width="190" height="140" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <clipPath id="rt-455-70"><rect x="455" y="70" width="190" height="9" rx="9"/></clipPath>
+  <rect x="455" y="70" width="190" height="4" fill="#06b6d4" clip-path="url(#rt-455-70)"/>
+  <text x="550" y="110" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">LinkedIn Ads</text>
+  <text x="550" y="130" text-anchor="middle" fill="#E07850" font-size="11" font-weight="600">27 checks</text>
+  <text x="550" y="150" text-anchor="middle" fill="#888888" font-size="10">B2B</text>
+  <text x="550" y="166" text-anchor="middle" fill="#888888" font-size="10">TLA</text>
+  <text x="550" y="182" text-anchor="middle" fill="#888888" font-size="10">Lead Gen</text>
+  <rect x="655" y="70" width="190" height="140" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <clipPath id="rt-655-70"><rect x="655" y="70" width="190" height="9" rx="9"/></clipPath>
+  <rect x="655" y="70" width="190" height="4" fill="#4ADE80" clip-path="url(#rt-655-70)"/>
+  <text x="750" y="110" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">TikTok Ads</text>
+  <text x="750" y="130" text-anchor="middle" fill="#E07850" font-size="11" font-weight="600">28 checks</text>
+  <text x="750" y="150" text-anchor="middle" fill="#888888" font-size="10">Creative</text>
+  <text x="750" y="166" text-anchor="middle" fill="#888888" font-size="10">Smart+</text>
+  <text x="750" y="182" text-anchor="middle" fill="#888888" font-size="10">Shop</text>
+  <rect x="150" y="220" width="190" height="140" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <clipPath id="rt-150-220"><rect x="150" y="220" width="190" height="9" rx="9"/></clipPath>
+  <rect x="150" y="220" width="190" height="4" fill="#FF6B35" clip-path="url(#rt-150-220)"/>
+  <text x="245" y="260" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">Microsoft Ads</text>
+  <text x="245" y="280" text-anchor="middle" fill="#E07850" font-size="11" font-weight="600">24 checks</text>
+  <text x="245" y="300" text-anchor="middle" fill="#888888" font-size="10">Copilot</text>
+  <text x="245" y="316" text-anchor="middle" fill="#888888" font-size="10">CTV</text>
+  <text x="245" y="332" text-anchor="middle" fill="#888888" font-size="10">Import</text>
+  <rect x="350" y="220" width="190" height="140" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <clipPath id="rt-350-220"><rect x="350" y="220" width="190" height="9" rx="9"/></clipPath>
+  <rect x="350" y="220" width="190" height="4" fill="#888888" clip-path="url(#rt-350-220)"/>
+  <text x="445" y="260" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">Apple Ads</text>
+  <text x="445" y="280" text-anchor="middle" fill="#E07850" font-size="11" font-weight="600">35+ checks</text>
+  <text x="445" y="300" text-anchor="middle" fill="#888888" font-size="10">CPPs</text>
+  <text x="445" y="316" text-anchor="middle" fill="#888888" font-size="10">Max Conv</text>
+  <rect x="550" y="220" width="190" height="140" rx="9" fill="#111111" stroke="#2D2D2D" stroke-width="1"/>
+  <clipPath id="rt-550-220"><rect x="550" y="220" width="190" height="9" rx="9"/></clipPath>
+  <rect x="550" y="220" width="190" height="4" fill="#F43F5E" clip-path="url(#rt-550-220)"/>
+  <text x="645" y="260" text-anchor="middle" fill="#F5F5F0" font-size="12" font-weight="700">YouTube</text>
+  <text x="645" y="280" text-anchor="middle" fill="#E07850" font-size="11" font-weight="600">15 checks</text>
+  <text x="645" y="300" text-anchor="middle" fill="#888888" font-size="10">Shorts</text>
+  <text x="645" y="316" text-anchor="middle" fill="#888888" font-size="10">DemandGen</text>
+  <text x="645" y="332" text-anchor="middle" fill="#888888" font-size="10">CTV</text>
+</svg>

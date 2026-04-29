@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 350" width="750" height="350">
+  <title>Data Privacy Architecture</title>
+  <style>text { font-family: 'Space Grotesk', system-ui, sans-serif; }</style>
+  <rect width="750" height="350" fill="#0A0A0A" rx="16"/>
+  <text x="375" y="28" font-size="17" fill="#F5F5F0" text-anchor="middle" font-weight="bold" dominant-baseline="central">Data Privacy Architecture</text>
+  <line x1="285" y1="40" x2="465" y2="40" stroke="#E07850" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- YOUR MACHINE box -->
+  <rect x="25" y="55" width="370" height="240" rx="16" fill="#0A0A0A" stroke="#4ADE80" stroke-width="2.5"/>
+  <text x="210" y="80" font-size="15" fill="#4ADE80" text-anchor="middle" font-weight="bold" dominant-baseline="central">YOUR MACHINE</text>
+  <!-- Lock icon -->
+  <path d="M55,72 L55,65 Q55,55 64,55 Q73,55 73,65 L73,72" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"/>
+  <rect x="50" y="72" width="27" height="18" rx="3" fill="#4ADE80" opacity="0.3" stroke="#4ADE80" stroke-width="1.5"/>
+
+  <!-- Stacked components inside -->
+  <rect x="60" y="105" width="300" height="36" rx="6" fill="#111111" stroke="#60A5FA" stroke-width="1.5"/>
+  <text x="210" y="123" font-size="12" fill="#F5F5F0" text-anchor="middle" font-weight="600" dominant-baseline="central">Claude Code</text>
+  <rect x="60" y="151" width="300" height="36" rx="6" fill="#111111" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="210" y="169" font-size="12" fill="#F5F5F0" text-anchor="middle" font-weight="600" dominant-baseline="central">claude-ads skill</text>
+  <rect x="60" y="197" width="300" height="36" rx="6" fill="#111111" stroke="#E07850" stroke-width="1.5"/>
+  <text x="210" y="215" font-size="12" fill="#F5F5F0" text-anchor="middle" font-weight="600" dominant-baseline="central">Analysis Engine</text>
+  <rect x="60" y="243" width="300" height="36" rx="6" fill="#111111" stroke="#F0A830" stroke-width="1.5"/>
+  <text x="210" y="261" font-size="12" fill="#F5F5F0" text-anchor="middle" font-weight="600" dominant-baseline="central">PDF Generator</text>
+
+  <!-- Ad Platforms box (right) -->
+  <rect x="510" y="55" width="215" height="240" rx="9" fill="#111111" stroke="#F43F5E" stroke-width="1.5"/>
+  <text x="617" y="80" font-size="14" fill="#888888" text-anchor="middle" font-weight="bold" dominant-baseline="central">Ad Platforms</text>
+  <text x="617" y="110" font-size="11" fill="#888888" text-anchor="middle" dominant-baseline="central">Google Ads</text>
+  <text x="617" y="138" font-size="11" fill="#888888" text-anchor="middle" dominant-baseline="central">Meta Ads</text>
+  <text x="617" y="166" font-size="11" fill="#888888" text-anchor="middle" dominant-baseline="central">LinkedIn Ads</text>
+  <text x="617" y="194" font-size="11" fill="#888888" text-anchor="middle" dominant-baseline="central">TikTok Ads</text>
+  <text x="617" y="222" font-size="11" fill="#888888" text-anchor="middle" dominant-baseline="central">Microsoft Ads</text>
+  <text x="617" y="250" font-size="11" fill="#888888" text-anchor="middle" dominant-baseline="central">Apple Search Ads</text>
+
+  <!-- Dashed line between -->
+  <line x1="405" y1="175" x2="500" y2="175" stroke="#888888" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <text x="452" y="160" font-size="9" fill="#888888" text-anchor="middle" font-weight="bold" dominant-baseline="central">Optional:</text>
+  <text x="452" y="192" font-size="9" fill="#888888" text-anchor="middle" dominant-baseline="central">MCP API calls only</text>
+
+  <!-- Bottom bar -->
+  <rect x="100" y="308" width="550" height="32" rx="6" fill="#1A1A1A" stroke="#4ADE80" stroke-width="2"/>
+  <!-- Lock icon small -->
+  <path d="M128,318 L128,313 Q128,307 133,307 Q138,307 138,313 L138,318" fill="none" stroke="#4ADE80" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="124" y="318" width="18" height="12" rx="2" fill="#4ADE80" opacity="0.3" stroke="#4ADE80" stroke-width="1"/>
+  <text x="395" y="324" font-size="13" fill="#4ADE80" text-anchor="middle" font-weight="bold" dominant-baseline="central">All analysis happens locally on your machine</text>
+</svg>
