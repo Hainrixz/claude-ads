@@ -478,7 +478,7 @@ def _add_page_footer(canvas, doc):
     canvas.setFillColor(colors.HexColor("#94a3b8"))
     canvas.drawCentredString(
         letter[0] / 2, 0.4 * inch,
-        f"claude-ads v1.5  |  Page {doc.page}  |  {datetime.now().strftime('%B %d, %Y')}"
+        f"claude-ads v2.0  |  Page {doc.page}  |  {datetime.now().strftime('%B %d, %Y')}"
     )
     canvas.restoreState()
 
@@ -499,7 +499,7 @@ def build_pdf(data: dict, output_path: str, brand_name: str = ""):
     elements.append(Paragraph(title, styles["RTitle"]))
     elements.append(Spacer(1, 4))
     elements.append(Paragraph(
-        f"Generated {datetime.now().strftime('%B %d, %Y')}  |  Powered by claude-ads v1.5",
+        f"Generated {datetime.now().strftime('%B %d, %Y')}  |  Powered by claude-ads v2.0",
         styles["RSubtitle"],
     ))
     elements.append(HRFlowable(width="100%", thickness=2, color=C_ACCENT))

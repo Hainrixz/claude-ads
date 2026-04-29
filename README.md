@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/web-tododeia.com-1f6feb)](https://tododeia.com)
 [![Instagram](https://img.shields.io/badge/IG-%40soyenriquerocha-E4405F?logo=instagram)](https://instagram.com/soyenriquerocha)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.0.2-blue)](https://github.com/Hainrixz/claude-ads/releases)
+[![Version](https://img.shields.io/badge/version-2.0.3-blue)](https://github.com/Hainrixz/claude-ads/releases)
 [![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://claude.ai/claude-code)
 
 Comprehensive paid advertising audit and optimization skill for Claude Code. Covers Google Ads, Meta Ads, YouTube Ads, LinkedIn Ads, TikTok Ads, Microsoft Ads, and Apple Ads with **250+ audit checks**, industry-specific templates, parallel subagent delegation, PPC financial modeling, A/B test design, PDF report generation, and — new in v2.0 — **`/ads update`**, a self-refreshing knowledge layer that pulls the last 30 days of platform changes (features, deprecations, policy updates) directly from Reddit, Hacker News, official changelogs, and the open web.
@@ -334,7 +334,7 @@ claude-ads runs entirely on your local machine via Claude Code. No ad account da
 
 For direct API access without manual exports, pair claude-ads with MCP servers. See `ads/references/mcp-integration.md` for setup guides:
 - **Google Ads**: [mcp-google-ads](https://github.com/cohnen/mcp-google-ads): 29 GAQL tools for live API access
-- **Meta Ads**: [Adspirer MCP](https://www.adspirer.com) or use included `scripts/fetch_meta_ads.py`
+- **Meta Ads**: [Adspirer MCP](https://www.adspirer.com)
 - **LinkedIn Ads**: [GrowthSpree MCP](https://www.growthspreeofficial.com) or [Adzviser MCP](https://adzviser.com)
 
 <p align="center">
