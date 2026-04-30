@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" role="img" aria-label="Connect to your real ad accounts via MCP. Central hub: Claude Code /ads. Five connected platform nodes with their MCP server identifiers — Google Ads via cohnen/mcp-google-ads, Meta Ads via brijr/meta-mcp, LinkedIn Ads via Synter or Adzviser, TikTok Ads via AdsMCP, Microsoft Ads via CData or Synter. Two modes: Manual (paste exports) or Live (MCP pulls live data).">
+  <defs>
+    <pattern id="dots" patternUnits="userSpaceOnUse" width="24" height="24">
+      <circle cx="2" cy="2" r="1" fill="#E5E5E5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="#FAFAFA"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+
+  <!-- Title -->
+  <text x="800" y="100" text-anchor="middle" font-size="56" font-weight="900" fill="#0A0A0A" letter-spacing="-2">Connect to your real ad accounts.</text>
+  <text x="800" y="148" text-anchor="middle" font-size="20" font-weight="400" fill="#737373">One MCP server per platform. Same /ads commands, live data.</text>
+
+  <!-- Connecting lines (drawn first so pills sit on top). Center hub: 800, 460 -->
+  <g stroke="#E5E5E5" stroke-width="2" fill="none">
+    <line x1="800" y1="460" x2="380" y2="280"/>
+    <line x1="800" y1="460" x2="640" y2="220"/>
+    <line x1="800" y1="460" x2="960" y2="220"/>
+    <line x1="800" y1="460" x2="1220" y2="280"/>
+    <line x1="800" y1="460" x2="1220" y2="500"/>
+  </g>
+
+  <!-- Center hub: claude-code /ads -->
+  <g transform="translate(680, 420)">
+    <rect width="240" height="80" rx="40" fill="#0A0A0A"/>
+    <text x="120" y="40" text-anchor="middle" font-size="22" font-weight="800" fill="#FFFFFF" letter-spacing="-1">claude-code</text>
+    <text x="120" y="64" text-anchor="middle" font-size="18" font-weight="500" fill="#F47B30">/ads</text>
+  </g>
+
+  <!-- 5 platform pills -->
+  <!-- Google Ads (top-left) -->
+  <g transform="translate(220, 230)">
+    <rect width="320" height="100" rx="50" fill="#FFFFFF" stroke="#F47B30" stroke-width="2"/>
+    <text x="160" y="46" text-anchor="middle" font-size="22" font-weight="700" fill="#0A0A0A">Google Ads</text>
+    <text x="160" y="76" text-anchor="middle" font-size="14" font-weight="500" fill="#737373" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">cohnen/mcp-google-ads</text>
+  </g>
+
+  <!-- Meta Ads (top-center-left) -->
+  <g transform="translate(480, 170)">
+    <rect width="320" height="100" rx="50" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="160" y="46" text-anchor="middle" font-size="22" font-weight="700" fill="#0A0A0A">Meta Ads</text>
+    <text x="160" y="76" text-anchor="middle" font-size="14" font-weight="500" fill="#737373" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">brijr/meta-mcp</text>
+  </g>
+
+  <!-- LinkedIn Ads (top-center-right) -->
+  <g transform="translate(800, 170)">
+    <rect width="320" height="100" rx="50" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+    <text x="160" y="46" text-anchor="middle" font-size="22" font-weight="700" fill="#0A0A0A">LinkedIn Ads</text>
+    <text x="160" y="76" text-anchor="middle" font-size="14" font-weight="500" fill="#737373" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">Synter · Adzviser</text>
+  </g>
+
+  <!-- TikTok Ads (top-right) -->
+  <g transform="translate(1060, 230)">
+    <rect width="320" height="100" rx="50" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
+    <text x="160" y="46" text-anchor="middle" font-size="22" font-weight="700" fill="#0A0A0A">TikTok Ads</text>
+    <text x="160" y="76" text-anchor="middle" font-size="14" font-weight="500" fill="#737373" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">AdsMCP/tiktok-ads-mcp</text>
+  </g>
+
+  <!-- Microsoft Ads (right side) -->
+  <g transform="translate(1060, 450)">
+    <rect width="320" height="100" rx="50" fill="#FFFFFF" stroke="#F47B30" stroke-width="2"/>
+    <text x="160" y="46" text-anchor="middle" font-size="22" font-weight="700" fill="#0A0A0A">Microsoft Ads</text>
+    <text x="160" y="76" text-anchor="middle" font-size="14" font-weight="500" fill="#737373" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace">CData · Synter</text>
+  </g>
+
+  <!-- Bottom: Manual vs Live mode pills -->
+  <g transform="translate(0, 700)">
+    <text x="800" y="0" text-anchor="middle" font-size="13" font-weight="800" fill="#737373" letter-spacing="3">TWO MODES</text>
+
+    <!-- Manual mode (gray outlined) -->
+    <g transform="translate(440, 30)">
+      <rect width="320" height="76" rx="38" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+      <text x="160" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#0A0A0A">Manual mode</text>
+      <text x="160" y="58" text-anchor="middle" font-size="13" font-weight="400" fill="#737373">Paste exports · screenshots · metrics</text>
+    </g>
+
+    <!-- Live mode (orange filled) -->
+    <g transform="translate(840, 30)">
+      <rect width="320" height="76" rx="38" fill="#F47B30"/>
+      <text x="160" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Live mode</text>
+      <text x="160" y="58" text-anchor="middle" font-size="13" font-weight="400" fill="#FFFFFF" opacity="0.9">MCP server pulls live data on demand</text>
+    </g>
+  </g>
+</svg>

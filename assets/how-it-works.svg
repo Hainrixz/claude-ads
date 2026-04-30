@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" role="img" aria-label="How /ads audit works. One command, six parallel agents, one scored report. Stage 1 input: Your ad data. Stage 2 orchestrate: /ads orchestrator dispatches Google 80 checks, Meta 50 checks, Creative, Tracking, Budget, Compliance. Stage 3 output: Ads Health Score 78 of 100, grade B.">
+  <defs>
+    <pattern id="dots" patternUnits="userSpaceOnUse" width="24" height="24">
+      <circle cx="2" cy="2" r="1" fill="#E5E5E5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="#FAFAFA"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+
+  <!-- Title -->
+  <text x="800" y="120" text-anchor="middle" font-size="64" font-weight="900" fill="#0A0A0A" letter-spacing="-2">How /ads audit works.</text>
+  <text x="800" y="170" text-anchor="middle" font-size="22" font-weight="400" fill="#737373">One command, six parallel agents, one scored report.</text>
+
+  <!-- Stage labels -->
+  <text x="200" y="290" text-anchor="middle" font-size="13" font-weight="800" fill="#737373" letter-spacing="3">1 · INPUT</text>
+  <text x="800" y="290" text-anchor="middle" font-size="13" font-weight="800" fill="#737373" letter-spacing="3">2 · ORCHESTRATE</text>
+  <text x="1400" y="290" text-anchor="middle" font-size="13" font-weight="800" fill="#737373" letter-spacing="3">3 · OUTPUT</text>
+
+  <!-- Stage 1: Your ad data -->
+  <g transform="translate(80, 470)">
+    <rect width="240" height="64" rx="32" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+    <text x="120" y="42" text-anchor="middle" font-size="20" font-weight="600" fill="#0A0A0A">Your ad data</text>
+  </g>
+  <text x="200" y="565" text-anchor="middle" font-size="14" font-weight="400" fill="#737373">export · screenshot · paste</text>
+
+  <!-- Arrow 1 -->
+  <g transform="translate(340, 502)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#F47B30" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="78,-7 92,0 78,7" fill="#F47B30"/>
+  </g>
+
+  <!-- Stage 2: orchestrator container -->
+  <g transform="translate(450, 320)">
+    <rect width="700" height="320" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2" stroke-dasharray="6,6"/>
+
+    <!-- /ads orchestrator pill -->
+    <g transform="translate(130, 30)">
+      <rect width="440" height="64" rx="32" fill="#0A0A0A"/>
+      <text x="220" y="42" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">/ads orchestrator</text>
+    </g>
+
+    <!-- 6 agents grid -->
+    <g transform="translate(40, 130)">
+      <g>
+        <rect width="200" height="50" rx="25" fill="#FFFFFF" stroke="#F47B30" stroke-width="2"/>
+        <text x="100" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#0A0A0A">Google · 80</text>
+      </g>
+      <g transform="translate(210,0)">
+        <rect width="200" height="50" rx="25" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+        <text x="100" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#0A0A0A">Meta · 50</text>
+      </g>
+      <g transform="translate(420,0)">
+        <rect width="200" height="50" rx="25" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+        <text x="100" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#0A0A0A">Creative</text>
+      </g>
+      <g transform="translate(0,70)">
+        <rect width="200" height="50" rx="25" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+        <text x="100" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#0A0A0A">Tracking</text>
+      </g>
+      <g transform="translate(210,70)">
+        <rect width="200" height="50" rx="25" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+        <text x="100" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#0A0A0A">Budget</text>
+      </g>
+      <g transform="translate(420,70)">
+        <rect width="200" height="50" rx="25" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+        <text x="100" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#0A0A0A">Compliance</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g transform="translate(1170, 502)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#F47B30" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="78,-7 92,0 78,7" fill="#F47B30"/>
+  </g>
+
+  <!-- Stage 3: Health Score -->
+  <g transform="translate(1280, 460)">
+    <rect width="240" height="80" rx="40" fill="#F47B30"/>
+    <text x="120" y="36" text-anchor="middle" font-size="11" font-weight="800" fill="#FFFFFF" letter-spacing="2">HEALTH SCORE</text>
+    <text x="120" y="65" text-anchor="middle" font-size="22" font-weight="700" fill="#FFFFFF">78 / 100 · B</text>
+  </g>
+  <text x="1400" y="565" text-anchor="middle" font-size="14" font-weight="400" fill="#737373">prioritized fixes · optional PDF</text>
+</svg>

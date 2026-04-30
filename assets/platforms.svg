@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" role="img" aria-label="7 platforms, 250+ audit checks. Google Ads 80 checks: Search, PMax, Demand Gen, YouTube. Meta Ads 50 checks: FB, IG, Advantage+, CAPI. YouTube Ads multi: Skippable, Shorts, Demand Gen. LinkedIn Ads 27 checks: B2B, Lead Gen, ABM. TikTok Ads 28 checks: Smart+, Shop, Search. Microsoft Ads 24 checks: Bing, Copilot, Import safety. Apple Search Ads 35+ checks: CPPs, TAP, AdAttributionKit. Plus cross-platform 3 checks: privacy infrastructure, creative diversity.">
+  <defs>
+    <pattern id="dots" patternUnits="userSpaceOnUse" width="24" height="24">
+      <circle cx="2" cy="2" r="1" fill="#E5E5E5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="#FAFAFA"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+
+  <!-- Title -->
+  <text x="800" y="120" text-anchor="middle" font-size="64" font-weight="900" fill="#0A0A0A" letter-spacing="-2">7 platforms · 250+ checks.</text>
+  <text x="800" y="170" text-anchor="middle" font-size="22" font-weight="400" fill="#737373">Each tile is one platform. Each number is real, weighted by severity.</text>
+
+  <!-- Tile grid: 4 cols × 2 rows. Tile 320×220, gap 24. Total 4×320+3×24=1352. Margin (1600-1352)/2=124. Top y=260 -->
+
+  <!-- Row 1 -->
+  <g transform="translate(124, 260)">
+    <!-- Google Ads -->
+    <g>
+      <rect width="320" height="220" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+      <rect x="24" y="24" width="48" height="6" rx="3" fill="#F47B30"/>
+      <text x="24" y="80" font-size="26" font-weight="800" fill="#0A0A0A">Google Ads</text>
+      <text x="24" y="135" font-size="56" font-weight="900" fill="#F47B30" letter-spacing="-2">80</text>
+      <text x="116" y="135" font-size="20" font-weight="500" fill="#737373">checks</text>
+      <text x="24" y="180" font-size="14" font-weight="400" fill="#737373">Search · PMax · Demand Gen</text>
+      <text x="24" y="200" font-size="14" font-weight="400" fill="#737373">YouTube</text>
+    </g>
+
+    <!-- Meta Ads -->
+    <g transform="translate(344, 0)">
+      <rect width="320" height="220" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+      <rect x="24" y="24" width="48" height="6" rx="3" fill="#2563EB"/>
+      <text x="24" y="80" font-size="26" font-weight="800" fill="#0A0A0A">Meta Ads</text>
+      <text x="24" y="135" font-size="56" font-weight="900" fill="#2563EB" letter-spacing="-2">50</text>
+      <text x="106" y="135" font-size="20" font-weight="500" fill="#737373">checks</text>
+      <text x="24" y="180" font-size="14" font-weight="400" fill="#737373">FB · IG · Advantage+</text>
+      <text x="24" y="200" font-size="14" font-weight="400" fill="#737373">CAPI · Andromeda</text>
+    </g>
+
+    <!-- YouTube Ads -->
+    <g transform="translate(688, 0)">
+      <rect width="320" height="220" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+      <rect x="24" y="24" width="48" height="6" rx="3" fill="#0A0A0A"/>
+      <text x="24" y="80" font-size="26" font-weight="800" fill="#0A0A0A">YouTube Ads</text>
+      <text x="24" y="135" font-size="40" font-weight="900" fill="#0A0A0A" letter-spacing="-1">multi</text>
+      <text x="24" y="180" font-size="14" font-weight="400" fill="#737373">Skippable · Shorts</text>
+      <text x="24" y="200" font-size="14" font-weight="400" fill="#737373">Demand Gen</text>
+    </g>
+
+    <!-- LinkedIn Ads -->
+    <g transform="translate(1032, 0)">
+      <rect width="320" height="220" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+      <rect x="24" y="24" width="48" height="6" rx="3" fill="#2563EB"/>
+      <text x="24" y="80" font-size="26" font-weight="800" fill="#0A0A0A">LinkedIn Ads</text>
+      <text x="24" y="135" font-size="56" font-weight="900" fill="#2563EB" letter-spacing="-2">27</text>
+      <text x="106" y="135" font-size="20" font-weight="500" fill="#737373">checks</text>
+      <text x="24" y="180" font-size="14" font-weight="400" fill="#737373">B2B · Lead Gen</text>
+      <text x="24" y="200" font-size="14" font-weight="400" fill="#737373">ABM · CRM</text>
+    </g>
+  </g>
+
+  <!-- Row 2 -->
+  <g transform="translate(124, 504)">
+    <!-- TikTok Ads -->
+    <g>
+      <rect width="320" height="220" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+      <rect x="24" y="24" width="48" height="6" rx="3" fill="#0A0A0A"/>
+      <text x="24" y="80" font-size="26" font-weight="800" fill="#0A0A0A">TikTok Ads</text>
+      <text x="24" y="135" font-size="56" font-weight="900" fill="#0A0A0A" letter-spacing="-2">28</text>
+      <text x="106" y="135" font-size="20" font-weight="500" fill="#737373">checks</text>
+      <text x="24" y="180" font-size="14" font-weight="400" fill="#737373">Smart+ · Shop</text>
+      <text x="24" y="200" font-size="14" font-weight="400" fill="#737373">Search · Events API</text>
+    </g>
+
+    <!-- Microsoft Ads -->
+    <g transform="translate(344, 0)">
+      <rect width="320" height="220" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+      <rect x="24" y="24" width="48" height="6" rx="3" fill="#F47B30"/>
+      <text x="24" y="80" font-size="26" font-weight="800" fill="#0A0A0A">Microsoft Ads</text>
+      <text x="24" y="135" font-size="56" font-weight="900" fill="#F47B30" letter-spacing="-2">24</text>
+      <text x="106" y="135" font-size="20" font-weight="500" fill="#737373">checks</text>
+      <text x="24" y="180" font-size="14" font-weight="400" fill="#737373">Bing · Copilot · CTV</text>
+      <text x="24" y="200" font-size="14" font-weight="400" fill="#737373">Import safety</text>
+    </g>
+
+    <!-- Apple Search Ads -->
+    <g transform="translate(688, 0)">
+      <rect width="320" height="220" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+      <rect x="24" y="24" width="48" height="6" rx="3" fill="#0A0A0A"/>
+      <text x="24" y="80" font-size="26" font-weight="800" fill="#0A0A0A">Apple Search</text>
+      <text x="24" y="135" font-size="56" font-weight="900" fill="#0A0A0A" letter-spacing="-2">35+</text>
+      <text x="148" y="135" font-size="20" font-weight="500" fill="#737373">checks</text>
+      <text x="24" y="180" font-size="14" font-weight="400" fill="#737373">CPPs · TAP</text>
+      <text x="24" y="200" font-size="14" font-weight="400" fill="#737373">AdAttributionKit</text>
+    </g>
+
+    <!-- Cross-platform (subtler) -->
+    <g transform="translate(1032, 0)">
+      <rect width="320" height="220" rx="24" fill="#FAFAFA" stroke="#E5E5E5" stroke-width="2" stroke-dasharray="6,6"/>
+      <rect x="24" y="24" width="48" height="6" rx="3" fill="#737373"/>
+      <text x="24" y="80" font-size="26" font-weight="800" fill="#737373">+ Cross-platform</text>
+      <text x="24" y="135" font-size="56" font-weight="900" fill="#737373" letter-spacing="-2">3</text>
+      <text x="68" y="135" font-size="20" font-weight="500" fill="#737373">checks</text>
+      <text x="24" y="180" font-size="14" font-weight="400" fill="#737373">Privacy infra</text>
+      <text x="24" y="200" font-size="14" font-weight="400" fill="#737373">Creative diversity</text>
+    </g>
+  </g>
+</svg>

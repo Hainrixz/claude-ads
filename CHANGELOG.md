@@ -5,6 +5,39 @@ All notable changes to claude-ads are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.2] - 2026-04-29
+
+Visual identity rewrite — replaced all five raster JPGs (generated with AI image models in v2.1.0–v2.1.1) with hand-authored, hand-coded SVG infographics in the [tododeia.com](https://tododeia.com) house style: light dot-pattern background (`#FAFAFA` + `#E5E5E5`), bold black wordmarks (`#0A0A0A`), pill-shaped buttons (`rx=full`), and a flat brand palette of orange (`#F47B30`) and blue (`#2563EB`). Total weight dropped from ~1.77 MB to ~29 KB (60× lighter), text is now perfectly crisp at any zoom, and there is zero risk of AI typos in rendered text.
+
+### Changed
+
+- **All 5 README images rewritten as hand-authored SVG**, replacing the v2.1.1 Nano Banana PRO raster renders:
+  - `assets/hero.svg` (3.4 KB) — `claude-ads.` wordmark in 200pt black, gold-shimmer "VERSION 2.1.2 · 250+ checks · 7 platforms · MCP-ready" pill, two rows of clickable-style command pills (`/ads audit`, `/ads google`, `/ads meta`, `/ads tiktok`, `Connect MCP`, `/ads update`, `/ads report`).
+  - `assets/how-it-works.svg` (4.9 KB) — three-stage flow with section labels (1 · INPUT, 2 · ORCHESTRATE, 3 · OUTPUT). Dashed orchestrator container holds the `/ads orchestrator` black pill with six agent pills below (Google · 80, Meta · 50, Creative, Tracking, Budget, Compliance). Output: orange `HEALTH SCORE 78 / 100 · B` pill.
+  - `assets/platforms.svg` (7.1 KB) — 4×2 tile grid. Each tile is a white card with a colored top accent bar, platform name in 26pt black, check count in 56pt color (Google 80 orange, Meta 50 blue, YouTube multi black, LinkedIn 27 blue, TikTok 28 black, Microsoft 24 orange, Apple 35+ black) and area tags. Cross-platform tile is dashed/dimmed.
+  - `assets/connect.svg` (5.3 KB) — radial network: black `claude-code · /ads` hub at center, five outlined pills around it labeled with platform name + monospace MCP server identifier (`cohnen/mcp-google-ads`, `brijr/meta-mcp`, `Synter · Adzviser`, `AdsMCP/tiktok-ads-mcp`, `CData · Synter`). Below: white "Manual mode" pill vs orange "Live mode" pill.
+  - `assets/showcase.svg` (8.4 KB) — three-column dashboard. Left card: 78/100 semicircle gauge with cyan→orange gradient stroke and B grade badge. Center card: full A–F grade scale with B row highlighted ("← you are here"). Right card: three findings cards (CRITICAL/WARNING/QUICK WIN with proper red/yellow/green vertical accent bars) plus three platform breakdown bars (Google 82, Meta 71, LinkedIn 88).
+- All SVGs use the same design tokens: `Inter` system font with fallbacks, dot-pattern background `<pattern id="dots">`, pill `rx=full` corner radius, `viewBox="0 0 1600 900"` (16:9), `role="img"` + `aria-label` for screen-reader accessibility.
+- README image alt text reused from v2.1.1 (already accurate descriptions of rendered content), only the file extension swapped `.jpg` → `.svg` in both EN and ES.
+- Version bumped `2.1.1` → `2.1.2` across `README.md` badge, `README.es.md` badge, `.claude-plugin/plugin.json`, and `.claude-plugin/marketplace.json`.
+
+### Removed
+
+- `assets/{hero,how-it-works,platforms,connect,showcase}.jpg` (v2.1.1 Nano Banana PRO renders, ~1.77 MB total). The visual identity changed enough that keeping both formats wasn't worth the binary churn.
+
+### Why this rewrite
+
+- **Brand consistency.** v2.1.1's dark-navy/cyan/magenta cinematic mood was inherited from prompt experimentation with Higgsfield, not from the maintainer's actual brand. The new SVGs match [tododeia.com](https://tododeia.com)'s light-bg dot-pattern aesthetic, so the README, the website, and the brand wordmark all read as one product.
+- **Sharper text.** AI-rendered text occasionally has subtle artifacts (kerning, partial letterforms) that are visible at GitHub's raw image scale. SVG text is rasterized by the browser and is pixel-perfect at every zoom level.
+- **60× smaller.** ~29 KB total vs 1.77 MB. README loads on slow connections, and the repo's `assets/` no longer dominates clone size.
+- **Editable.** Future content updates (new platform, new command, score change) are 5-minute SVG text edits — no MCP server needed, no credit cost, no AI prompt re-rolls.
+
+### Notes
+
+- Pure docs / assets / version-string change. Zero behavior change in any sub-skill, agent, script, or routing logic.
+- All 5 SVGs validated with `xmllint --noout` (well-formed XML).
+- GitHub renders `<img src="*.svg">` natively in markdown — no additional setup needed.
+
 ## [2.1.1] - 2026-04-29
 
 Visual identity upgrade — replaced the v2.1.0 atmospheric mood images with didactic infographics that actually teach what Claude Ads does. Same 5-image footprint (~1.8 MB total), but each image now contains rendered text, labeled diagrams, and concrete data instead of abstract visual mood.

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" role="img" aria-label="claude-ads. Multi-platform paid ads audit for Claude Code. v2.1.2 — 250+ checks, 7 platforms, MCP-ready. Commands: /ads audit, /ads google, /ads meta, /ads tiktok, Connect MCP, /ads update, /ads report.">
+  <defs>
+    <pattern id="dots" patternUnits="userSpaceOnUse" width="24" height="24">
+      <circle cx="2" cy="2" r="1" fill="#E5E5E5"/>
+    </pattern>
+    <linearGradient id="featured" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFEAB0" stop-opacity="0.85"/>
+      <stop offset="0.5" stop-color="#FFF4D8"/>
+      <stop offset="1" stop-color="#FFE0A0" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="#FAFAFA"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+
+  <!-- Brand wordmark -->
+  <text x="800" y="370" text-anchor="middle" font-size="200" font-weight="900" fill="#0A0A0A" letter-spacing="-6">claude-ads.</text>
+
+  <!-- Tagline -->
+  <text x="800" y="445" text-anchor="middle" font-size="26" font-weight="400" fill="#737373">Multi-platform paid ads audit · for Claude Code</text>
+
+  <!-- Featured holographic pill -->
+  <g transform="translate(490, 490)">
+    <rect width="620" height="60" rx="30" fill="url(#featured)" stroke="#E5C77D" stroke-width="1"/>
+    <text x="50" y="38" font-size="13" font-weight="800" fill="#9A6E1A" letter-spacing="2">VERSION 2.1.2</text>
+    <text x="200" y="38" font-size="18" font-weight="700" fill="#0A0A0A">250+ checks · 7 platforms · MCP-ready</text>
+  </g>
+
+  <!-- Pill row 1 (5 commands) -->
+  <g transform="translate(252, 615)">
+    <g>
+      <rect width="200" height="56" rx="28" fill="#F47B30"/>
+      <text x="100" y="36" text-anchor="middle" font-size="18" font-weight="600" fill="#FFFFFF">/ads audit</text>
+    </g>
+    <g transform="translate(224,0)">
+      <rect width="200" height="56" rx="28" fill="#FFFFFF" stroke="#F47B30" stroke-width="2"/>
+      <text x="100" y="36" text-anchor="middle" font-size="18" font-weight="600" fill="#0A0A0A">/ads google</text>
+    </g>
+    <g transform="translate(448,0)">
+      <rect width="200" height="56" rx="28" fill="#0A0A0A"/>
+      <text x="100" y="36" text-anchor="middle" font-size="18" font-weight="600" fill="#FFFFFF">/ads meta</text>
+    </g>
+    <g transform="translate(672,0)">
+      <rect width="200" height="56" rx="28" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+      <text x="100" y="36" text-anchor="middle" font-size="18" font-weight="600" fill="#0A0A0A">/ads tiktok</text>
+    </g>
+    <g transform="translate(896,0)">
+      <rect width="200" height="56" rx="28" fill="#2563EB"/>
+      <text x="100" y="36" text-anchor="middle" font-size="18" font-weight="600" fill="#FFFFFF">Connect MCP</text>
+    </g>
+  </g>
+
+  <!-- Pill row 2 (2 commands) -->
+  <g transform="translate(588, 695)">
+    <g>
+      <rect width="200" height="56" rx="28" fill="#0A0A0A" stroke="#F47B30" stroke-width="2"/>
+      <text x="100" y="36" text-anchor="middle" font-size="18" font-weight="600" fill="#FFFFFF">/ads update</text>
+    </g>
+    <g transform="translate(224,0)">
+      <rect width="200" height="56" rx="28" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+      <text x="100" y="36" text-anchor="middle" font-size="18" font-weight="600" fill="#0A0A0A">/ads report</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" role="img" aria-label="Sample /ads audit report. Health Score 78 of 100, Grade B (some improvement opportunities). Grade scale: A 90-100 minor optimizations only, B 75-89 some improvements (selected), C 60-74 notable issues, D 40-59 significant problems, F under 40 urgent intervention. Findings: CRITICAL 3x Kill Rule violation in Meta ad set, WARNING Broad Match without Smart Bidding, QUICK WIN Add CAPI to recover about 30% of events. Platform breakdown: Google 82, Meta 71, LinkedIn 88.">
+  <defs>
+    <pattern id="dots" patternUnits="userSpaceOnUse" width="24" height="24">
+      <circle cx="2" cy="2" r="1" fill="#E5E5E5"/>
+    </pattern>
+    <linearGradient id="gauge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#F47B30"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="#FAFAFA"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+
+  <!-- Title -->
+  <text x="800" y="100" text-anchor="middle" font-size="56" font-weight="900" fill="#0A0A0A" letter-spacing="-2">Sample /ads audit report.</text>
+  <text x="800" y="148" text-anchor="middle" font-size="20" font-weight="400" fill="#737373">One scored health number. One prioritized punch list.</text>
+
+  <!-- Three columns: gauge | grade scale | findings -->
+
+  <!-- LEFT: gauge card -->
+  <g transform="translate(80, 220)">
+    <rect width="420" height="560" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+    <text x="40" y="52" font-size="13" font-weight="800" fill="#737373" letter-spacing="3">ADS HEALTH SCORE</text>
+
+    <!-- Semicircle gauge: center 210, 310. Radius 140. From 180° to 360° (top half). 78% fill. -->
+    <!-- background arc (gray) -->
+    <path d="M 70 310 A 140 140 0 0 1 350 310" fill="none" stroke="#F0F0F0" stroke-width="22" stroke-linecap="round"/>
+    <!-- progress arc 78% — sweep from 180° to 180+(78/100)*180=320.4° -->
+    <!-- end angle 320.4°: x = 210 + 140*cos(320.4°)=210+140*0.7705=317.9, y=310+140*sin(320.4°)=310+140*(-0.6374)=220.8 -->
+    <path d="M 70 310 A 140 140 0 1 1 317.9 220.8" fill="none" stroke="url(#gauge)" stroke-width="22" stroke-linecap="round"/>
+
+    <!-- center number -->
+    <text x="210" y="295" text-anchor="middle" font-size="100" font-weight="900" fill="#0A0A0A" letter-spacing="-4">78</text>
+    <text x="210" y="328" text-anchor="middle" font-size="18" font-weight="500" fill="#737373">/ 100</text>
+
+    <!-- grade badge -->
+    <circle cx="210" cy="380" r="32" fill="#2563EB"/>
+    <text x="210" y="392" text-anchor="middle" font-size="32" font-weight="900" fill="#FFFFFF">B</text>
+
+    <!-- Caption -->
+    <text x="210" y="470" text-anchor="middle" font-size="20" font-weight="700" fill="#0A0A0A">Grade B</text>
+    <text x="210" y="498" text-anchor="middle" font-size="16" font-weight="400" fill="#737373">Some improvement opportunities</text>
+  </g>
+
+  <!-- CENTER: grade scale -->
+  <g transform="translate(540, 220)">
+    <rect width="380" height="560" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+    <text x="40" y="52" font-size="13" font-weight="800" fill="#737373" letter-spacing="3">GRADE SCALE</text>
+
+    <!-- 5 rows starting y=90 -->
+    <!-- A -->
+    <g transform="translate(40, 90)">
+      <circle cx="22" cy="22" r="20" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+      <text x="22" y="30" text-anchor="middle" font-size="20" font-weight="900" fill="#10B981">A</text>
+      <text x="64" y="20" font-size="16" font-weight="700" fill="#0A0A0A">90 – 100</text>
+      <text x="64" y="40" font-size="14" font-weight="400" fill="#737373">Minor optimizations only</text>
+    </g>
+
+    <!-- B (highlighted) -->
+    <g transform="translate(40, 178)">
+      <rect x="-10" y="-10" width="320" height="64" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+      <circle cx="22" cy="22" r="20" fill="#2563EB"/>
+      <text x="22" y="30" text-anchor="middle" font-size="20" font-weight="900" fill="#FFFFFF">B</text>
+      <text x="64" y="20" font-size="16" font-weight="700" fill="#0A0A0A">75 – 89</text>
+      <text x="64" y="40" font-size="14" font-weight="400" fill="#2563EB">Some improvements ← you are here</text>
+    </g>
+
+    <!-- C -->
+    <g transform="translate(40, 280)">
+      <circle cx="22" cy="22" r="20" fill="#FFFFFF" stroke="#EAB308" stroke-width="2"/>
+      <text x="22" y="30" text-anchor="middle" font-size="20" font-weight="900" fill="#EAB308">C</text>
+      <text x="64" y="20" font-size="16" font-weight="700" fill="#0A0A0A">60 – 74</text>
+      <text x="64" y="40" font-size="14" font-weight="400" fill="#737373">Notable issues</text>
+    </g>
+
+    <!-- D -->
+    <g transform="translate(40, 360)">
+      <circle cx="22" cy="22" r="20" fill="#FFFFFF" stroke="#F47B30" stroke-width="2"/>
+      <text x="22" y="30" text-anchor="middle" font-size="20" font-weight="900" fill="#F47B30">D</text>
+      <text x="64" y="20" font-size="16" font-weight="700" fill="#0A0A0A">40 – 59</text>
+      <text x="64" y="40" font-size="14" font-weight="400" fill="#737373">Significant problems</text>
+    </g>
+
+    <!-- F -->
+    <g transform="translate(40, 440)">
+      <circle cx="22" cy="22" r="20" fill="#FFFFFF" stroke="#EF4444" stroke-width="2"/>
+      <text x="22" y="30" text-anchor="middle" font-size="20" font-weight="900" fill="#EF4444">F</text>
+      <text x="64" y="20" font-size="16" font-weight="700" fill="#0A0A0A">&lt; 40</text>
+      <text x="64" y="40" font-size="14" font-weight="400" fill="#737373">Urgent intervention</text>
+    </g>
+  </g>
+
+  <!-- RIGHT: findings + breakdown -->
+  <g transform="translate(960, 220)">
+    <rect width="560" height="560" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
+    <text x="40" y="52" font-size="13" font-weight="800" fill="#737373" letter-spacing="3">PRIORITIZED FINDINGS</text>
+
+    <!-- Critical card -->
+    <g transform="translate(40, 80)">
+      <rect width="480" height="80" rx="12" fill="#FEF2F2"/>
+      <rect width="6" height="80" rx="3" fill="#EF4444"/>
+      <text x="24" y="32" font-size="11" font-weight="800" fill="#EF4444" letter-spacing="2">CRITICAL</text>
+      <text x="24" y="58" font-size="16" font-weight="600" fill="#0A0A0A">3× Kill Rule violation in Meta ad set</text>
+    </g>
+
+    <!-- Warning card -->
+    <g transform="translate(40, 174)">
+      <rect width="480" height="80" rx="12" fill="#FEFCE8"/>
+      <rect width="6" height="80" rx="3" fill="#EAB308"/>
+      <text x="24" y="32" font-size="11" font-weight="800" fill="#EAB308" letter-spacing="2">WARNING</text>
+      <text x="24" y="58" font-size="16" font-weight="600" fill="#0A0A0A">Broad Match without Smart Bidding</text>
+    </g>
+
+    <!-- Quick win card -->
+    <g transform="translate(40, 268)">
+      <rect width="480" height="80" rx="12" fill="#F0FDF4"/>
+      <rect width="6" height="80" rx="3" fill="#10B981"/>
+      <text x="24" y="32" font-size="11" font-weight="800" fill="#10B981" letter-spacing="2">QUICK WIN</text>
+      <text x="24" y="58" font-size="16" font-weight="600" fill="#0A0A0A">Add CAPI to recover ~30% events</text>
+    </g>
+
+    <!-- Platform breakdown -->
+    <text x="40" y="396" font-size="13" font-weight="800" fill="#737373" letter-spacing="3">PLATFORM BREAKDOWN</text>
+
+    <!-- Google bar -->
+    <g transform="translate(40, 416)">
+      <text x="0" y="20" font-size="14" font-weight="600" fill="#0A0A0A">Google</text>
+      <rect x="100" y="6" width="320" height="16" rx="8" fill="#F0F0F0"/>
+      <rect x="100" y="6" width="262" height="16" rx="8" fill="#F47B30"/>
+      <text x="436" y="20" font-size="14" font-weight="700" fill="#0A0A0A">82</text>
+    </g>
+
+    <!-- Meta bar -->
+    <g transform="translate(40, 458)">
+      <text x="0" y="20" font-size="14" font-weight="600" fill="#0A0A0A">Meta</text>
+      <rect x="100" y="6" width="320" height="16" rx="8" fill="#F0F0F0"/>
+      <rect x="100" y="6" width="227" height="16" rx="8" fill="#2563EB"/>
+      <text x="436" y="20" font-size="14" font-weight="700" fill="#0A0A0A">71</text>
+    </g>
+
+    <!-- LinkedIn bar -->
+    <g transform="translate(40, 500)">
+      <text x="0" y="20" font-size="14" font-weight="600" fill="#0A0A0A">LinkedIn</text>
+      <rect x="100" y="6" width="320" height="16" rx="8" fill="#F0F0F0"/>
+      <rect x="100" y="6" width="282" height="16" rx="8" fill="#0A0A0A"/>
+      <text x="436" y="20" font-size="14" font-weight="700" fill="#0A0A0A">88</text>
+    </g>
+  </g>
+</svg>
