@@ -5,6 +5,34 @@ All notable changes to claude-ads are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-04-29
+
+Documentation and visual identity release. No behavior change in any sub-skill, agent, script, or routing logic — pure docs / assets / version-string update so users (and clients) get a clear, distinctive face for the fork instead of an upstream lookalike.
+
+### Added
+
+- **Spanish README** (`README.es.md`) — full localized version for LatAm / Spanish-speaking practitioners, with bilingual switcher (`EN · ES`) at the top of both files. Voice is natural LatAm Spanish, not a literal translation; commands, code blocks, and product names stay untranslated.
+- **"Connect to your real ad accounts" section** — new top-level section in both READMEs with a per-platform MCP server table (Google Ads → `cohnen/mcp-google-ads`, Meta → `brijr/meta-mcp` or Adspirer, LinkedIn → Synter / Adzviser, TikTok → `AdsMCP/tiktok-ads-mcp-server`, Microsoft → CData / Synter), including install commands, auth requirements, and a read-vs-write safety caveat. Gives users a documented path from "paste-based analyzer" to "live ads agent." Points to existing `ads/references/mcp-integration.md` for the full per-platform setup walkthrough.
+- **5 new cinematic dark/neon brand images** at `assets/{hero,how-it-works,agents,connect,showcase}.jpg`, generated via Higgsfield Cinema Studio 2.5 (16:9, JPEG q90, ~1.7 MB total). All images feature dark navy backgrounds with subtle cyan/magenta accents and contain no real brand logos or readable text (trademark hygiene).
+- **Inline mermaid orchestration diagram** in both READMEs replacing the most important upstream SVG flow (`/ads audit` → 6 parallel agents → scored report). Renders natively on GitHub, no asset to maintain, easy to keep in sync with code changes.
+- **LICENSE: tododeia.com copyright line** added below the upstream `agricidaniel` line. Original upstream copyright preserved verbatim per MIT §2.
+
+### Changed
+
+- **`README.md` fully rewritten** (395 → 292 lines). New ELI5 intro in plain English ("you know how you can ask Claude to review your code? Claude Ads is the same idea, but for paid advertising") explains what the skill is and isn't (analysis tool by default, real ads agent when paired with MCP). Restructured into 16 sections: What is this? · Quick start · How it works · What you can run · Platforms covered · Connect to your real ad accounts · Industry templates · Showcase · `/ads update` · What's different in this fork · Privacy · FAQ · Requirements · Uninstall · Credits · License.
+- **Honest "What's different in this fork" section** — 3-bullet summary distinguishing what tododeia actually added (`/ads update`, refreshed 2026 references, rebrand) from what came from upstream (250+ checks, 19 sub-skills, 10 agents, 12 templates, audit pipeline). Replaces scattered attribution.
+- Version bumped `2.0.3` → `2.1.0` across `README.md` badge, `README.es.md` badge, `.claude-plugin/plugin.json` (`version`), and `.claude-plugin/marketplace.json` (both `metadata.version` and the per-plugin entry).
+
+### Removed
+
+- All 18 upstream-derived SVG diagrams in `assets/diagrams/` (`01-architecture.svg` through `20-install-methods.svg`, ~970 lines of vector markup). The fork now has its own visual identity instead of carrying upstream visuals.
+- `assets/demo.gif` (628 KB) — to be replaced with a freshly recorded terminal cast in a follow-up commit (asciinema → `agg`).
+
+### Notes
+
+- Doc-level verification passed: 5/5 image references resolve, 6/6 internal relative links resolve (`ads/references/mcp-integration.md`, `scripts/lib/THIRD_PARTY_NOTICES.md`, `skills/ads-update/SKILL.md`, `scripts/url_utils.py`, `CHANGELOG.md`, `LICENSE`), zero leftover references to deleted `assets/diagrams/` or `demo.gif`, EN↔ES section parity (16 sections / 292 lines each), plugin manifest version strings match the README install command (`claude-ads@tododeia-claude-ads`).
+- The "LICENSE preserved verbatim" stance from v2.0.0 is updated here — adding the fork maintainer's copyright is allowed under MIT and standard practice for actively maintained forks. The upstream `agricidaniel` line remains untouched immediately above.
+
 ## [2.0.3] - 2026-04-29
 
 ### Fixed

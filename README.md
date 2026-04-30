@@ -1,395 +1,292 @@
-# claude-ads
+<div align="right">
+<sub><strong>EN</strong> · <a href="README.es.md">Español</a></sub>
+</div>
 
-> The only multi-platform paid-advertising audit skill for Claude Code that updates itself.
+<p align="center">
+  <img src="assets/hero.jpg" alt="Claude Ads — multi-platform paid ads audit skill for Claude Code" width="100%">
+</p>
+
+# Claude Ads
+
+> A free Claude Code skill that turns Claude into your in-house paid-ads team — audits, plans, scores, reports.
 
 [![Website](https://img.shields.io/badge/web-tododeia.com-1f6feb)](https://tododeia.com)
 [![Instagram](https://img.shields.io/badge/IG-%40soyenriquerocha-E4405F?logo=instagram)](https://instagram.com/soyenriquerocha)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.0.3-blue)](https://github.com/Hainrixz/claude-ads/releases)
+[![Version](https://img.shields.io/badge/version-2.1.0-blue)](https://github.com/Hainrixz/claude-ads/releases)
 [![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://claude.ai/claude-code)
 
-Comprehensive paid advertising audit and optimization skill for Claude Code. Covers Google Ads, Meta Ads, YouTube Ads, LinkedIn Ads, TikTok Ads, Microsoft Ads, and Apple Ads with **250+ audit checks**, industry-specific templates, parallel subagent delegation, PPC financial modeling, A/B test design, PDF report generation, and — new in v2.0 — **`/ads update`**, a self-refreshing knowledge layer that pulls the last 30 days of platform changes (features, deprecations, policy updates) directly from Reddit, Hacker News, official changelogs, and the open web.
+---
 
-## Contents
+## What is this? (in plain English)
 
-- [Installation](#installation)
-- [Demo](#demo)
-- [Quick Start](#quick-start)
-- [Cost & Credits](#cost--credits)
-- [Commands](#commands)
-- [Features](#features)
-- [Architecture](#architecture)
-- [How It Analyzes Your Ads](#how-it-analyzes-your-ads)
-- [FAQ](#faq)
-- [Requirements](#requirements)
-- [Uninstall](#uninstall)
-- [About](#about)
-- [License](#license)
+You know how you can ask Claude to review your code? **Claude Ads is the same idea, but for paid advertising.** Install it once, and Claude gets a brain transplant: it now knows Google Ads, Meta, YouTube, LinkedIn, TikTok, Microsoft Ads, and Apple Search Ads at a senior-strategist level — 250+ specific checks, 12 industry templates, and the ability to write you a real audit report at the end.
 
-## Installation
+You drop in your ad data (an export, a screenshot, or just paste your numbers), type a command like `/ads audit`, and Claude runs six analysts in parallel — one per slice of your account. You get back a 0–100 health score, a prioritized punch list of what to fix, and (optionally) a polished PDF report you can hand a client.
 
-### Plugin Install (Recommended)
+It's not a magic button that runs your ads for you. It's a senior-level reviewer that lives inside your terminal, knows what's broken before you do, and never forgets to check the boring things (Consent Mode V2, CAPI, learning-phase rules, kill thresholds). And in v2.0+, it can update its own knowledge base monthly so it doesn't go stale.
 
-Add the marketplace and install in Claude Code:
+---
+
+## Quick start (90 seconds)
+
+**Plugin install (recommended)** — registers as a native Claude Code plugin with auto-updates:
 
 ```shell
 /plugin marketplace add Hainrixz/claude-ads
 /plugin install claude-ads@tododeia-claude-ads
 ```
 
-This registers claude-ads as a native plugin with auto-updates, namespace isolation, and proper version tracking.
-
-### One-Command Install (Unix/macOS/Linux)
+**Or one-liner install (Unix / macOS / Linux):**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Hainrixz/claude-ads/main/install.sh | bash
 ```
 
-### One-Command Install (Windows PowerShell)
+**Or one-liner install (Windows PowerShell):**
 
 ```powershell
 irm https://raw.githubusercontent.com/Hainrixz/claude-ads/main/install.ps1 | iex
 ```
 
-### Manual Install
+Then open Claude Code and run your first audit:
 
-```bash
-git clone https://github.com/Hainrixz/claude-ads.git
-cd claude-ads
-./install.sh          # Unix/macOS/Linux
-```
-
-```powershell
-.\install.ps1         # Windows PowerShell
-```
-
-<p align="center">
-  <img src="assets/diagrams/20-install-methods.svg" alt="Installation Methods Comparison" width="100%">
-</p>
-
-## Demo
-
-<p align="center">
-  <img src="assets/demo.gif" alt="claude-ads Demo" width="100%">
-</p>
-
-## Quick Start
-
-```bash
-# Start Claude Code
+```shell
 claude
-
-# Run a full multi-platform audit
-/ads audit
-
-# Deep analysis for a single platform
-/ads google
-/ads meta
-/ads linkedin
-
-# Strategic planning by business type
-/ads plan saas
-/ads plan ecommerce
-/ads plan local-service
-
-# Cross-platform creative audit
-/ads creative
-
-# Budget and bidding strategy review
-/ads budget
-
-# NEW in v2.0 — refresh platform references with last 30 days of changes
-/ads update meta
-/ads update all
+> /ads audit
 ```
 
+Claude will ask you for your industry, monthly spend, and which platforms to include. Tell it. It does the rest.
+
+---
+
+## How it works
+
 <p align="center">
-  <img src="assets/diagrams/06-how-it-works.svg" alt="How It Works: 5-Step Process" width="100%">
+  <img src="assets/how-it-works.jpg" alt="How Claude Ads orchestrates parallel audit agents" width="100%">
 </p>
 
-## Cost & Credits
+```mermaid
+flowchart LR
+  U([You]) -->|/ads audit| O[Orchestrator]
+  O -.dispatches in parallel.-> G[Google audit]
+  O -.-> M[Meta audit]
+  O -.-> C[Creative audit]
+  O -.-> T[Tracking audit]
+  O -.-> B[Budget audit]
+  O -.-> X[Compliance audit]
+  G & M & C & T & B & X -->|findings| S[Scored report]
+  S --> R([0–100 health score · prioritized fixes · optional PDF])
+```
 
-> **Heads up — `/ads update` is the most credit-intensive command in this skill.**
+The orchestrator (`/ads`) doesn't try to do everything itself. It dispatches six specialized agents in parallel — each with its own checklist, its own reference data loaded on-demand (RAG style), and its own severity weights. Their findings merge into a single scored report.
 
-The new `/ads update` command runs 20–50 web fetches per platform plus LLM synthesis to digest what's actually changed in the last 30 days across Reddit, Hacker News, official platform changelogs, and the open web.
+---
 
-| Mode | Estimated cost | Recommended cadence |
+## What you can run
+
+| Group | Command | What it does |
 |---|---|---|
-| `/ads update <one platform>` | ~50–150k tokens per run | Monthly per platform |
-| `/ads update all` | ~500k+ tokens per run | Monthly, off-peak |
+| **Audit** | `/ads audit` | Full multi-platform audit — 6 parallel agents, scored report |
+| **Platform deep-dive** | `/ads google` | Google Ads (Search, PMax, Demand Gen, CTV, YouTube) — 80 checks |
+| | `/ads meta` | Meta Ads (FB / IG / Advantage+) — 50 checks |
+| | `/ads youtube` | YouTube Ads (Skippable, Shorts, Demand Gen) |
+| | `/ads linkedin` | LinkedIn Ads (B2B, Lead Gen, TLA) — 27 checks |
+| | `/ads tiktok` | TikTok Ads (Smart+, Shop, Search) — 28 checks |
+| | `/ads microsoft` | Microsoft / Bing Ads (Copilot, import safety) — 24 checks |
+| | `/ads apple` | Apple Search Ads (CPPs, AdAttributionKit, TAP) — 35+ checks |
+| **Creative** | `/ads creative` | Cross-platform creative quality + fatigue detection |
+| | `/ads landing` | Landing page conversion review |
+| **Strategy** | `/ads plan <type>` | Strategic plan from 12 industry templates |
+| | `/ads budget` | Budget allocation + bidding strategy review |
+| | `/ads competitor` | Competitor ad intelligence across all platforms |
+| **Numbers** | `/ads math` | PPC calculator: CPA, ROAS, break-even, LTV:CAC, MER |
+| | `/ads test` | A/B test design (hypothesis, sample size, duration) |
+| **Output** | `/ads report` | PDF audit report for client deliverables |
+| **Maintenance** | `/ads update <platform\|all>` | Refresh references with last-30-day platform changes (NEW in v2.0) |
 
-**If you're on a low-credit plan**, run `update` per platform instead of `all`, switch to Sonnet (not Opus) for the run, and refresh **monthly — not daily**. Reference data stays valid for ~30 days; daily reruns waste credits without producing meaningfully different output.
+---
 
-The skill prompts for confirmation before any `/ads update` invocation and shows the estimated cost — you can always cancel or fall back to a lighter `--depth quick` mode.
+## Platforms covered
 
-All other `/ads` commands (audit, platform deep-dives, creative pipeline, math, test, report) cost the same as in v1.x — no change.
+| Platform | Checks | Focus areas |
+|---|---|---|
+| Google Ads | **80** | Search match types · PMax · AI Max · Demand Gen · CTV · YouTube |
+| Meta Ads | **50** | Pixel + CAPI · Andromeda creative diversity · Advantage+ Shopping · audience structure |
+| LinkedIn Ads | **27** | B2B targeting · TLA · Lead Gen · CRM integration |
+| TikTok Ads | **28** | Creative-first · Smart+ · GMV Max · Search Ads · Events API |
+| Microsoft Ads | **24** | Google import safety · Copilot · CTV · LinkedIn targeting |
+| Apple Search Ads | **35+** | Campaign structure · CPPs · Maximize Conversions · AdAttributionKit |
+| Cross-platform | **3** | Privacy infra · creative diversity · refresh cadence |
+| **Total** | **250+** | weighted by severity into a 0–100 Ads Health Score |
 
-## Commands
+---
 
-| Command | Description |
-|---------|-------------|
-| `/ads audit` | Full multi-platform audit with parallel subagent delegation |
-| `/ads google` | Google Ads deep analysis (Search, PMax, Display, YouTube, Demand Gen) |
-| `/ads meta` | Meta Ads deep analysis (FB, IG, Advantage+ Shopping) |
-| `/ads youtube` | YouTube Ads specific analysis (Skippable, Shorts, Demand Gen) |
-| `/ads linkedin` | LinkedIn Ads deep analysis (B2B, Lead Gen, TLA) |
-| `/ads tiktok` | TikTok Ads deep analysis (Creative, Shop, Smart+) |
-| `/ads microsoft` | Microsoft/Bing Ads deep analysis (Copilot, Import validation) |
-| `/ads apple` | Apple Ads deep analysis (campaign structure, bids, CPPs, Maximize Conversions, TAP) |
-| `/ads creative` | Cross-platform creative quality audit and fatigue detection |
-| `/ads landing` | Landing page quality assessment for ad campaigns |
-| `/ads budget` | Budget allocation and bidding strategy review |
-| `/ads plan <type>` | Strategic ad plan with industry templates |
-| `/ads competitor` | Competitor ad intelligence across all platforms |
-| `/ads math` | PPC financial calculator (CPA, ROAS, break-even, budget forecasting, LTV:CAC) |
-| `/ads test` | A/B test design (hypothesis framework, significance, sample size, duration) |
-| `/ads report` | Generate PDF audit report for client deliverables |
-| `/ads update <platform\|all>` | **NEW** — refresh platform references with last 30 days of changes (see [Cost & Credits](#cost--credits)) |
-
-### `/ads audit`
-**Full Multi-Platform Audit**
-
-Spawns 6 parallel subagents to analyze your ad accounts simultaneously:
-- **audit-google**: 80 checks across Search, PMax, AI Max, Demand Gen, CTV, YouTube
-- **audit-meta**: 50 checks across Pixel/CAPI, Andromeda creative diversity, Structure, Audience
-- **audit-creative**: 21+ cross-platform creative quality checks with Andromeda and Symphony awareness
-- **audit-tracking**: 8+ conversion tracking and privacy infrastructure checks (Consent Mode V2, CAPI, Events API, AdAttributionKit)
-- **audit-budget**: 24 budget and bidding strategy checks
-- **audit-compliance**: 18+ compliance checks (ECPC deprecated, VAC deprecated, EU messaging, Apple rebrand)
-
-Generates a unified **Ads Health Score (0-100)** with prioritized action plan.
+## Connect to your real ad accounts
 
 <p align="center">
-  <img src="assets/diagrams/02-parallel-audit.svg" alt="Parallel Audit Pipeline" width="100%">
+  <img src="assets/connect.jpg" alt="Connect Claude to Google, Meta, LinkedIn, TikTok and Microsoft Ads via MCP servers" width="100%">
 </p>
+
+Out of the box, Claude Ads runs in **manual mode** — you paste exports, screenshots, or numbers, and Claude analyzes them. That's the path of least resistance and works on every plan.
+
+If you want Claude to read your ad accounts directly — turning the skill into a real ads agent that can pull live data on demand — connect an **MCP server** for the platform. MCP is Claude Code's plugin protocol for live data sources. You install one once, paste your API credentials into `~/.claude/.mcp.json`, and from then on Claude can call your ad platform on its own.
+
+| Platform | MCP server | Install | Auth you'll need |
+|---|---|---|---|
+| **Google Ads** | [`cohnen/mcp-google-ads`](https://github.com/cohnen/mcp-google-ads) | `pip install -r requirements.txt` | Google Cloud project · Developer Token · OAuth refresh token · login customer ID |
+| **Meta Ads** | [`brijr/meta-mcp`](https://github.com/brijr/meta-mcp) (open) or [Adspirer](https://www.adspirer.com) (commercial) | clone + `pip install -r requirements.txt` | Meta Business Manager · Marketing API access token |
+| **LinkedIn Ads** | [Synter](https://syntermedia.ai/blog/mcp-server-linkedin-ads) or [Adzviser](https://adzviser.com) | SaaS signup, then add MCP entry | LinkedIn Marketing API OAuth (often handled by the service) |
+| **TikTok Ads** | [`AdsMCP/tiktok-ads-mcp-server`](https://github.com/AdsMCP/tiktok-ads-mcp-server) | `uv sync` or `pip install -e .` | TikTok Developer Portal app ID + secret · advertiser OAuth |
+| **Microsoft Ads** | [CData Bing Ads MCP](https://github.com/CDataSoftware/bing-ads-mcp-server-by-cdata) (read-only) or [Synter](https://syntermedia.ai) (read/write) | `mvn clean install` or SaaS signup | Microsoft Advertising OAuth |
+
+> **Heads up.** Live mode means Claude can read — and with some MCP servers, **write** to — your real ad accounts. Start in read-only mode, point it at a sandbox or a low-spend account first, and only enable write access once you've watched it run a few times. The full per-platform setup walkthrough lives at [`ads/references/mcp-integration.md`](ads/references/mcp-integration.md).
+
+---
+
+## Industry templates
 
 <p align="center">
-  <img src="assets/diagrams/19-audit-lifecycle.svg" alt="Audit Lifecycle" width="100%">
+  <img src="assets/agents.jpg" alt="Twelve industry templates loaded as parallel reference panels" width="100%">
 </p>
 
-### `/ads update <platform|all>` (NEW in v2.0)
+`/ads plan <type>` builds a full strategic ad plan from a template tuned to your business model — platform mix, campaign architecture, creative angles, targeting, budget split, and KPI targets included. Twelve are bundled:
 
-**Self-refreshing platform knowledge.** Ad platforms ship API changes, deprecations, and new features almost weekly — your audit is only as good as your reference data. `/ads update` regenerates the per-platform reference files in `ads/references/<platform>-changelog-30d.md` (and appends a "Recent Updates" block to `ads/references/<platform>-audit.md`) by aggregating the last 30 days of changes from:
+| Template | Use it for |
+|---|---|
+| `saas` | SaaS / B2B software · trial + demo focus · Google + LinkedIn |
+| `ecommerce` | DTC + ecom · Shopping / PMax · ROAS-driven · seasonal |
+| `b2b-enterprise` | Enterprise B2B · LinkedIn ABM · long sales cycles |
+| `local-service` | Plumbers, dentists, agencies · Google Search + LSA · call tracking |
+| `info-products` | Coaches / courses · Meta + YouTube · webinar / VSL funnels |
+| `mobile-app` | Mobile apps · Meta + Google UAC · MMP required |
+| `real-estate` | Realtors · Special Ad Category (housing) · buyer/seller campaigns |
+| `healthcare` | Clinics / health · HIPAA · LegitScript · restricted targeting |
+| `finance` | Fintech / lending · Special Ad Category · required disclosures |
+| `agency` | Multi-client management · reporting framework |
+| `ecommerce-creative` | Ecom with heavy creative testing |
+| `generic` | Universal questionnaire when none of the above fits |
 
-- **Official platform changelogs** (Google Ads release notes, Meta Marketing API changelog, TikTok / LinkedIn / Microsoft / Apple Ads release pages)
-- **Practitioner discussion** (r/PPC, r/GoogleAds, r/FacebookAds, r/TikTokAds, r/LinkedInAds, r/adops, Hacker News)
-- **Industry press** (Search Engine Land, Search Engine Journal, AdWeek, MarTech) via WebSearch fallback
+---
 
-Powered by an adapted version of the time-bounded research pipeline from [last30days-skill](https://github.com/mvanhorn/last30days-skill) (MIT, by Matt Van Horn — see `scripts/lib/THIRD_PARTY_NOTICES.md`).
-
-**See the [Cost & Credits](#cost--credits) section before running.**
-
-### `/ads plan <business-type>`
-**Strategic Ad Planning**
-
-Industry-specific templates with platform mix, campaign architecture, creative strategy, targeting, budget guidelines, and KPI targets.
-
-**Supported business types:**
-- `saas`: Trial/demo focus, Google + LinkedIn primary
-- `ecommerce`: Shopping/PMax, ROAS-focused, seasonal
-- `local-service`: Google Search + LSA, call tracking, geo radius
-- `b2b-enterprise`: LinkedIn ABM, long sales cycle, pipeline metrics
-- `info-products`: Meta + YouTube, webinar/VSL funnels
-- `mobile-app`: Meta + Google UAC, MMP required, LTV:CPI
-- `real-estate`: Special Ad Category (housing), buyer/seller campaigns
-- `healthcare`: HIPAA compliance, LegitScript, restricted targeting
-- `finance`: Special Ad Category (credit), required disclosures
-- `agency`: Multi-client management, reporting framework
-- `generic`: Universal template with platform selection questionnaire
+## Showcase: what a `/ads audit` report looks like
 
 <p align="center">
-  <img src="assets/diagrams/08-industry-templates.svg" alt="Industry Templates" width="100%">
+  <img src="assets/showcase.jpg" alt="Sample audit report layout — health score, platform breakdown, prioritized actions" width="100%">
 </p>
 
-### `/ads math` and `/ads test`
+Every audit produces the same shape of output, so you (or your client) always know where to look:
 
-<p align="center">
-  <img src="assets/diagrams/18-ppc-calculators.svg" alt="PPC Calculators" width="48%">
-  <img src="assets/diagrams/17-ab-testing.svg" alt="A/B Test Design" width="48%">
-</p>
+| Section | What's in it |
+|---|---|
+| **Ads Health Score** | A single 0–100 number (and letter grade A–F) summarizing the account |
+| **Platform breakdown** | Per-platform sub-scores so you can see where the account is bleeding |
+| **Critical issues** | Hard violations (3× kill rule, broad match without smart bidding, missing CAPI) — fix these first |
+| **Quick wins** | Things you can fix in under an hour with measurable lift |
+| **Strategic recommendations** | Longer-term moves (creative refresh cadence, structure rebuilds) |
+| **Compliance flags** | Special Ad Categories, Apple privacy, EU Consent Mode V2 status |
 
-### `/ads report`
+| Grade | Score | What it means |
+|---|---|---|
+| **A** | 90–100 | Minor optimizations only |
+| **B** | 75–89 | Some improvement opportunities |
+| **C** | 60–74 | Notable issues need attention |
+| **D** | 40–59 | Significant problems present |
+| **F** | <40 | Urgent intervention required |
 
-Generate professional PDF audit reports for client deliverables with health score gauge, platform comparison charts, pass/fail distribution, formatted tables, and zero-overlap layout.
+Run `/ads report` after any audit to package the findings into a client-ready PDF (health-score gauge, platform charts, formatted tables, zero-overlap layout).
 
-<p align="center">
-  <img src="assets/diagrams/16-pdf-pipeline.svg" alt="PDF Report Pipeline" width="100%">
-</p>
+---
 
-## Features
+## `/ads update` — keeping the skill current
 
-### 250+ Audit Checks
-Comprehensive coverage across all platforms with weighted severity scoring:
+Ad platforms ship API changes, new features, and deprecations almost weekly. Your audit is only as good as your reference data. **`/ads update <platform|all>` regenerates the per-platform reference files** with the last 30 days of changes from official changelogs (Google, Meta, TikTok, LinkedIn, Microsoft, Apple), practitioner discussion (r/PPC, r/GoogleAds, r/FacebookAds, r/adops, Hacker News), and industry press (Search Engine Land, AdWeek, MarTech) via WebSearch fallback.
 
-| Platform | Checks | Key Areas |
-|----------|--------|-----------|
-| Google Ads | 80 | Search, PMax, AI Max, Demand Gen, CTV, YouTube |
-| Meta Ads | 50 | Pixel/CAPI, Andromeda creative diversity, Structure, Audience |
-| LinkedIn Ads | 27 | B2B targeting, TLA, Lead Gen, CRM integration |
-| TikTok Ads | 28 | Creative-first, Smart+, GMV Max, Search Ads, Events API |
-| Microsoft Ads | 24 | Google import safety, Copilot, CTV, LinkedIn targeting, video |
-| Apple Ads | 35+ | Campaign structure, CPPs, Maximize Conversions, AdAttributionKit |
-| Cross-platform | 3 | Privacy infrastructure, creative diversity, refresh cadence |
+The pipeline is adapted from [last30days-skill](https://github.com/mvanhorn/last30days-skill) (MIT, by Matt Van Horn — see [`scripts/lib/THIRD_PARTY_NOTICES.md`](scripts/lib/THIRD_PARTY_NOTICES.md)).
 
-<p align="center">
-  <img src="assets/diagrams/15-platform-grid.svg" alt="Platform Coverage Grid" width="100%">
-</p>
+| Mode | Approx. cost | Recommended cadence |
+|---|---|---|
+| `/ads update <one platform>` | 50–150k tokens | Monthly per platform |
+| `/ads update all` | 500k+ tokens | Monthly, off-peak |
 
-<p align="center">
-  <img src="assets/diagrams/04-platform-checks.svg" alt="Platform Check Distribution" width="100%">
-</p>
+`/ads update` always asks for confirmation and shows the cost estimate before running — you can cancel or fall back to `--depth quick`. On a low-credit plan, prefer per-platform mode, run monthly (not daily), and switch to Sonnet for the run. Reference data stays valid ~30 days; daily reruns waste credits without producing meaningfully different output.
 
-### Self-Updating References (NEW in v2.0)
+Full details: [`skills/ads-update/SKILL.md`](skills/ads-update/SKILL.md).
 
-Ad platforms move fast. The seven `ads/references/<platform>-audit.md` files ship with curated checks, but `/ads update` keeps them current by digesting the last 30 days of changes per platform — official changelogs, practitioner discussion, and industry press — into dated `ads/references/<platform>-changelog-30d.md` files. Run monthly to stay current without re-cloning.
+---
 
-### Ads Health Score (0-100)
-Weighted scoring algorithm with severity multipliers:
+## What's different in this fork
 
-| Grade | Score | Action Required |
-|-------|-------|-----------------|
-| A | 90-100 | Minor optimizations only |
-| B | 75-89 | Some improvement opportunities |
-| C | 60-74 | Notable issues need attention |
-| D | 40-59 | Significant problems present |
-| F | <40 | Urgent intervention required |
+This is a community fork by [tododeia.com](https://tododeia.com) of the upstream open-source `claude-ads` project (MIT). The honest 30-second summary of what's actually different:
 
-<p align="center">
-  <img src="assets/diagrams/13-scoring-algorithm.svg" alt="Scoring Algorithm" width="100%">
-</p>
+- **`/ads update` (NEW in v2.0)** — self-refreshing platform knowledge powered by a vendored time-bounded research pipeline. The upstream skill never updated itself; this fork does.
+- **Refreshed 2026 platform references** — Apple Search Ads expansion, AdAttributionKit, Andromeda creative diversity, Consent Mode V2 + EU policy hooks.
+- **Maintenance, identity, visual rebrand** — bug fixes (install path coverage, version strings, phantom file refs), tododeia branding, this README.
 
-### Industry Detection
-Auto-detects business type from ad account signals (product feeds, conversion events, platform mix, targeting patterns) and loads industry-specific benchmarks and templates.
+The original 250+ checks, 19 sub-skills, 10 agents, 12 templates, MCP integration guide, and the audit/scoring/reporting pipeline all come from the upstream project — credit goes to the original maintainer. See [`CHANGELOG.md`](CHANGELOG.md) for the full history.
 
-### Quality Gates
-Hard rules enforced during every audit:
-- Never recommend Broad Match without Smart Bidding (Google)
-- 3x Kill Rule: flag CPA >3x target for immediate pause
-- Budget sufficiency: Meta >=5x CPA/ad set, TikTok >=50x CPA/ad group
-- Learning phase protection: no edits during active learning
-- Compliance: auto-check Special Ad Categories (housing/credit/finance)
-- **Privacy infrastructure gate**: verify tracking stack (Consent Mode V2, CAPI, Events API, AdAttributionKit) before optimization recommendations
-- **Andromeda creative diversity**: flag Meta accounts with <10 genuinely distinct creatives
+---
 
-<p align="center">
-  <img src="assets/diagrams/05-quality-gates.svg" alt="Quality Gates" width="100%">
-</p>
+## Privacy & data handling
 
-### Creative Pipeline
+- **Local execution.** Claude Ads runs entirely inside your local Claude Code session. No ad-account data is sent to tododeia, the original author, or any third-party server.
+- **No credentials stored in the repo.** MCP credentials live in your own `~/.claude/.mcp.json`, never in the skill.
+- **SSRF-validated URL fetches.** Landing-page analysis blocks private IP ranges and validates URLs before fetching ([`scripts/url_utils.py`](scripts/url_utils.py)).
+- **`/ads update` outbound calls.** This command makes public-internet HTTP calls (Reddit JSON, Hacker News Algolia, official changelog pages, WebSearch) to gather platform changes — none of your ad data is sent in those calls.
 
-AI-powered creative generation with 4 specialized agents:
-
-<p align="center">
-  <img src="assets/diagrams/14-creative-pipeline.svg" alt="Creative Pipeline" width="100%">
-</p>
-
-### Reference Data
-25 built-in reference files with 2026-current benchmarks, bidding decision trees, platform specifications, compliance requirements, conversion tracking guides, MCP integration guide, and additional platform coverage. Plus 7 auto-generated `<platform>-changelog-30d.md` files via `/ads update`.
-
-### Data Handling & Privacy
-claude-ads runs entirely on your local machine via Claude Code. No ad account data is sent to external servers. When using MCP servers for live API access, data flows directly between your machine and the ad platform APIs. All analysis happens locally. `/ads update` does make outbound HTTP requests to public sources (Reddit JSON API, Hacker News Algolia API, official platform changelog pages, WebSearch) — none of your ad data is sent during these calls.
-
-<p align="center">
-  <img src="assets/diagrams/12-privacy-flow.svg" alt="Privacy and Data Flow" width="100%">
-</p>
-
-## Architecture
-
-<p align="center">
-  <img src="assets/diagrams/01-architecture.svg" alt="3-Layer Architecture" width="100%">
-</p>
-
-```
-~/.claude/skills/ads/              # Main orchestrator
-~/.claude/skills/ads/references/   # 25 RAG reference files + 7 auto-generated changelogs
-~/.claude/skills/ads-*/            # 20 sub-skills (19 original + ads-update)
-~/.claude/skills/ads-plan/assets/  # 12 industry templates
-~/.claude/agents/                  # 10 agents (6 audit + 4 creative)
-```
-
-### How It Works
-
-1. **Orchestrator** (`/ads`) routes commands to specialized sub-skills
-2. **Sub-skills** provide deep single-domain analysis with structured output
-3. **Agents** run in parallel during full audits for maximum speed
-4. **References** load on-demand (RAG pattern); only what's needed per analysis
-5. **Templates** provide industry-specific strategy frameworks
-6. **`/ads update`** regenerates per-platform reference data from live sources (NEW in v2.0)
-
-## How It Analyzes Your Ads
-
-**claude-ads works with data you provide**; exports, screenshots, or pasted metrics from your ad platform dashboards. It does not connect to any ad platform API automatically.
-
-**To get accurate, account-specific recommendations:**
-1. Export your account data (last 30 days recommended)
-2. Run the relevant command: `/ads google`, `/ads audit`, etc.
-3. Claude will ask for your industry and budget context first; provide these for relevant benchmarks
-4. Paste or share your data when prompted
-
-<p align="center">
-  <img src="assets/diagrams/07-data-flow.svg" alt="Data Flow" width="100%">
-</p>
-
-### Live Data Integration (Optional)
-
-For direct API access without manual exports, pair claude-ads with MCP servers. See `ads/references/mcp-integration.md` for setup guides:
-- **Google Ads**: [mcp-google-ads](https://github.com/cohnen/mcp-google-ads): 29 GAQL tools for live API access
-- **Meta Ads**: [Adspirer MCP](https://www.adspirer.com)
-- **LinkedIn Ads**: [GrowthSpree MCP](https://www.growthspreeofficial.com) or [Adzviser MCP](https://adzviser.com)
-
-<p align="center">
-  <img src="assets/diagrams/10-mcp-integration.svg" alt="MCP Integration" width="100%">
-</p>
+---
 
 ## FAQ
 
-**Can claude-ads log into my ad manager automatically?**
-No. claude-ads analyzes data you provide (exports, screenshots, or pasted metrics). It doesn't connect to ad platforms automatically. See the Live Data Integration section above for Google Ads API access via MCP.
+**Does Claude Ads log into my ad manager automatically?**
+Not by default — it analyzes data you provide. If you want live access, install the matching MCP server for your platform (see [Connect to your real ad accounts](#connect-to-your-real-ad-accounts)).
 
-**Does it use real account data or generic benchmarks?**
-Benchmarks are based on industry research covering 16,000+ campaigns. They're averages; your results will vary by industry, budget level, and account maturity. Always provide your industry and monthly spend when running audits for the most relevant comparisons.
+**Can it create or edit ads for me?**
+Even with a write-capable MCP server connected, Claude Ads is positioned as an audit + strategy tool: find issues, recommend fixes, build campaign plans. Whether to actually write changes back to your ad account is your call to enable per-MCP — it's not on by default.
 
-**How fresh is the platform reference data?**
-Built-in references are curated by the maintainer. The new `/ads update` command refreshes per-platform changelogs with the last 30 days of changes from Reddit, Hacker News, and official sources. Run it monthly to stay current.
+**How fresh are the benchmarks and platform rules?**
+Built-in references are curated by the maintainer. `/ads update` refreshes per-platform changelogs monthly with the last 30 days of changes. Run it monthly to stay current.
 
-**Is ad posting or campaign creation still manual?**
-Yes. claude-ads is an audit and strategy tool. It finds issues, recommends fixes, and builds campaign plans; but creating, editing, or posting ads remains manual in your ad platform.
+**My account is small — are these benchmarks even relevant?**
+Tell Claude your monthly spend upfront. *"I spend $2k/month on Google Ads for a local plumbing business"* gives much better results than running `/ads google` cold. Benchmarks differ a lot between $500/mo and $50k/mo accounts.
 
-**Why do some recommendations seem off for my account size?**
-Benchmarks and best practices differ significantly between a $500/month account and a $50k/month account. Always tell Claude your budget upfront: *"I spend $2k/month on Google Ads for a local plumbing business"* gives much better results than running `/ads google` without context.
+**Will `/ads update all` blow my credits?**
+It can — see the [`/ads update` cost table](#ads-update--keeping-the-skill-current). Use per-platform mode on a tight budget, run monthly not daily, pick Sonnet over Opus for the run.
 
-**Does it support [platform] ads?**
-Currently supported: Google, Meta (Facebook/Instagram), YouTube, LinkedIn, TikTok, Microsoft/Bing, and Apple Ads. Additional platforms (Reddit, CTV/OTT, Pinterest, Snapchat) are covered in the reference guide for strategic planning.
+**Which platforms aren't covered?**
+First-class: Google · Meta · YouTube · LinkedIn · TikTok · Microsoft · Apple. Reddit, CTV/OTT, Pinterest, Snapchat are covered for strategic planning but not full audit.
 
-**Will `/ads update all` burn through my credits?**
-It can — see the [Cost & Credits](#cost--credits) section. Use per-platform mode (`/ads update meta`) on a low-credit plan, run monthly not daily, and pick Sonnet over Opus for the run.
+---
 
 ## Requirements
 
 - Claude Code CLI
-- Python 3.10+ with Playwright (optional, for live landing page analysis)
-- reportlab (optional, for PDF report generation via `/ads report`)
+- Python 3.10+
+- Playwright (optional, for live landing-page analysis)
+- reportlab (optional, for `/ads report` PDF generation)
+
+---
 
 ## Uninstall
 
-### Unix/macOS/Linux
-
 ```bash
+# Unix / macOS / Linux
 curl -fsSL https://raw.githubusercontent.com/Hainrixz/claude-ads/main/uninstall.sh | bash
 ```
 
-### Windows PowerShell
-
 ```powershell
+# Windows PowerShell
 irm https://raw.githubusercontent.com/Hainrixz/claude-ads/main/uninstall.ps1 | iex
 ```
 
-## About
+---
 
-This is a community fork maintained by [**tododeia.com**](https://tododeia.com). Follow on Instagram: [**@soyenriquerocha**](https://instagram.com/soyenriquerocha).
+## Credits
 
-Originally based on the open-source `claude-ads` project (MIT). The vendored time-bounded research pipeline that powers `/ads update` is adapted from [last30days-skill](https://github.com/mvanhorn/last30days-skill) (MIT, by Matt Van Horn) — see `scripts/lib/THIRD_PARTY_NOTICES.md` for full attribution.
+Maintained by [**tododeia.com**](https://tododeia.com) · Enrique Henry · [@soyenriquerocha](https://instagram.com/soyenriquerocha).
+
+Originally based on the open-source `claude-ads` project (MIT). The vendored time-bounded research pipeline that powers `/ads update` is adapted from [last30days-skill](https://github.com/mvanhorn/last30days-skill) (MIT, by Matt Van Horn) — see [`scripts/lib/THIRD_PARTY_NOTICES.md`](scripts/lib/THIRD_PARTY_NOTICES.md).
 
 ## License
 
-MIT License — see [LICENSE](LICENSE) for details.
+MIT — see [LICENSE](LICENSE).
