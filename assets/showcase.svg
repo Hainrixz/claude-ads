@@ -23,24 +23,27 @@
     <rect width="420" height="560" rx="24" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2"/>
     <text x="40" y="52" font-size="13" font-weight="800" fill="#737373" letter-spacing="3">ADS HEALTH SCORE</text>
 
-    <!-- Semicircle gauge: center 210, 310. Radius 140. From 180° to 360° (top half). 78% fill. -->
-    <!-- background arc (gray) -->
-    <path d="M 70 310 A 140 140 0 0 1 350 310" fill="none" stroke="#F0F0F0" stroke-width="22" stroke-linecap="round"/>
-    <!-- progress arc 78% — sweep from 180° to 180+(78/100)*180=320.4° -->
-    <!-- end angle 320.4°: x = 210 + 140*cos(320.4°)=210+140*0.7705=317.9, y=310+140*sin(320.4°)=310+140*(-0.6374)=220.8 -->
-    <path d="M 70 310 A 140 140 0 1 1 317.9 220.8" fill="none" stroke="url(#gauge)" stroke-width="22" stroke-linecap="round"/>
+    <!-- Full 360° ring gauge: center (210, 240), r=120, stroke-width 22 -->
+    <!-- Background ring (full circle, gray) -->
+    <circle cx="210" cy="240" r="120" fill="none" stroke="#F0F0F0" stroke-width="22"/>
+    <!-- Progress ring (78% of circumference 754 = 588 visible) -->
+    <!-- rotate(-90) so the stroke starts at 12 o'clock and fills clockwise -->
+    <circle cx="210" cy="240" r="120" fill="none" stroke="url(#gauge)" stroke-width="22" stroke-linecap="round"
+            stroke-dasharray="588 754"
+            transform="rotate(-90 210 240)"/>
 
-    <!-- center number -->
-    <text x="210" y="295" text-anchor="middle" font-size="100" font-weight="900" fill="#0A0A0A" letter-spacing="-4">78</text>
-    <text x="210" y="328" text-anchor="middle" font-size="18" font-weight="500" fill="#737373">/ 100</text>
+    <!-- Center stack inside ring: 78 + /100 -->
+    <text x="210" y="275" text-anchor="middle" font-size="100" font-weight="900" fill="#0A0A0A" letter-spacing="-4">78</text>
+    <text x="210" y="305" text-anchor="middle" font-size="14" font-weight="500" fill="#737373">/ 100</text>
 
-    <!-- grade badge -->
-    <circle cx="210" cy="380" r="32" fill="#2563EB"/>
-    <text x="210" y="392" text-anchor="middle" font-size="32" font-weight="900" fill="#FFFFFF">B</text>
+    <!-- B grade badge "snapped" onto the bottom of the ring with a white halo -->
+    <circle cx="210" cy="378" r="34" fill="#2563EB" stroke="#FFFFFF" stroke-width="6"/>
+    <text x="210" y="392" text-anchor="middle" font-size="34" font-weight="900" fill="#FFFFFF">B</text>
 
     <!-- Caption -->
-    <text x="210" y="470" text-anchor="middle" font-size="20" font-weight="700" fill="#0A0A0A">Grade B</text>
-    <text x="210" y="498" text-anchor="middle" font-size="16" font-weight="400" fill="#737373">Some improvement opportunities</text>
+    <text x="210" y="465" text-anchor="middle" font-size="20" font-weight="700" fill="#0A0A0A">Grade B</text>
+    <text x="210" y="495" text-anchor="middle" font-size="14" font-weight="400" fill="#737373">Some improvement</text>
+    <text x="210" y="515" text-anchor="middle" font-size="14" font-weight="400" fill="#737373">opportunities</text>
   </g>
 
   <!-- CENTER: grade scale -->

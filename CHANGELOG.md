@@ -5,6 +5,22 @@ All notable changes to claude-ads are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.3] - 2026-04-29
+
+### Fixed
+
+- **`assets/showcase.svg` gauge layout** — the v2.1.2 design used an open top semicircle for the health-score gauge, which left the `78` number and the `B` grade badge floating below the arc instead of inside it. The whole left card read as three disconnected pieces. Replaced with an Apple-Watch-style **full 360° ring** (radius 120, stroke-width 22, cyan-to-orange gradient stroke filling 78% of the circumference clockwise from 12 o'clock). The `78 / 100` is now centered inside the ring, and the blue `B` grade badge is "snapped" onto the bottom of the ring with a 6pt white halo so it reads as one unified scoring component instead of stacked elements.
+
+### Changed
+
+- **`assets/hero.svg` version pill** — replaced `VERSION 2.1.2` with `LATEST` so future patch bumps don't require touching the SVG. The pill still reads `LATEST · 250+ checks · 7 platforms · MCP-ready` and keeps the same gold-shimmer design.
+- Version bumped `2.1.2` → `2.1.3` across `README.md` badge, `README.es.md` badge, `.claude-plugin/plugin.json`, and `.claude-plugin/marketplace.json`.
+
+### Notes
+
+- Both edited SVGs validate clean with `xmllint --noout`.
+- Pure docs / assets / version-string change. Zero behavior change.
+
 ## [2.1.2] - 2026-04-29
 
 Visual identity rewrite — replaced all five raster JPGs (generated with AI image models in v2.1.0–v2.1.1) with hand-authored, hand-coded SVG infographics in the [tododeia.com](https://tododeia.com) house style: light dot-pattern background (`#FAFAFA` + `#E5E5E5`), bold black wordmarks (`#0A0A0A`), pill-shaped buttons (`rx=full`), and a flat brand palette of orange (`#F47B30`) and blue (`#2563EB`). Total weight dropped from ~1.77 MB to ~29 KB (60× lighter), text is now perfectly crisp at any zoom, and there is zero risk of AI typos in rendered text.
