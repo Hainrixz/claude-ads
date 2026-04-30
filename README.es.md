@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
-  <img src="assets/hero.jpg" alt="Claude Ads — skill de auditoría de ads multi-plataforma para Claude Code" width="100%">
+  <img src="assets/hero.jpg" alt="Claude Ads — terminal corriendo /ads audit, wordmark de la marca y dashboard de muestra con health score 78/100" width="100%">
 </p>
 
 # Claude Ads
@@ -13,7 +13,7 @@
 [![Sitio](https://img.shields.io/badge/web-tododeia.com-1f6feb)](https://tododeia.com)
 [![Instagram](https://img.shields.io/badge/IG-%40soyenriquerocha-E4405F?logo=instagram)](https://instagram.com/soyenriquerocha)
 [![Licencia: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Versión](https://img.shields.io/badge/version-2.1.0-blue)](https://github.com/Hainrixz/claude-ads/releases)
+[![Versión](https://img.shields.io/badge/version-2.1.1-blue)](https://github.com/Hainrixz/claude-ads/releases)
 [![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://claude.ai/claude-code)
 
 ---
@@ -63,7 +63,7 @@ Claude te va a preguntar tu industria, gasto mensual y qué plataformas incluir.
 ## Cómo funciona
 
 <p align="center">
-  <img src="assets/how-it-works.jpg" alt="Cómo Claude Ads orquesta agentes de auditoría en paralelo" width="100%">
+  <img src="assets/how-it-works.jpg" alt="Diagrama de flujo — tus datos de ads → /ads orchestrator → 6 agentes en paralelo (Google 80, Meta 50, Creative, Tracking, Budget, Compliance) → Ads Health Score 0–100" width="100%">
 </p>
 
 ```mermaid
@@ -109,6 +109,10 @@ El orquestador (`/ads`) no intenta hacer todo solo. Despacha seis agentes especi
 
 ## Plataformas cubiertas
 
+<p align="center">
+  <img src="assets/platforms.jpg" alt="Grid de cobertura por plataforma — Google 80, Meta 50, YouTube multi, LinkedIn 27, TikTok 28, Microsoft 24, Apple 35+, más 3 checks multi-plataforma" width="100%">
+</p>
+
 | Plataforma | Checks | Áreas clave |
 |---|---|---|
 | Google Ads | **80** | Match types · PMax · AI Max · Demand Gen · CTV · YouTube |
@@ -125,7 +129,7 @@ El orquestador (`/ads`) no intenta hacer todo solo. Despacha seis agentes especi
 ## Conecta tus cuentas reales de ads
 
 <p align="center">
-  <img src="assets/connect.jpg" alt="Conecta Claude a Google, Meta, LinkedIn, TikTok y Microsoft Ads vía servidores MCP" width="100%">
+  <img src="assets/connect.jpg" alt="Arquitectura MCP — Claude Code como hub central conectado a Google Ads (cohnen/mcp-google-ads), Meta (brijr/meta-mcp), LinkedIn (Synter · Adzviser), TikTok (AdsMCP), Microsoft (CData · Synter); modo manual vs modo en vivo" width="100%">
 </p>
 
 Por default, Claude Ads corre en **modo manual** — pegas exports, screenshots o números, y Claude los analiza. Es el camino más fácil y funciona en cualquier plan.
@@ -145,10 +149,6 @@ Si quieres que Claude lea tus cuentas directo — convirtiendo el skill en un ag
 ---
 
 ## Plantillas por industria
-
-<p align="center">
-  <img src="assets/agents.jpg" alt="Doce plantillas por industria cargadas como paneles de referencia paralelos" width="100%">
-</p>
 
 `/ads plan <tipo>` arma un plan estratégico completo desde una plantilla afinada para tu modelo de negocio — mix de plataformas, arquitectura de campañas, ángulos creativos, targeting, distribución de presupuesto y KPIs. Vienen 12 incluidas:
 
@@ -172,7 +172,7 @@ Si quieres que Claude lea tus cuentas directo — convirtiendo el skill en un ag
 ## Showcase: cómo se ve un reporte de `/ads audit`
 
 <p align="center">
-  <img src="assets/showcase.jpg" alt="Layout de muestra del reporte — health score, breakdown por plataforma, acciones priorizadas" width="100%">
+  <img src="assets/showcase.jpg" alt="Dashboard de reporte de muestra — gauge 78/100 grade B, escala A–F, tres tarjetas de hallazgos (CRITICAL · WARNING · QUICK WIN) y barras de breakdown por plataforma (Google 82, Meta 71, LinkedIn 88)" width="100%">
 </p>
 
 Toda auditoría produce la misma estructura de salida, así tú (o tu cliente) siempre saben dónde buscar:

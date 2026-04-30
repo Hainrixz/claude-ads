@@ -5,6 +5,28 @@ All notable changes to claude-ads are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2026-04-29
+
+Visual identity upgrade — replaced the v2.1.0 atmospheric mood images with didactic infographics that actually teach what Claude Ads does. Same 5-image footprint (~1.8 MB total), but each image now contains rendered text, labeled diagrams, and concrete data instead of abstract visual mood.
+
+### Changed
+
+- **Re-rendered 5 README images using Nano Banana PRO** (Google's `nano_banana_2`, "Ultimate quality, text and diagrams"), replacing the v2.1.0 Higgsfield Cinema Studio renders. The new images include readable text, flow arrows, labeled tiles, and dashboard mockups so the README is informative even before reading the prose:
+  - `assets/hero.jpg` — terminal showing `$ /ads audit → Dispatching 6 parallel agents...`, brand wordmark, sample 78/100 dashboard with six platform bars (Google, Meta, LinkedIn, TikTok, YouTube, Apple).
+  - `assets/how-it-works.jpg` — left-to-right flow diagram: `Your ad data → /ads orchestrator → 6 agent panels (Google · 80 checks, Meta · 50 checks, Creative quality, Tracking + privacy, Budget + bidding, Compliance) → Ads Health Score 0–100`.
+  - `assets/platforms.jpg` *(renamed from `agents.jpg`)* — 4×2 grid of 7 platform tiles + 1 cross-platform tile, each showing platform name, check count (80, 50, 27, 28, 24, 35+, multi, 3), and key area tags. Moved from "Industry templates" section to "Platforms covered" section in both READMEs (visual TOC for the table that follows).
+  - `assets/connect.jpg` — radial network diagram: `Claude Code · /ads` central hexagon → 5 platform nodes labeled with their MCP server identifiers (`cohnen/mcp-google-ads`, `brijr/meta-mcp`, `Synter · Adzviser`, `AdsMCP`, `CData · Synter`); MANUAL MODE vs LIVE MODE lanes at the bottom.
+  - `assets/showcase.jpg` — sample report mockup: 78/100 gauge with B grade, A–F grade-scale legend with B highlighted, three findings cards (CRITICAL · WARNING · QUICK WIN), platform breakdown bars (Google 82 / Meta 71 / LinkedIn 88).
+- **README image alt text** rewritten in both EN and ES to describe the actual rendered content (e.g. "Flow diagram — your ad data → /ads orchestrator → 6 parallel audit agents → Ads Health Score 0–100") instead of generic mood descriptions. Improves screen-reader and SEO clarity.
+- Industry templates section in both READMEs now relies on the table alone (image moved to Platforms section, where it's more useful as a visual TOC).
+- Version bumped `2.1.0` → `2.1.1` across `README.md` badge, `README.es.md` badge, `.claude-plugin/plugin.json`, and `.claude-plugin/marketplace.json` (both metadata and per-plugin entries).
+
+### Notes
+
+- File renames: `assets/agents.jpg` → `assets/platforms.jpg` (matches the new content). All four other JPGs keep their existing filenames; only the underlying pixels changed.
+- Compressed sizes: hero 276 KB · how-it-works 337 KB · platforms 438 KB · connect 377 KB · showcase 345 KB (total ~1.77 MB, comparable to v2.1.0).
+- Pure docs / assets / version-string change. Zero behavior change in any sub-skill, agent, script, or routing logic.
+
 ## [2.1.0] - 2026-04-29
 
 Documentation and visual identity release. No behavior change in any sub-skill, agent, script, or routing logic — pure docs / assets / version-string update so users (and clients) get a clear, distinctive face for the fork instead of an upstream lookalike.
