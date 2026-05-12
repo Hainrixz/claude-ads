@@ -143,17 +143,16 @@ Before launching any ads, ensure tracking is configured:
 ## Industry Templates
 
 Load from `assets/` directory based on detected or specified business type:
-- `saas.md`: SaaS companies
 - `ecommerce.md`: E-commerce stores
+- `ecommerce-creative.md`: E-commerce with heavy creative testing
 - `local-service.md`: Local service businesses
-- `b2b-enterprise.md`: B2B enterprise
-- `info-products.md`: Info products and courses
-- `mobile-app.md`: Mobile app companies
 - `real-estate.md`: Real estate
 - `healthcare.md`: Healthcare
 - `finance.md`: Financial services
 - `agency.md`: Marketing agencies
-- `generic.md`: General business template
+- `generic.md`: General business template (use this for SaaS, B2B-enterprise, info-products, mobile-app, and other industries whose original templates were removed in v2.3.0 since they relied on platforms claude-ads no longer audits — LinkedIn, Apple Ads, YouTube)
+
+> **Note on removed templates:** `saas.md`, `b2b-enterprise.md`, `info-products.md`, and `mobile-app.md` were removed in v2.3.0 because their strategic plans depended heavily on LinkedIn (B2B + SaaS), Apple Ads (mobile-app), or YouTube (info-products) — platforms that are out of audit scope after the focus shift to Meta / Google / TikTok. Use `generic.md` plus the platform-specific skills (`/ads meta`, `/ads google`, `/ads tiktok`) for those industries.
 
 ## Output
 

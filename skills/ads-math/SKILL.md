@@ -6,8 +6,7 @@ user-invokable: false
 
 # PPC Financial Calculator & Modeling
 
-<!-- Created: 2026-04-13 | v1.5 -->
-<!-- Source: itallstartedwithaidea/google-ads-skills (PPC math concept) -->
+> Concept adapted from `itallstartedwithaidea/google-ads-skills` (PPC math).
 
 ## Process
 

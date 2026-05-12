@@ -1,7 +1,6 @@
 # Additional Advertising Platforms
 
-<!-- Created: 2026-04-13 | v1.5 -->
-<!-- Purpose: Overview of platforms beyond the core 7 for strategic planning -->
+Overview of platforms beyond the core 7 for strategic planning.
 
 ## When to Consider These Platforms
 
@@ -39,11 +38,11 @@ Professional software → G2, Capterra (directory ads)
 **Best for:** Brand awareness, broad reach, upper funnel
 **Reach:** 230M+ US CTV users (2025)
 
-**Key platforms:**
-- YouTube CTV (covered in ads-youtube)
-- Microsoft CTV (Netflix, Max, Hulu, Roku, discovery+)
-- The Trade Desk (programmatic)
-- Amazon Fire TV / Freevee
+**Key platforms (none audited by claude-ads — strategic context only):**
+- YouTube CTV (Google Ads API; not audited as a separate platform in v2.3.0+)
+- Microsoft CTV (Netflix, Max, Hulu, Roku, discovery+) — out of audit scope
+- The Trade Desk (programmatic) — out of audit scope
+- Amazon Fire TV / Freevee — out of audit scope
 
 **Key considerations:**
 - Non-skippable 15-30s format (high completion rates)

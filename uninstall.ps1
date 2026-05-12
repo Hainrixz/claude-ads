@@ -20,13 +20,14 @@ function Main {
         Remove-Item -Path $MainSkill -Recurse -Force
     }
 
-    # Remove sub-skills
+    # Remove sub-skills — v2.3.0 set PLUS legacy v2.2.x skills so upgraders don't leave stale files behind.
     $SubSkills = @(
-        "ads-audit", "ads-google", "ads-meta", "ads-youtube",
-        "ads-linkedin", "ads-tiktok", "ads-microsoft", "ads-creative",
-        "ads-landing", "ads-budget", "ads-plan", "ads-competitor", "ads-apple",
+        "ads-audit", "ads-google", "ads-meta", "ads-tiktok",
+        "ads-creative", "ads-landing", "ads-budget", "ads-plan", "ads-competitor",
         "ads-dna", "ads-create", "ads-generate", "ads-photoshoot",
-        "ads-math", "ads-test", "ads-update"
+        "ads-math", "ads-test", "ads-update", "ads-publish",
+        # Legacy v2.2.x skills removed in v2.3.0 — also cleaned for upgraders
+        "ads-apple", "ads-linkedin", "ads-microsoft", "ads-youtube"
     )
     foreach ($skill in $SubSkills) {
         $SkillPath = Join-Path $ClaudeDir "skills\$skill"
@@ -35,11 +36,12 @@ function Main {
         }
     }
 
-    # Remove agents
+    # Remove agents — v2.3.0 set PLUS legacy v2.2.x cross-platform audit agents so upgraders don't leave stale files behind.
     $Agents = @(
-        "audit-google", "audit-meta", "audit-creative",
-        "audit-tracking", "audit-budget", "audit-compliance",
-        "creative-strategist", "visual-designer", "copy-writer", "format-adapter"
+        "audit-google", "audit-meta", "audit-tiktok",
+        "creative-strategist", "visual-designer", "copy-writer", "format-adapter",
+        # Legacy v2.2.x cross-platform audit agents — also cleaned for upgraders
+        "audit-creative", "audit-tracking", "audit-budget", "audit-compliance"
     )
     foreach ($agent in $Agents) {
         $AgentPath = Join-Path $ClaudeDir "agents\$agent.md"

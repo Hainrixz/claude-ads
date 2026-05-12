@@ -33,8 +33,7 @@ commentary: Validate every asset in the manifest. Be precise about which dimensi
    - `~/.claude/skills/ads/references/meta-creative-specs.md`
    - `~/.claude/skills/ads/references/google-creative-specs.md`
    - `~/.claude/skills/ads/references/tiktok-creative-specs.md`
-   - `~/.claude/skills/ads/references/linkedin-creative-specs.md`
-   - etc.; load only platforms present in the manifest
+   - Load only platforms present in the manifest. (Note: claude-ads v2.3.0 audits Meta/Google/TikTok only; if a brief targets a removed platform like LinkedIn or YouTube as a publishing destination, the validation step still works against `platform-specs-cross.md` aspect-ratio standards.)
 
 3. **Validate each asset** using Python/Pillow via Bash:
    ```bash

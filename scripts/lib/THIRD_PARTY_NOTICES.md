@@ -6,7 +6,7 @@ This directory contains code adapted from open-source projects. Their licenses a
 
 ## last30days-skill
 
-The files `dates.py` (verbatim) and `signals.py` + `dedupe.py` (adapted) are derived from [last30days-skill](https://github.com/mvanhorn/last30days-skill) by Matt Van Horn.
+The file `dates.py` (verbatim) is derived from [last30days-skill](https://github.com/mvanhorn/last30days-skill) by Matt Van Horn. `signals.py`, `dedupe.py`, and `story.py` were also vendored on 2026-04-28 but were never wired into the audit/update pipeline; they were removed in v2.2.0 to keep `scripts/lib/` honest. If a future feature needs deduplication or signal scoring across update sources, re-vendor from the upstream repo.
 
 **Original repository:** https://github.com/mvanhorn/last30days-skill
 **Vendored on:** 2026-04-28
@@ -40,6 +40,5 @@ SOFTWARE.
 
 ### Modifications made
 
-- `dates.py` — verbatim copy.
-- `signals.py` — replaced upstream `schema.SourceItem` with a local `story.Story` dataclass; removed text-overlap relevance scoring (not needed because ad-platform queries are pre-filtered by source/keyword upstream); added an `official_changelog` source class with a 2x quality boost since vendor changelogs are ground truth.
-- `dedupe.py` — replaced `schema.SourceItem` with `story.Story`; kept hybrid trigram + token Jaccard at 0.7 threshold.
+- `dates.py` — verbatim copy. Used by `scripts/run_update.py` for date-range helpers.
+- `signals.py`, `dedupe.py`, `story.py` — vendored alongside but **removed in v2.2.0** as they were never imported. See section above.

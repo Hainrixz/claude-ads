@@ -6,17 +6,18 @@ user-invokable: false
 
 # Google Ads Deep Analysis
 
-## Process
+## Data Collection (3-tier free-first)
 
-1. Collect Google Ads account data (export, Change History, Search Terms Report)
-2. **Validate**: confirm data covers ≥30 days and includes Search Terms Report before proceeding
-3. Read `ads/references/google-audit.md` for full 80-check audit
-4. Read `ads/references/benchmarks.md` for Google-specific benchmarks
-5. Read `ads/references/scoring-system.md` for weighted scoring
-6. Evaluate all applicable checks as PASS, WARNING, or FAIL
-7. **Validate**: confirm all 80 checks evaluated before calculating score
-8. Calculate Google Ads Health Score (0-100)
-9. Generate findings report with action plan
+- **Capa 1 — MCP** (preferred): `cohnen/mcp-google-ads` for GAQL access. Pull Search Terms Report, keyword data, conversion actions, campaign structure automatically. See `mcp-integration.md` for setup.
+- **Capa 2 — Direct API** (free; OAuth + developer-token setup): if `google-data.json` is present in cwd, read it. The user generates it with:
+  ```bash
+  python3 scripts/api/google_fetch.py --account-id <customer_id> -o google-data.json
+  ```
+  Full setup (developer token application takes 1-3 business days) in `scripts/api/README.md`.
+- **Capa 3 — Manual fallback**: Google Ads account export including Change History and Search Terms Report.
+- **Validate** before evaluating: data covers ≥30 days AND includes the Search Terms Report. If not, stop and request a fresh export.
+
+Then follow the standard 7-step audit process in `ads/references/audit-methodology.md` using `google-audit.md` as the check list. Before any GAQL analysis, read `gaql-notes.md` for known field incompatibilities and deduplication rules. Emit dual output (`google-audit-results.json` against `audit-output-schema.json`, plus `google-audit-results.md`).
 
 ## What to Analyze
 

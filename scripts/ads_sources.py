@@ -92,74 +92,10 @@ PLATFORM_SOURCES: dict[str, PlatformSourceSet] = {
         hn_keywords=["tiktok ads", "tiktok marketing", "tiktok shop"],
         x_handles=["TikTokForBiz"],
     ),
-    "linkedin": PlatformSourceSet(
-        platform="linkedin",
-        display_name="LinkedIn Ads",
-        subreddits=["LinkedInAds", "B2BMarketing", "marketing"],
-        changelog_urls=[
-            "https://learn.microsoft.com/en-us/linkedin/marketing/whats-new/",
-            "https://www.linkedin.com/business/marketing/blog",
-        ],
-        search_queries=[
-            "LinkedIn Ads new feature 2026 last 30 days",
-            "LinkedIn Marketing API change 2026",
-            "LinkedIn Thought Leader Ads update 2026",
-            "LinkedIn ABM new feature 2026",
-        ],
-        hn_keywords=["linkedin ads", "linkedin marketing"],
-        x_handles=["LinkedInMktg"],
-    ),
-    "microsoft": PlatformSourceSet(
-        platform="microsoft",
-        display_name="Microsoft Advertising (Bing Ads)",
-        subreddits=["MicrosoftAds", "PPC", "bigseo"],
-        changelog_urls=[
-            "https://about.ads.microsoft.com/en-us/resources/whats-new",
-            "https://learn.microsoft.com/en-us/advertising/guides/release-notes",
-        ],
-        search_queries=[
-            "Microsoft Advertising new feature 2026 last 30 days",
-            "Bing Ads Copilot update 2026",
-            "Microsoft Ads API change 2026",
-            "Microsoft Audience Network 2026",
-        ],
-        hn_keywords=["bing ads", "microsoft advertising", "microsoft ads"],
-        x_handles=["MSFTAdvertising"],
-    ),
-    "apple": PlatformSourceSet(
-        platform="apple",
-        display_name="Apple Search Ads",
-        subreddits=["aso", "AppBusiness", "iOSProgramming"],
-        changelog_urls=[
-            "https://searchads.apple.com/whats-new",
-            "https://developer.apple.com/news/?id=adattributionkit",
-        ],
-        search_queries=[
-            "Apple Search Ads new feature 2026 last 30 days",
-            "Apple Search Ads Custom Product Pages 2026",
-            "AdAttributionKit update 2026",
-            "Apple Search Ads Maximize Conversions 2026",
-        ],
-        hn_keywords=["apple search ads", "adattributionkit", "skadnetwork"],
-    ),
-    "youtube": PlatformSourceSet(
-        platform="youtube",
-        display_name="YouTube Ads",
-        subreddits=["GoogleAds", "PPC", "youtubers"],
-        changelog_urls=[
-            "https://support.google.com/youtube/answer/2375475",
-            "https://blog.youtube/news-and-events/",
-            "https://blog.google/products/ads-commerce/",
-        ],
-        search_queries=[
-            "YouTube Ads new feature 2026 last 30 days",
-            "YouTube Shorts Ads update 2026",
-            "YouTube Demand Gen campaign 2026",
-            "YouTube CTV Ads 2026",
-        ],
-        hn_keywords=["youtube ads", "youtube shorts ads", "youtube ctv"],
-        x_handles=["YouTube"],
-    ),
+    # NOTE: LinkedIn / Microsoft / Apple / YouTube source sets removed in v2.3.0
+    # alongside the platform scope reduction (Meta / Google / TikTok only).
+    # YouTube changes are surfaced through the Google source set since they
+    # share the Google Ads API and announcement channels.
 }
 
 

@@ -4,8 +4,6 @@ description: "Competitor ad intelligence analysis across Google, Meta, LinkedIn,
 user-invokable: false
 ---
 
-<!-- Updated: 2026-04-13 | v1.5 -->
-
 # Competitor Ad Intelligence
 
 ## Process

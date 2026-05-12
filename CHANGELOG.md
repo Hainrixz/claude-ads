@@ -5,6 +5,89 @@ All notable changes to claude-ads are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-05-12
+
+**Focused refactor on Meta / Google / TikTok + hybrid MCP+API + `/ads publish` (Zernio, free for 2 accounts).** Three changes folded into one release: (1) the foundations refactor from v2.2.0 (JSON contract, Meta MCP wired, tests, references split, shared methodology), (2) hybrid MCP+API+manual data tiers, and (3) a scope refocus that drops Apple, LinkedIn, Microsoft, and YouTube as first-class platforms to sharpen the product around the 3 platforms where 95% of advertiser spend lives. No upstream-compatible release of v2.2.0 or v2.3.0 ever shipped, so this is the first external v2.3.0.
+
+### Added
+
+- **`scripts/api/` — 3 direct-API adapters** (Capa 2 in the new free-first strategy), pure stdlib (no external deps):
+  - `meta_fetch.py` — Meta Marketing API (account, campaigns, ad sets, ads, custom audiences, insights, pixel).
+  - `google_fetch.py` — Google Ads API via GAQL (campaigns, ad groups, keywords, search terms, conversion actions, ads, asset groups, metrics) — handles OAuth refresh-token exchange inline.
+  - `tiktok_fetch.py` — TikTok Business API v1.3 (advertiser, campaigns, adgroups, ads, pixels, reports).
+  - `scripts/api/README.md` — complete OAuth setup walkthrough per platform, common CLI shape, exit codes, and the post-fetch hand-off to the audit agents.
+- **`/ads publish` sub-skill** (`skills/ads-publish/SKILL.md` + `scripts/zernio_publish.py`) — publishes generated creatives (output of `/ads generate` or `/ads photoshoot`) to 14+ social networks via the Zernio API: Twitter/X, Instagram, Facebook, LinkedIn, TikTok, YouTube, Pinterest, Reddit, Bluesky, Threads, Google Business, Telegram, Snapchat, WhatsApp, Discord. **Zernio's free tier covers the first 2 connected accounts forever (no credit card)**, so the typical solo / single-brand case is $0/mo. Agencies managing 3+ accounts hit per-account pricing ($1–$6/mo). X/Twitter API costs are metered pass-through at X's rates regardless of tier; the other 13 networks are fully included. Auto-matches each asset to compatible platforms by aspect ratio, extracts per-platform captions from `campaign-brief.md`, supports `--dry-run` and `--schedule <ISO-8601>`.
+- **`agents/audit-tiktok.md`** — new single deep-specialist agent for TikTok mirroring the `audit-google` / `audit-meta` pattern (28 checks, dual MD+JSON output, T-prefix check IDs). Absorbs the TikTok responsibilities of the four removed cross-platform audit agents.
+- **Brand refresh** — README hero / how-it-works / platforms / connect / showcase images regenerated in tododeia editorial brand language (Geist typography, white background + 32px dot grid, 4px rainbow ribbon top edge, sparing rainbow accents on the period-square, eyebrow bar, value highlights and featured-card borders). Generated with Nano Banana Pro at 2K 16:9, ~16 MB total. The five v2.2.x hand-coded SVGs were archived to `assets/legacy-v22-svg/` for reference.
+
+### Changed
+
+- **Scope refocus to 3 platforms (Meta, Google, TikTok).** Removed 4 sub-skills (`ads-apple`, `ads-linkedin`, `ads-microsoft`, `ads-youtube`), 9 platform-specific references (linkedin/microsoft/youtube/apple audit checklists, creative specs, changelogs, benchmarks-microsoft-apple), 4 industry templates (`saas`, `b2b-enterprise`, `info-products`, `mobile-app` — all anchored on removed platforms), and 4 cross-platform audit agents (`audit-creative`, `audit-tracking`, `audit-budget`, `audit-compliance` — their TikTok-only remainders folded into the new `audit-tiktok`). Totals: **21 → 17 sub-skills**, **10 → 7 agents**, **12 → 8 industry templates**, **~250 → ~158 weighted checks + 3 cross-platform = 161**. YouTube video-campaign audit checks (G-DG*, G-CTV*) remain inside `/ads google` since they share the Google Ads API.
+- **README EN + ES rewritten** around the 3 base platforms. Hero claim, command tables, MCP tiers, industry templates, FAQ, "What's different in this fork" all reflect the focused scope. Both READMEs note the legacy 7-tile platforms SVG predates the v2.3.0 refocus (intentional — visual-asset refresh deferred).
+- **3-tier free-first integration documented**: Tier 1 (Free, $0 — community MCPs + direct API adapters), Tier 2 (Convenience, $0 with claude.ai account), Tier 3 (Paid SaaS, opt-in — Adspirer for Meta, Zernio for publishing). Most users never need Tier 3.
+- **Platform SKILL.md files** (3 remaining) document the 3 data-collection capas in their Data Collection section. The audit agent reads `<platform>-data.json` (output of `scripts/api/<platform>_fetch.py`) as Capa 2 before falling back to manual exports.
+- **`ads/SKILL.md`**: Quick Reference table trimmed to 3 platform commands; Sub-Skills numbered list 21→17; references section mentions `scripts/api/README.md`; orchestrator now spawns 3 parallel audit agents (was 6).
+- **`scoring-system.md`** trimmed to 3 platform weight tables; total check counts table updated (158 + 3 cross-platform = 161).
+- **`mcp-integration.md`** trimmed to the 3 platforms; canonical pattern unchanged.
+- **`bidding-others.md` → `bidding-tiktok.md`**, **`tracking-others.md` → `tracking-tiktok.md`** (renamed and trimmed to TikTok-only content; cross-platform red-flag tables retained).
+- **`audit-output-schema.json`** platform enum: `["google", "meta", "tiktok"]`.
+- **`CLAUDE.md`** rewritten with the new architecture map, command list, removed-platforms section, and updated development rules.
+- **`uninstall.sh` / `uninstall.ps1`** updated to clean the new (smaller) skill + agent set.
+- **`scripts/ads_sources.py` and `scripts/run_update.py`** updated to support only Meta / Google / TikTok.
+- **`requirements.txt`** simplified: removed the optional `PyJWT[crypto]` line (no longer needed without Apple).
+- **`.gitignore`** trimmed: data files for removed platforms no longer listed.
+- Version bumped `2.2.0` → `2.3.0` across `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `CITATION.cff` (and `date-released`), README badges (EN + ES).
+
+### Notes
+
+- **Why these 3 platforms?** Meta + Google + TikTok cover roughly 95% of advertiser spend for the use cases this skill targets (DTC e-commerce, local services, performance creators). Each has a free community MCP server **and** a free direct-API adapter in this repo. The 4 removed platforms each had a real friction: Apple (no MCP exists, certificate-based JWT setup), LinkedIn (Marketing Developer Platform partner-program approval), Microsoft (lower advertiser usage), YouTube (already covered inside Google Ads). Sharper product, lower maintenance, and the "free-first" claim is now honest with zero caveats.
+- All API adapters fail soft: HTTP errors are appended to the output JSON's `errors` array rather than thrown, so the audit agent always gets a parseable file even when half the endpoints fail.
+- Zernio is the **only third-party dependency in claude-ads with a paid component**, and only for `/ads publish`. Its free tier (first 2 connected social accounts, no credit card) covers the typical solo / single-brand use case, so even `/ads publish` is $0/mo for that case. Audit pipeline is **100% free across all 3 platforms** with no caveats.
+- Pattern for adding a new platform (Pinterest, Reddit, X, etc.) is unchanged: drop in `scripts/api/<platform>_fetch.py` following the canonical pattern from any of the 3 existing ones, add Capa 2 mention to the platform's SKILL.md, optionally add an MCP server reference in `mcp-integration.md`. No orchestrator, scoring, or test changes needed.
+
+### Removed
+
+- `skills/ads-apple/`, `skills/ads-linkedin/`, `skills/ads-microsoft/`, `skills/ads-youtube/` — 4 sub-skill directories.
+- `ads/references/{apple-changelog-30d, linkedin-audit, linkedin-changelog-30d, linkedin-creative-specs, microsoft-audit, microsoft-changelog-30d, microsoft-creative-specs, youtube-changelog-30d, youtube-creative-specs, benchmarks-microsoft-apple}.md` — 10 reference files.
+- `scripts/api/{apple_fetch, linkedin_fetch, microsoft_fetch}.py` — 3 API adapters.
+- `agents/{audit-creative, audit-tracking, audit-budget, audit-compliance}.md` — 4 cross-platform audit agents (their TikTok content folded into new `audit-tiktok.md`).
+- `skills/ads-plan/assets/{b2b-enterprise, mobile-app, info-products, saas}.md` — 4 industry templates whose strategies depended on removed platforms. Use `generic.md` plus the platform-specific skills for those industries.
+
+## [2.2.0] - 2026-05-12
+
+**Foundations refactor** — internal quality pass before opening the door to new platform integrations. Auditing the repo surfaced drift between docs and code, ~1k lines of duplicated boilerplate, an MCP integration that was half-wired, six reference files over the 200-line budget, and zero automated tests. This release closes all of those gaps. No `/ads <subcommand>` command was renamed or removed; behavior is preserved end-to-end.
+
+### Added
+
+- **`ads/references/audit-output-schema.json`** — canonical JSON contract every `audit-*` agent now emits alongside its markdown report. The orchestrator (`/ads audit`) validates against this schema before aggregating cross-platform scores, so a malformed sub-audit fails fast instead of silently corrupting the unified Ads Health Score.
+- **`ads/references/audit-methodology.md`** — single source of truth for the 7-step audit process (data collection → check eval → scoring → dual MD+JSON output), the check-ID convention, the MCP-first rule, and the JSON output requirement. The six platform `SKILL.md` files now delegate to it instead of restating the same steps.
+- **`ads/references/mcp-meta-integration.md`** — per-check mapping from Meta audit IDs (M01-M40) to the `mcp__claude_ai_Facebook__*` tools that fetch the live data, with explicit failure/fallback rules and a "duplicate this file" template for the next MCP integration.
+- **`tests/` (4 files + helpers)** — first automated test suite for the repo. `test_skill_loading.py` parses every `SKILL.md`, checks frontmatter, and follows every `ads/references/*`, `scripts/*`, and agent reference to verify it resolves on disk. `test_references.py` enforces the ≤200-line budget on reference files and validates the audit-output JSON schema. `test_agents.py` checks agent frontmatter and reference integrity. `test_scripts.py` smoke-tests every CLI script via `--help`. CI now runs `pytest tests/` as a required step.
+- **Eight new focused reference files** from splitting oversized originals: `bidding-google.md`, `bidding-meta.md`, `bidding-others.md`; `compliance-platforms.md`, `compliance-privacy.md`, `compliance-changes-2025-2026.md`; `benchmarks-google.md`, `benchmarks-social.md`, `benchmarks-microsoft-apple.md`, `benchmarks-cross.md`; `tracking-google.md`, `tracking-meta.md`, `tracking-others.md`, `tracking-cross.md`; `platform-specs-cross.md`; `google-audit-notes.md`. Each original (`bidding-strategies.md`, `compliance.md`, `benchmarks.md`, `conversion-tracking.md`, `platform-specs.md`, `google-audit.md`) is preserved as a thin index so existing references keep working.
+
+### Changed
+
+- **`skills/ads-meta/SKILL.md` and `agents/audit-meta.md` are now MCP-first.** When an `ad_account_id` is supplied, the audit queries the official **claude.ai Facebook** MCP server for live EMQ scores, CAPI health, dedup rate, ad-entity structure, catalog diagnostics, performance trends, and industry benchmarks — replacing manual Ads Manager exports for ~70% of the 50-check Meta audit. Falls back gracefully to exports when no `ad_account_id` is supplied or MCP returns errors. Sets `data_source` in the JSON output accordingly (`"mcp" | "export" | "mixed"`).
+- **Six audit agents output dual results** (`<platform>-audit-results.json` + `<platform>-audit-results.md`). The JSON must validate against `audit-output-schema.json`; markdown stays for human readers. Aggregation in `ads/SKILL.md` step 5 now parses JSON, not markdown, and halts on schema-validation failure.
+- **Six platform SKILL.md files slimmed** (`ads-google`, `ads-meta`, `ads-linkedin`, `ads-tiktok`, `ads-microsoft`, `ads-youtube`) — generic 7-step Process blocks removed; each file now declares only its platform-specific data-collection step and delegates the rest to `audit-methodology.md`. Content unique to each platform (Andromeda for Meta, AI Max for Google, Demand Gen for YouTube, Copilot for Microsoft, TLA for LinkedIn, GMV Max for TikTok) is preserved verbatim.
+- **`install.sh` and `install.ps1` count installed assets dynamically** via `find`/`Get-ChildItem` instead of hardcoded `"19 sub-skills"` / `"25 reference files"`. Future additions auto-update the post-install summary.
+- **`ads/SKILL.md` corrected** — "Orchestrates 17 specialized sub-skills" → 20, plus the numbered sub-skill list now includes `ads-math`, `ads-test`, and a note pointing to `scripts/generate_report.py` for `/ads report`. The new `audit-methodology.md`, `audit-output-schema.json`, `mcp-integration.md`, and `mcp-meta-integration.md` were added to the on-demand reference index.
+- **Six `audit-*.md` agent tool lists narrowed** from `Read, Bash, Write, Glob, Grep` to `Read, Write, Glob` (Bash and Grep were never invoked from these workflows). `audit-meta.md` additionally lists the thirteen `mcp__claude_ai_Facebook__*` tools it now calls.
+- **`skills/ads-update/SKILL.md` frontmatter standardized** — added `user-invokable: false` to match the rest of the sub-skills; removed the redundant `license: MIT` field (still in `LICENSE` and `.claude-plugin/plugin.json`).
+- **`CITATION.cff` version bumped** to `2.1.3` (was stuck at `2.0.3` four releases behind HEAD).
+- **Eight `SKILL.md` files cleaned** — removed inline `<!-- Updated: ... | v1.5 -->` and `<!-- Created: ... | v1.5 -->` comments. Substantive content from those comments (Apple rebrand note, YouTube 2026 changes, attribution to `itallstartedwithaidea`, attribution to `OpenClaudia`) was preserved as visible prose, not hidden HTML comments.
+
+### Removed
+
+- **`scripts/lib/dedupe.py`, `scripts/lib/signals.py`, `scripts/lib/story.py`** — vendored from `last30days-skill` in v2.0.0 but never imported by any script, skill, or agent. Removed to keep `scripts/lib/` honest. `dates.py` stays (it's used by `scripts/run_update.py`). `THIRD_PARTY_NOTICES.md` updated to reflect the removal.
+- All six `<!-- Updated: 2026-04-13 | v1.5 -->` HTML-comment version stamps in sub-skill `SKILL.md` files (the canonical version now lives in `.claude-plugin/plugin.json`).
+
+### Notes
+
+- `pytest tests/` runs 164 tests, all green on CI Python 3.12. Five tests are conditionally skipped on machines where a script's runtime dependency (`playwright`, `requests`, `Pillow`, `reportlab`/`matplotlib`) is not installed — the CI environment installs `requirements.txt` before tests, so nothing is skipped there.
+- No user-facing command was renamed or removed. `/ads audit`, `/ads google`, `/ads meta`, `/ads report`, and every other documented command behaves identically. Agents now emit JSON in addition to markdown — downstream consumers that only read the `.md` deliverable are unaffected.
+- The Meta MCP wiring is the **canonical pattern** for future platform integrations. To add Pinterest, Reddit, X, etc.: (1) declare the MCP tools in the agent's `tools:` frontmatter, (2) write `mcp-<platform>-integration.md` mapping checks to tools, (3) update the corresponding `skills/ads-<platform>/SKILL.md` step 1 to be MCP-first with manual fallback, (4) emit JSON against `audit-output-schema.json`. No orchestrator or scoring changes needed.
+
 ## [2.1.3] - 2026-04-29
 
 ### Fixed

@@ -1,8 +1,6 @@
 # Meta Ads Audit Checklist
 
-<!-- Updated: 2026-04-13 | v1.5 -->
-<!-- Sources: Google Research PDF 1 (M01-M40), Claude Research (42-item extended), Gemini Research -->
-<!-- Total Checks: 50 | Categories: 5 | See scoring-system.md for weights and algorithm -->
+Total checks: 50. Categories: 5. See `scoring-system.md` for weights and algorithm. When `ad_account_id` is supplied, see `mcp-meta-integration.md` for the check↔MCP tool mapping.
 
 ## Quick Reference
 

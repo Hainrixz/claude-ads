@@ -1,32 +1,28 @@
 ---
 name: ads
-description: "Multi-platform paid advertising audit and optimization skill. Analyzes Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, and Apple Ads. 250+ checks with scoring, parallel agents, industry templates, and AI creative generation."
-argument-hint: "audit | google | meta | youtube | linkedin | tiktok | microsoft | apple | creative | landing | budget | plan <type> | competitor | dna <url> | create | generate | photoshoot | update <platform|all>"
+description: "Free-first paid advertising audit and optimization skill, focused on the 3 platforms where 95% of advertiser spend lives: Meta, Google, TikTok. ~158 weighted checks with scoring, parallel agents, industry templates, and AI creative generation."
+argument-hint: "audit | google | meta | tiktok | creative | landing | budget | plan <type> | competitor | dna <url> | create | generate | photoshoot | update <platform|all> | publish"
 license: MIT
 ---
 
-# Ads: Multi-Platform Paid Advertising Audit & Optimization
+# Ads: Free-first Paid Advertising Audit & Optimization
 
-Comprehensive ad account analysis across all major platforms (Google, Meta,
-LinkedIn, TikTok, Microsoft). Orchestrates 17 specialized sub-skills and
-10 agents (6 audit + 4 creative).
+Focused ad account analysis on the 3 base platforms where most ad spend
+lives: **Meta, Google, TikTok**. Orchestrates 17 specialized sub-skills and
+7 agents (3 audit + 4 creative).
 
 ## Quick Reference
 
 | Command | What it does |
 |---------|-------------|
-| `/ads audit` | Full multi-platform audit with parallel subagent delegation |
-| `/ads google` | Google Ads deep analysis (Search, PMax, YouTube) |
-| `/ads meta` | Meta Ads deep analysis (FB, IG, Advantage+) |
-| `/ads youtube` | YouTube Ads specific analysis |
-| `/ads linkedin` | LinkedIn Ads deep analysis (B2B, Lead Gen) |
-| `/ads tiktok` | TikTok Ads deep analysis (Creative, Shop, Smart+) |
-| `/ads microsoft` | Microsoft/Bing Ads deep analysis (Copilot, Import) |
+| `/ads audit` | Full multi-platform audit with parallel subagent delegation (3 agents: Meta, Google, TikTok) |
+| `/ads google` | Google Ads deep analysis (Search, PMax, includes YouTube video campaigns) |
+| `/ads meta` | Meta Ads deep analysis (FB, IG, Advantage+) — MCP-wired to claude.ai Facebook |
+| `/ads tiktok` | TikTok Ads deep analysis (Creative, Shop, Smart+, Symphony, GMV Max) |
 | `/ads creative` | Cross-platform creative quality audit |
 | `/ads landing` | Landing page quality assessment for ad campaigns |
 | `/ads budget` | Budget allocation and bidding strategy review |
 | `/ads plan <business-type>` | Strategic ad plan with industry templates |
-| `/ads apple` | Apple Ads deep analysis |
 | `/ads competitor` | Competitor ad intelligence analysis |
 | `/ads math` | PPC financial calculator (CPA, ROAS, break-even, budget forecasting) |
 | `/ads test` | A/B test design (hypothesis, significance, duration, sample size) |
@@ -35,7 +31,8 @@ LinkedIn, TikTok, Microsoft). Orchestrates 17 specialized sub-skills and
 | `/ads create` | Generate campaign concepts + copy briefs, outputs `campaign-brief.md` |
 | `/ads generate` | Generate AI ad images from brief, outputs to `ad-assets/` |
 | `/ads photoshoot` | Product photography in 5 styles (Studio, Floating, Ingredient, In Use, Lifestyle) |
-| `/ads update <platform\|all>` | **NEW** — Refresh per-platform references with last 30 days of changes (COSTLY: ~50–150k tokens/platform, ~500k+ for `all`; gates on confirmation) |
+| `/ads update <platform\|all>` | Refresh per-platform references with last 30 days of changes (COSTLY: ~50–150k tokens/platform; gates on confirmation) |
+| `/ads publish` | Publish generated creatives to 14+ social networks via Zernio (first 2 accounts free; see `skills/ads-publish/SKILL.md`) |
 
 ## Context Intake (Required: Always Do This First)
 
@@ -45,11 +42,11 @@ be generic and recommendations may be wrong for the user's situation.
 Ask these questions upfront (combine into one message):
 
 1. **Industry / Business type**: Which best describes you?
-   SaaS · E-commerce · Local Service · B2B Enterprise · Info Products · Mobile App ·
-   Real Estate · Healthcare · Finance · Agency · Other
+   E-commerce · Local Service · Real Estate · Healthcare · Finance · Agency · Other
+   (Note: B2B-enterprise, SaaS, mobile-app, and info-products templates were removed in v2.3.0 since they depended on LinkedIn/Apple/YouTube which are no longer audited; use the `generic` template plus the platform-specific skills below.)
 2. **Monthly ad spend**: Total budget and per-platform breakdown (approximate is fine)
 3. **Primary goal**: Sales / Revenue · Leads / Demos · App Installs · Calls · Brand
-4. **Active platforms**: Which platforms are you advertising on?
+4. **Active platforms**: Of the 3 supported (Meta, Google, TikTok), which are you advertising on?
 
 If the user provides data upfront (e.g. "audit my Google Ads, I spend $5k/mo on SaaS"),
 extract context from that and proceed without re-asking.
@@ -65,10 +62,10 @@ When the user invokes `/ads audit`, delegate to subagents in parallel:
 1. **Collect context** (see Context Intake above; do this first)
 2. Collect account data (exports, screenshots, or pasted metrics)
 3. Detect business type and identify active platforms
-4. Spawn subagents via Task tool with `context: fork`: audit-google, audit-meta, audit-creative, audit-tracking, audit-budget, audit-compliance
-5. **Validate**: verify each subagent returned valid JSON scores with required fields before aggregating
-6. Collect results and generate unified report with Ads Health Score (0-100)
-7. Create prioritized action plan with Quick Wins
+4. Spawn 3 subagents via Task tool with `context: fork` — one per active platform: `audit-google`, `audit-meta`, `audit-tiktok`
+5. **Validate**: each subagent writes both `<platform>-audit-results.json` and `<platform>-audit-results.md`. Parse the JSON and validate against `references/audit-output-schema.json` before aggregating. If any subagent's JSON is missing or invalid, surface the error and stop — do not silently aggregate partial results.
+6. Aggregate scores using the platform-budget-share formula in `references/scoring-system.md` and generate the unified Ads Health Score (0-100)
+7. Create prioritized action plan from the `quick_wins` and `critical_issues` arrays of each JSON
 
 For individual commands (`/ads google`, `/ads meta`, etc.), load the relevant
 sub-skill directly. Still collect context first if not already provided.
@@ -125,6 +122,8 @@ Load these on-demand as needed; do NOT load all at startup.
 When sub-skills or agents reference `ads/references/*.md`, resolve to
 `~/.claude/skills/ads/references/*.md`.
 
+- `references/audit-methodology.md`: **Shared 7-step audit process** all platform skills delegate to. Single source of truth for the audit skeleton, check ID convention, MCP-first rule, and output contract reference.
+- `references/audit-output-schema.json`: **Canonical JSON schema** every audit-* agent must emit. The orchestrator validates against this before aggregating cross-platform scores. New integrations conform to this contract.
 - `references/scoring-system.md`: Weighted scoring algorithm and grading thresholds
 - `references/benchmarks.md`: Industry benchmarks by platform (CPC, CTR, CVR, ROAS)
 - `references/bidding-strategies.md`: Bidding decision trees per platform
@@ -132,22 +131,24 @@ When sub-skills or agents reference `ads/references/*.md`, resolve to
 - `references/platform-specs.md`: Creative specifications across all platforms
 - `references/conversion-tracking.md`: Pixel, CAPI, EMQ, ttclid implementation
 - `references/compliance.md`: Regulatory requirements, ad policies, privacy
-- `references/google-audit.md`: 74-check Google Ads audit checklist
-- `references/meta-audit.md`: 46-check Meta Ads audit checklist
-- `references/linkedin-audit.md`: 25-check LinkedIn Ads audit checklist
-- `references/tiktok-audit.md`: 25-check TikTok Ads audit checklist
-- `references/microsoft-audit.md`: 20-check Microsoft Ads audit checklist
+- `references/google-audit.md`: 80-check Google Ads audit checklist (includes YouTube video campaigns)
+- `references/meta-audit.md`: 50-check Meta Ads audit checklist
+- `references/tiktok-audit.md`: 28-check TikTok Ads audit checklist
 - `references/brand-dna-template.md`: Brand DNA schema and extraction guide
 - `references/image-providers.md`: Provider config (Gemini/OpenAI/Stability/Replicate)
 - `references/google-creative-specs.md`: PMax/RSA/YouTube generation-ready specs
 - `references/meta-creative-specs.md`: Feed/Reels/Stories specs + safe zones
-- `references/linkedin-creative-specs.md`: Single image/video B2B constraints
 - `references/tiktok-creative-specs.md`: 9:16 only + safe zone overlay
-- `references/youtube-creative-specs.md`: Skippable/Bumper/Shorts/Thumbnail
-- `references/microsoft-creative-specs.md`: Multimedia Ads + RSA subset
 - `references/gaql-notes.md`: GAQL field compatibility, deduplication patterns, filter scope best practices
 - `references/voice-to-style.md`: Brand voice axis to visual attribute mapping for image generation
 - `references/copy-frameworks.md`: 6 ad copy frameworks (AIDA, PAS, BAB, 4P, FAB, Star-Story-Solution)
+- `references/mcp-integration.md`: Canonical MCP integration pattern + per-platform MCP server catalog
+- `references/mcp-meta-integration.md`: Meta MCP check↔tool mapping (template for new MCP integrations)
+
+For platforms where MCP is not the preferred path, the audit agent reads
+`<platform>-data.json` produced by `scripts/api/<platform>_fetch.py`.
+These are pure-stdlib API adapters covering Meta, Google, and TikTok.
+See `scripts/api/README.md` for the per-platform OAuth setup walkthrough.
 
 ## Scoring Methodology
 
@@ -181,34 +182,34 @@ Aggregate = Sum(Platform_Score x Platform_Budget_Share)
 
 This skill orchestrates 17 specialized sub-skills:
 
-1. **ads-audit**: Full multi-platform audit with parallel delegation
-2. **ads-google**: Google Ads deep analysis (Search, PMax, YouTube)
-3. **ads-meta**: Meta Ads deep analysis (FB, IG, Advantage+)
-4. **ads-youtube**: YouTube Ads specific analysis
-5. **ads-linkedin**: LinkedIn Ads deep analysis
-6. **ads-tiktok**: TikTok Ads deep analysis
-7. **ads-microsoft**: Microsoft/Bing Ads deep analysis
-8. **ads-creative**: Cross-platform creative quality audit
-9. **ads-landing**: Landing page quality for ad campaigns
-10. **ads-budget**: Budget allocation and bidding strategy
-11. **ads-plan**: Strategic ad planning with industry templates
-12. **ads-competitor**: Competitor ad intelligence
-13. **ads-apple**: Apple Ads deep analysis
-14. **ads-dna**: Brand DNA extraction from website URL
-15. **ads-create**: Campaign concepts, copy decks, creative briefs
-16. **ads-generate**: AI image generation with pluggable providers
-17. **ads-photoshoot**: Product photography in 5 professional styles
-18. **ads-update**: Refresh per-platform references with last 30 days of changes (NEW in v2.0)
+1. **ads-audit**: Full multi-platform audit with parallel delegation across Meta / Google / TikTok
+2. **ads-google**: Google Ads deep analysis (Search, PMax, YouTube video campaigns — they share the Google Ads API)
+3. **ads-meta**: Meta Ads deep analysis (FB, IG, Advantage+) — MCP-wired to claude.ai Facebook
+4. **ads-tiktok**: TikTok Ads deep analysis (Creative, Shop, Smart+, Symphony, GMV Max)
+5. **ads-creative**: Cross-platform creative quality audit
+6. **ads-landing**: Landing page quality for ad campaigns
+7. **ads-budget**: Budget allocation and bidding strategy
+8. **ads-plan**: Strategic ad planning with industry templates (8 templates after v2.3.0 scope-down)
+9. **ads-competitor**: Competitor ad intelligence
+10. **ads-dna**: Brand DNA extraction from website URL
+11. **ads-create**: Campaign concepts, copy decks, creative briefs
+12. **ads-generate**: AI image generation with pluggable providers
+13. **ads-photoshoot**: Product photography in 5 professional styles
+14. **ads-update**: Refresh per-platform references with last 30 days of changes
+15. **ads-math**: PPC financial calculator (CPA, ROAS, break-even, LTV:CAC, MER)
+16. **ads-test**: A/B test design (hypothesis, sample size, statistical significance)
+17. **ads-publish**: Publish creatives to 14+ social networks via Zernio (first 2 accounts free)
+
+Plus `/ads report` for PDF deliverable generation (implemented in `scripts/generate_report.py`, no SKILL.md).
 
 ## Subagents
 
-For parallel analysis during full audits:
-- `audit-google`: Google Ads checks (G01-G74)
-- `audit-meta`: Meta Ads checks (M01-M46)
-- `audit-creative`: Creative quality for LinkedIn, TikTok, Microsoft
-- `audit-tracking`: Conversion tracking health across all platforms
-- `audit-budget`: Budget, bidding, structure for LinkedIn, TikTok, Microsoft
-- `audit-compliance`: Compliance, settings, performance across all platforms
+For parallel analysis during full audits — one deep specialist per platform:
+- `audit-google`: Google Ads 80-check audit (G01-G74, G-PM*, G-AI*, G-DG*, G-CTV*, G-WS*, G-KW*, G-CT*, G-AD*)
+- `audit-meta`: Meta Ads 50-check audit (M01-M40, M-AN*, M-AT*, M-CR*, M-ST*, M-IA*, M-TH*) — MCP-wired
+- `audit-tiktok`: TikTok Ads 28-check audit (T01-T25, T-SR*) — consolidates the former audit-creative/tracking/budget/compliance for TikTok into one deep-specialist agent
+
+Creative pipeline agents (unchanged):
 - `creative-strategist`: Campaign concepts from brand profile + audit results (Opus, maxTurns: 25)
 - `visual-designer`: Image generation with brand injection via generate_image.py (Sonnet, maxTurns: 30)
 - `copy-writer`: Headlines, CTAs, primary text within platform limits (Sonnet, maxTurns: 20)

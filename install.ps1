@@ -103,12 +103,20 @@ function Main {
         Write-Host ""
         Write-Host "Claude Ads installed successfully!" -ForegroundColor Green
         Write-Host ""
+        # Count installed assets dynamically so the output never drifts from reality.
+        $SkillsRoot = Join-Path $env:USERPROFILE ".claude\skills"
+        $SkillsCount    = (Get-ChildItem -Path $SkillsRoot -Directory -Filter "ads-*" -ErrorAction SilentlyContinue | Measure-Object).Count
+        $RefsCount      = (Get-ChildItem -Path (Join-Path $SkillDir "references") -Filter "*.md" -ErrorAction SilentlyContinue | Measure-Object).Count
+        $AgentsCount    = (Get-ChildItem -Path $AgentDir -Filter "*.md" -ErrorAction SilentlyContinue | Measure-Object).Count
+        $TemplatesPath  = Join-Path $SkillsRoot "ads-plan\assets"
+        $TemplatesCount = (Get-ChildItem -Path $TemplatesPath -Filter "*.md" -ErrorAction SilentlyContinue | Measure-Object).Count
+
         Write-Host "  Installed:"
         Write-Host "    - 1 main skill (ads orchestrator)"
-        Write-Host "    - 19 sub-skills (platform + functional + creative)"
-        Write-Host "    - 10 agents (6 audit + 4 creative)"
-        Write-Host "    - 25 reference files"
-        Write-Host "    - 12 industry templates"
+        Write-Host "    - $SkillsCount sub-skills (platform + functional + creative)"
+        Write-Host "    - $AgentsCount agents (6 audit + 4 creative)"
+        Write-Host "    - $RefsCount reference files"
+        Write-Host "    - $TemplatesCount industry templates"
         Write-Host ""
         Write-Host "Usage:"
         Write-Host "  1. Start Claude Code:  claude"

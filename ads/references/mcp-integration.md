@@ -1,11 +1,20 @@
 # MCP Integration Guide
 
-<!-- Created: 2026-04-13 | v1.5 -->
-<!-- Purpose: How to pair claude-ads with live ad platform MCP servers -->
+> **Purpose:** how to pair claude-ads with live ad-platform MCP servers, and the canonical pattern any new integration must follow.
 
 ## Overview
 
 claude-ads works with manually provided data by default (exports, screenshots, pasted metrics). For live API access, pair it with MCP servers that connect Claude Code directly to ad platform APIs.
+
+## Canonical MCP Pattern (for new integrations)
+
+Every audit that supports an MCP must follow the same three-layer pattern. **When adding a new platform (Pinterest, Reddit, X, etc.) duplicate this pattern verbatim** — don't invent a new one.
+
+1. **Detection** — the sub-skill's `Process` step 1 declares: *"if user supplies `<platform>_account_id`, use MCP; otherwise fall back to exports/screenshots"*. Never require MCP — always degrade gracefully.
+2. **Tool whitelist** — the corresponding `agents/audit-<platform>.md` frontmatter lists the exact `mcp__<server>__<tool>` names in its `tools:` field. Adding tools requires editing the agent, not run-time discovery.
+3. **Output contract** — the audit emits `<platform>-audit-results.json` against `ads/references/audit-output-schema.json` with `data_source` set to `"mcp"` (or `"export"` / `"mixed"`). See `mcp-meta-integration.md` for a worked example.
+
+Each platform that has an MCP gets its own `mcp-<platform>-integration.md` file mapping individual checks (Gxx, Mxx, etc.) to specific MCP tools. That file is the source of truth for the audit agent's behavior.
 
 ## Available MCP Servers
 
@@ -49,61 +58,52 @@ claude-ads works with manually provided data by default (exports, screenshots, p
 - Creative quality assessment (subjective)
 - Consent Mode V2 verification (requires GTM/tag audit)
 
-### Meta Ads: Adspirer MCP
+### Meta Ads: claude.ai Facebook MCP (**canonical — wire this first**)
+
+The official **claude.ai Facebook** MCP server is the recommended Meta integration. It exposes `mcp__claude_ai_Facebook__*` tools directly inside Claude Code with no extra setup beyond connecting your Meta Business account from claude.ai's MCP catalog.
+
+**Setup:** in claude.ai → MCP servers → connect "Facebook". The tools become available automatically.
+
+**Tools used by claude-ads** (full mapping in `mcp-meta-integration.md`):
+
+| Tool | Covers checks |
+|------|---------------|
+| `mcp__claude_ai_Facebook__ads_get_dataset_quality` | M02 (CAPI), M03 (dedup), M04 (EMQ) |
+| `mcp__claude_ai_Facebook__ads_get_ad_entities` | M11-M18 (structure), M19 (overlap), M13 (learning phase) |
+| `mcp__claude_ai_Facebook__ads_catalog_get_diagnostics` | M15 (Advantage+ Shopping), M-CR* (catalog) |
+| `mcp__claude_ai_Facebook__ads_insights_performance_trend` | M28 (creative fatigue), M25 (creative diversity over time) |
+| `mcp__claude_ai_Facebook__ads_insights_industry_benchmark` | Live benchmarks (overrides static `benchmarks.md` when available) |
+| `mcp__claude_ai_Facebook__ads_get_ad_account_pages` | Page-level diagnostics |
+| `mcp__claude_ai_Facebook__ads_get_opportunity_score` | Meta's own "opportunity score" — cross-reference with our health score |
+
+**What stays manual:** subjective creative quality, organic Threads activity, off-platform attribution.
+
+### Meta Ads: alternative — Adspirer MCP
 
 **Docs:** https://www.adspirer.com/blog/connect-claude-meta-ads
-**Type:** Commercial MCP server
+**Type:** Commercial MCP server. Use only if you cannot connect the claude.ai Facebook MCP (e.g., need write access or features the official MCP does not expose).
 
-**Setup:**
-1. Sign up at adspirer.com
-2. Connect Meta Business Manager account
-3. Add MCP server config per their docs
+### Meta Ads: alternative — direct Marketing API
 
-**What becomes automated:**
-- Campaign performance data for M11-M18 (structure)
-- Creative metrics for M25-M32 (fatigue detection)
-- Audience overlap for M19 (overlap check)
-- EMQ scores for M04 (requires Events Manager access)
-
-**Alternative: Direct Meta API:**
-Roll your own integration with the Meta Marketing API for a free, self-hosted option. The Marketing API supports campaign reads, creative metadata, and Insights queries — wrap it in a small script and pipe to `/ads meta` for analysis.
-
-### LinkedIn Ads: Multiple Options
-
-**GrowthSpree MCP:** https://www.growthspreeofficial.com/blogs/connect-linkedin-ads-to-claude-mcp
-**Adzviser MCP:** https://adzviser.com/mcp/linkedin-ads
-
-Both provide campaign data access for LinkedIn Ads analysis. Setup follows standard MCP patterns.
+Roll your own integration with the Meta Marketing API. Free, self-hosted, but requires significant setup. Only worth it for advanced cases the official MCP does not cover.
 
 ### TikTok Ads
 
-No dedicated MCP server available as of April 2026. Use:
-- TikTok Ads Manager exports (CSV)
-- TikTok Business API (custom integration via scripts)
+**Community MCP:** [`AdsMCP/tiktok-ads-mcp-server`](https://github.com/AdsMCP/tiktok-ads-mcp-server) provides campaign / adgroup / ad / report data access (free, open-source).
 
-### Microsoft Ads
-
-No dedicated MCP server available as of April 2026. Use:
-- Microsoft Ads Editor exports
-- Google Ads import data (if mirrored)
-- Microsoft Advertising API (custom integration)
-
-### Apple Ads
-
-No dedicated MCP server available as of April 2026. Use:
-- Apple Ads dashboard exports
-- Apple Ads API (custom integration)
+**Free fallback:** `scripts/api/tiktok_fetch.py` (Capa 2 — direct API adapter, pure stdlib).
 
 ## Hybrid Workflow
 
-The recommended approach combines MCP live data with claude-ads structured analysis:
+The recommended approach combines MCP live data with claude-ads' direct-API
+adapters and manual exports — the 3-tier free-first strategy:
 
 ```
-1. Connect MCP server(s) for available platforms
-2. Run /ads audit (claude-ads auto-detects MCP data sources)
-3. For platforms without MCP, provide exports manually
-4. claude-ads merges all data into unified audit
-5. Health Score calculated across all platforms regardless of data source
+1. Capa 1 — Connect MCP server(s) for available platforms (Meta, Google, TikTok)
+2. Capa 2 — Or run scripts/api/<platform>_fetch.py to produce <platform>-data.json
+3. Capa 3 — Or paste exports manually
+4. Run /ads audit (claude-ads auto-detects whatever data source is present)
+5. Health Score calculated across all 3 platforms regardless of data source
 ```
 
 ## Security Notes

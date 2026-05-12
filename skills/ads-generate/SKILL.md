@@ -67,12 +67,11 @@ Load `~/.claude/skills/ads/references/image-providers.md` to confirm:
 ### Step 4: Read Platform Specs
 
 For each platform in the campaign brief, load the relevant spec reference:
-- `~/.claude/skills/ads/references/meta-creative-specs.md`
-- `~/.claude/skills/ads/references/google-creative-specs.md`
-- `~/.claude/skills/ads/references/tiktok-creative-specs.md`
-- `~/.claude/skills/ads/references/linkedin-creative-specs.md`
-- `~/.claude/skills/ads/references/youtube-creative-specs.md`
-- `~/.claude/skills/ads/references/microsoft-creative-specs.md`
+- `~/.claude/skills/ads/references/meta-creative-specs.md` (Feed/Reels/Stories specs + safe zones)
+- `~/.claude/skills/ads/references/google-creative-specs.md` (PMax/RSA/YouTube generation-ready specs)
+- `~/.claude/skills/ads/references/tiktok-creative-specs.md` (9:16 only + safe zone overlay)
+
+Plus `~/.claude/skills/ads/references/platform-specs-cross.md` for cross-platform aspect-ratio + character normalization.
 
 ### Step 5: Prepare banana Configuration
 

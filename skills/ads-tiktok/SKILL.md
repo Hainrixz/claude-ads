@@ -6,16 +6,18 @@ user-invokable: false
 
 # TikTok Ads Deep Analysis
 
-## Process
+## Data Collection (3-tier free-first)
 
-1. Collect TikTok Ads data (Ads Manager export, Pixel/Events API status)
-2. Read `ads/references/tiktok-audit.md` for full 28-check audit
-3. Read `ads/references/benchmarks.md` for TikTok-specific benchmarks
-4. Read `ads/references/platform-specs.md` for creative specifications
-5. Read `ads/references/scoring-system.md` for weighted scoring algorithm
-6. Evaluate all applicable checks as PASS, WARNING, or FAIL
-7. Calculate TikTok Ads Health Score (0-100)
-8. Generate findings report with action plan
+- **Capa 1 — MCP**: `AdsMCP/tiktok-ads-mcp-server` (community, free) provides campaign/adgroup/ad data. See `mcp-integration.md` for setup.
+- **Capa 2 — Direct API** (free; ~30 min OAuth setup): if `tiktok-data.json` is present in cwd, read it. The user generates it with:
+  ```bash
+  python3 scripts/api/tiktok_fetch.py --account-id <advertiser_id> -o tiktok-data.json
+  ```
+  Full setup in `scripts/api/README.md`.
+- **Capa 3 — Manual fallback**: TikTok Ads Manager export plus Pixel/Events API status from the Events Manager.
+- Also read `platform-specs.md` for 9:16 vertical and safe-zone requirements before evaluating creative checks.
+
+Then follow the standard 7-step audit process in `ads/references/audit-methodology.md` using `tiktok-audit.md` as the check list. Emit dual output (`tiktok-audit-results.json` against `audit-output-schema.json`, plus `tiktok-audit-results.md`).
 
 ## What to Analyze
 

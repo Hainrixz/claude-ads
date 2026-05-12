@@ -6,8 +6,7 @@ user-invokable: false
 
 # A/B Test Design & Experiment Planning
 
-<!-- Created: 2026-04-13 | v1.5 -->
-<!-- Source: OpenClaudia/openclaudia-skills (ab-test-setup concept) -->
+> Concept adapted from `OpenClaudia/openclaudia-skills` (ab-test-setup).
 
 ## Process
 

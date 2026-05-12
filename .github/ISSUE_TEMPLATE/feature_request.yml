@@ -29,15 +29,14 @@ body:
     id: platforms
     attributes:
       label: Related Ad Platform (if applicable)
+      description: "v2.3.0 focuses on Meta / Google / TikTok. If you're requesting a NEW platform integration (Pinterest, Reddit, X, etc.), pick 'New platform (please specify in Proposed Solution)'."
       multiple: true
       options:
-        - Google Ads
+        - Google Ads (includes YouTube video campaigns)
         - Meta Ads
-        - LinkedIn Ads
         - TikTok Ads
-        - Microsoft Ads
-        - Apple Search Ads
         - Cross-platform / General
+        - New platform (please specify in Proposed Solution)
     validations:
       required: false
 

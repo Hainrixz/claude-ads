@@ -91,12 +91,18 @@ main() {
     echo ""
     echo "✓ Claude Ads installed successfully!"
     echo ""
+    # Count installed assets dynamically so the output never drifts from reality.
+    SKILLS_COUNT=$(find "$HOME/.claude/skills" -maxdepth 2 -name SKILL.md -path "*/ads-*/SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
+    REFS_COUNT=$(find "$SKILL_DIR/references" -maxdepth 1 -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+    AGENTS_COUNT=$(find "$AGENT_DIR" -maxdepth 1 -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+    TEMPLATES_COUNT=$(find "$HOME/.claude/skills/ads-plan/assets" -maxdepth 1 -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+
     echo "  Installed:"
     echo "    • 1 main skill (ads orchestrator)"
-    echo "    • 19 sub-skills (platform + functional + creative)"
-    echo "    • 10 agents (6 audit + 4 creative)"
-    echo "    • 25 reference files"
-    echo "    • 12 industry templates"
+    echo "    • ${SKILLS_COUNT:-?} sub-skills (platform + functional + creative)"
+    echo "    • ${AGENTS_COUNT:-?} agents (6 audit + 4 creative)"
+    echo "    • ${REFS_COUNT:-?} reference files"
+    echo "    • ${TEMPLATES_COUNT:-?} industry templates"
     echo ""
     echo "Usage:"
     echo "  1. Start Claude Code:  claude"

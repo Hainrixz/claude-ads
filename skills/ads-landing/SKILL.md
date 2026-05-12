@@ -4,8 +4,6 @@ description: "Landing page quality assessment for paid advertising campaigns. Ev
 user-invokable: false
 ---
 
-<!-- Updated: 2026-04-13 | v1.5 -->
-
 # Landing Page Quality for Ad Campaigns
 
 ## Process

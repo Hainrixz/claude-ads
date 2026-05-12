@@ -22,3 +22,6 @@ matplotlib>=3.8.0,<4.0.0          # Health score gauge and platform bar charts
 # openai>=1.75.0,<2.0.0           # OpenAI gpt-image-1
 # stability-sdk>=0.8.4,<1.0.0     # Stability AI SD 3.5
 # replicate>=1.0.4,<2.0.0         # Replicate / FLUX.1 Pro
+
+# API adapters (scripts/api/*_fetch.py) — pure stdlib, no extra deps.
+# Meta / Google / TikTok adapters use only urllib + json + argparse.

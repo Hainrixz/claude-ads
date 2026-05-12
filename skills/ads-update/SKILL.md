@@ -1,8 +1,8 @@
 ---
 name: ads-update
-description: Refresh per-platform references (meta, google, tiktok, linkedin, microsoft, apple, youtube) with the last 30 days of platform changes — features, deprecations, policy updates. COSTLY; gates on confirmation.
-argument-hint: "meta | google | tiktok | linkedin | microsoft | apple | youtube | all"
-license: MIT
+description: Refresh per-platform references (meta, google, tiktok) with the last 30 days of platform changes — features, deprecations, policy updates. COSTLY; gates on confirmation.
+user-invokable: false
+argument-hint: "meta | google | tiktok | all"
 allowed-tools: Bash, Read, Write, Edit, WebFetch, WebSearch, AskUserQuestion
 ---
 
@@ -38,11 +38,11 @@ This skill regenerates per-platform reference files with what has actually chang
 
 Accept exactly one argument from this enum:
 
-`meta | google | tiktok | linkedin | microsoft | apple | youtube | all`
+`meta | google | tiktok | all`
 
-If the user invokes `/ads update` with no argument, ask them which platform via `AskUserQuestion` (don't default to `all` — that's the most expensive mode). If they pass an unknown value, list valid options and exit.
+If the user invokes `/ads update` with no argument, ask them which platform via `AskUserQuestion` (don't default to `all`). If they pass an unknown value, list valid options and exit.
 
-For `all`, loop the seven platforms **sequentially in this order**: `meta, google, tiktok, linkedin, microsoft, apple, youtube`. Sequential matters — parallel hits rate limits on the public APIs and makes cost unpredictable.
+For `all`, loop the three platforms **sequentially in this order**: `meta, google, tiktok`. Sequential matters — parallel hits rate limits on the public APIs and makes cost unpredictable.
 
 ---
 
@@ -61,7 +61,7 @@ Parse the JSON output. You'll get:
 - `changelog_urls` — official vendor release-note pages (use `WebFetch`)
 - `search_queries` — phrased to surface industry-press coverage (use `WebSearch`)
 - `hn_keywords` — terms to query against Hacker News
-- `youtube_channels` / `x_handles` — optional, skip if no API keys
+- `x_handles` — optional, skip if no X/Twitter API key
 
 ---
 

@@ -4,8 +4,6 @@ description: "Budget allocation and bidding strategy review across all ad platfo
 user-invokable: false
 ---
 
-<!-- Updated: 2026-04-13 | v1.5 -->
-
 # Budget Allocation & Bidding Strategy
 
 ## Process
@@ -97,7 +95,7 @@ Start
 - Manual CPC for low-volume campaigns (Enhanced CPC deprecated on Google March 2025; verify Microsoft availability before recommending)
 - Target CPA / Target ROAS for automated (requires 15+ conversions/30 days)
 
-## v1.5 Bidding Innovations
+## Bidding Innovations (2025+)
 
 ### Google AI Max for Search
 - 14% conversion lift in early testing

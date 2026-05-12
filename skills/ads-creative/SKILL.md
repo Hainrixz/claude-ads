@@ -4,8 +4,6 @@ description: "Cross-platform creative quality audit covering ad copy, video, ima
 user-invokable: false
 ---
 
-<!-- Updated: 2026-04-13 | v1.5 -->
-
 # Cross-Platform Creative Quality Audit
 
 ## Process
@@ -28,7 +26,7 @@ user-invokable: false
 - Pin usage: minimal and strategic (over-pinning kills RSA flexibility)
 - Extensions: sitelinks (≥4), callouts (≥4), structured snippets, image
 - PMax asset groups: text + image + video + optional product feed
-- YouTube: video quality, hook, subtitles (see ads-youtube sub-skill)
+- YouTube video campaigns: video quality, hook, subtitles (covered inside `audit-google` checks G-DG*, G-CTV* — YouTube uses the Google Ads API)
 
 ### Meta Ads Creative
 - Format diversity: ≥3 formats active (image, video, carousel, collection)

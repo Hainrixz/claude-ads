@@ -1,8 +1,6 @@
 # TikTok Ads Audit Checklist
 
-<!-- Updated: 2026-04-13 | v1.5 -->
-<!-- Sources: Google Research PDF 1 (T01-T25), Claude Research, Gemini Research -->
-<!-- Total Checks: 28 | Categories: 6 | See scoring-system.md for weights and algorithm -->
+Total checks: 28. Categories: 6. See `scoring-system.md` for weights and algorithm.
 
 ## Quick Reference
 

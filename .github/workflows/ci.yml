@@ -46,3 +46,9 @@ jobs:
         run: |
           pip install pip-audit==2.10.0
           pip-audit -r requirements.txt
+
+      - name: Install test dependencies
+        run: pip install pytest
+
+      - name: Run test suite (skill loading, references, agents, scripts)
+        run: pytest tests/ -v

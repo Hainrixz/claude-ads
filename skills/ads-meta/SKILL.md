@@ -14,15 +14,23 @@ get retrieval suppression. The algorithm clusters near-identical creatives and l
 their delivery. 100 minor variations perform no better than 10. Prioritize genuinely
 distinct concepts, angles, and formats over volume of similar variants.
 
-## Process
+## Data Collection (3-tier free-first)
 
-1. Collect Meta Ads data (Ads Manager export, Events Manager screenshot, EMQ scores)
-2. Read `ads/references/meta-audit.md` for full 50-check audit
-3. Read `ads/references/benchmarks.md` for Meta-specific benchmarks
-4. Read `ads/references/scoring-system.md` for weighted scoring
-5. Evaluate all applicable checks as PASS, WARNING, or FAIL
-6. Calculate Meta Ads Health Score (0-100)
-7. Generate findings report with action plan
+- **Capa 1 — MCP** (preferred when available): if the user supplies an `ad_account_id` (format `act_<digits>`) and the claude.ai Facebook MCP is connected, call the Meta MCP tools listed in `ads/references/mcp-meta-integration.md`. Most M01-M40 checks become live data lookups.
+  - `mcp__claude_ai_Facebook__ads_get_dataset_quality` → M02-M04 (EMQ, CAPI, dedup)
+  - `mcp__claude_ai_Facebook__ads_get_ad_entities` → M11-M40 (structure, learning phase, placements)
+  - `mcp__claude_ai_Facebook__ads_catalog_get_diagnostics` → Advantage+ Shopping health
+  - `mcp__claude_ai_Facebook__ads_insights_performance_trend` → M28 (creative fatigue)
+  - `mcp__claude_ai_Facebook__ads_insights_industry_benchmark` → live benchmarks (override `benchmarks.md` when present)
+- **Capa 2 — Direct API** (also free; OAuth setup once): if a `meta-data.json` file is present in the cwd, read it as the data source. The user generates it ahead of audit time with:
+  ```bash
+  export META_ACCESS_TOKEN='...'
+  python3 scripts/api/meta_fetch.py --account-id act_<id> -o meta-data.json
+  ```
+  Full setup in `scripts/api/README.md`. Set `data_source: "direct_api"` in the JSON output.
+- **Capa 3 — Manual fallback** (always works, no setup): Ads Manager CSV export + Events Manager screenshot + EMQ scores. Mark unevaluable checks `"result": "N/A"` in the JSON output.
+
+Then follow the standard 7-step audit process in `ads/references/audit-methodology.md` using `meta-audit.md` as the check list. Emit dual output (`meta-audit-results.json` against `audit-output-schema.json`, plus `meta-audit-results.md`).
 
 ## What to Analyze
 

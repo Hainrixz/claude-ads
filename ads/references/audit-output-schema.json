@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Hainrixz/claude-ads/ads/references/audit-output-schema.json",
+  "title": "Claude Ads — Audit Agent Output",
+  "description": "Canonical output schema every audit-* agent must emit alongside its human-readable markdown. The orchestrator (`ads/SKILL.md`) parses these JSON files to aggregate the cross-platform Ads Health Score. Adding a new audit platform = produce JSON that validates against this schema.",
+  "type": "object",
+  "required": ["platform", "version", "health_score", "grade", "category_scores", "checks"],
+  "additionalProperties": false,
+  "properties": {
+    "platform": {
+      "type": "string",
+      "enum": ["google", "meta", "tiktok"],
+      "description": "Which audit produced this result. Must match the agent's `name` minus the `audit-` prefix."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "description": "Schema version this document conforms to (e.g. \"1.0\"). Bump on breaking schema changes."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp when the audit completed."
+    },
+    "account_id": {
+      "type": ["string", "null"],
+      "description": "Optional platform-native account identifier (e.g. Meta ad_account_id, Google CID). Null if audit ran on manual exports."
+    },
+    "data_source": {
+      "type": "string",
+      "enum": ["mcp", "export", "screenshot", "manual", "mixed"],
+      "description": "How the audit obtained its source data. \"mcp\" means live platform API via MCP server."
+    },
+    "health_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Weighted aggregate score for this platform/dimension. See `scoring-system.md`."
+    },
+    "grade": {
+      "type": "string",
+      "enum": ["A", "B", "C", "D", "F"],
+      "description": "Letter grade derived from health_score (A:90-100, B:75-89, C:60-74, D:40-59, F:<40)."
+    },
+    "category_scores": {
+      "type": "object",
+      "description": "Per-category breakdown summing (weighted) to health_score.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["score", "weight"],
+        "additionalProperties": false,
+        "properties": {
+          "score": { "type": "number", "minimum": 0, "maximum": 100 },
+          "weight": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "description": "All checks evaluated, in order. Skipped checks should be included with result \"N/A\".",
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "result"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z]+(-[A-Z]+)?-?[A-Z0-9]+$",
+            "description": "Stable check identifier (e.g. G01, M-AT1, T-PI2, X-PI1). Letters identify platform/family."
+          },
+          "category": { "type": "string" },
+          "name": { "type": "string", "description": "Short check title." },
+          "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+          "result": { "type": "string", "enum": ["PASS", "WARNING", "FAIL", "N/A"] },
+          "finding": { "type": "string", "description": "What was observed in the data." },
+          "recommendation": { "type": "string", "description": "What to do about it." },
+          "fix_time_minutes": { "type": ["number", "null"], "minimum": 0 },
+          "evidence": {
+            "type": ["object", "null"],
+            "description": "Optional structured evidence (metric values, screenshots paths, MCP tool responses).",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "quick_wins": {
+      "type": "array",
+      "description": "Subset of checks with severity in {critical, high} AND fix_time_minutes <= 15. Sorted by impact.",
+      "items": {
+        "type": "object",
+        "required": ["check_id", "action"],
+        "additionalProperties": false,
+        "properties": {
+          "check_id": { "type": "string" },
+          "action": { "type": "string" },
+          "impact_estimate": { "type": "string" },
+          "effort_minutes": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "critical_issues": {
+      "type": "array",
+      "description": "Checks that failed at severity \"critical\". These block the platform from scoring above C until fixed.",
+      "items": {
+        "type": "object",
+        "required": ["check_id", "blocker_reason"],
+        "additionalProperties": false,
+        "properties": {
+          "check_id": { "type": "string" },
+          "blocker_reason": { "type": "string" },
+          "estimated_revenue_at_risk": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-form notes for the orchestrator or human reviewer."
+    }
+  }
+}

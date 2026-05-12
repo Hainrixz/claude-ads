@@ -12,13 +12,10 @@ user-invokable: false
 2. **Validate**: confirm at least one platform's data is available before proceeding
 3. **Detect business type**: analyze account signals per ads orchestrator
 4. **Identify active platforms**: determine which platforms are in use
-5. **Delegate to subagents** (if available, otherwise run inline sequentially):
-   - `audit-google`: Conversion tracking, wasted spend, structure, keywords, ads, settings (G01-G74)
-   - `audit-meta`: Pixel/CAPI health, creative fatigue, structure, audience (M01-M46)
-   - `audit-creative`: LinkedIn, TikTok, Microsoft creative checks + cross-platform synthesis
-   - `audit-tracking`: LinkedIn, TikTok, Microsoft tracking + cross-platform tracking health
-   - `audit-budget`: LinkedIn, TikTok, Microsoft budget/bidding + cross-platform allocation
-   - `audit-compliance`: All-platform compliance, settings, performance benchmarks
+5. **Delegate to subagents** (3 parallel deep specialists, one per platform):
+   - `audit-google`: Conversion tracking, wasted spend, structure, keywords, ads, settings, PMax, AI Max, Demand Gen, CTV, YouTube video campaigns (G01-G74, G-PM*, G-AI*, G-DG*, G-CTV*)
+   - `audit-meta`: Pixel/CAPI health, creative fatigue, structure, audience, Andromeda, Advantage+ (M01-M40, M-AN*, M-AT*, M-CR*, M-ST*, M-IA*, M-TH*) — MCP-wired
+   - `audit-tiktok`: Pixel + Events API + ttclid, creative diversity, Smart+, GMV Max, Symphony, learning phase (T01-T25, T-SR*)
 6. **Validate**: verify each subagent returned valid scores with required fields before aggregating
 7. **Score**: calculate per-platform and aggregate Ads Health Score (0-100)
 8. **Report**: generate prioritized action plan with Quick Wins
@@ -26,11 +23,9 @@ user-invokable: false
 ## Data Collection
 
 Ask the user for available data. Accept any combination:
-- Google Ads: account export, Change History, Search Terms Report
-- Meta Ads: Ads Manager export, Events Manager screenshot, EMQ scores
-- LinkedIn Ads: Campaign Manager export, Insight Tag status
-- TikTok Ads: Ads Manager export, Pixel/Events API status
-- Microsoft Ads: account export, UET tag status, import validation results
+- **Meta Ads**: Capa 1 (claude.ai Facebook MCP, free), Capa 2 (scripts/api/meta_fetch.py → meta-data.json), Capa 3 (Ads Manager export + Events Manager screenshot + EMQ)
+- **Google Ads**: Capa 1 (cohnen/mcp-google-ads, free), Capa 2 (scripts/api/google_fetch.py → google-data.json), Capa 3 (account export + Change History + Search Terms Report)
+- **TikTok Ads**: Capa 1 (AdsMCP/tiktok-ads-mcp, free), Capa 2 (scripts/api/tiktok_fetch.py → tiktok-data.json), Capa 3 (Ads Manager export + Pixel/Events API status)
 
 If no exports available, audit from screenshots or manual data entry.
 

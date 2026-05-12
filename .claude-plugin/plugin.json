@@ -1,7 +1,7 @@
 {
   "name": "claude-ads",
-  "version": "2.1.3",
-  "description": "Self-updating multi-platform paid advertising audit, optimization, and AI creative generation for Claude Code. 250+ checks across Google, Meta, YouTube, LinkedIn, TikTok, Microsoft, and Apple Ads with weighted scoring, parallel agents, industry templates, PPC math, A/B test design, PDF reports, and /ads update for refreshing platform references with the last 30 days of changes.",
+  "version": "2.3.0",
+  "description": "Free-first paid advertising audit and AI creative generation for Claude Code, focused on the 3 platforms where 95% of advertiser spend lives: Meta, Google, TikTok. ~158 weighted audit checks, parallel agents, industry templates, PPC math, A/B test design, PDF reports, /ads update for refreshing platform references with the last 30 days of changes, and /ads publish for posting generated creatives to 14+ social networks via Zernio (free for 2 accounts).",
   "author": {
     "name": "tododeia",
     "url": "https://tododeia.com"
@@ -13,17 +13,14 @@
     "advertising-audit",
     "google-ads",
     "meta-ads",
-    "linkedin-ads",
     "tiktok-ads",
-    "microsoft-ads",
-    "apple-ads",
-    "youtube-ads",
     "ppc",
     "paid-advertising",
     "ad-optimization",
     "creative-generation",
     "claude-code-skill",
-    "self-updating"
+    "self-updating",
+    "free-first"
   ],
   "skills": ["./ads/", "./skills/"]
 }

@@ -6,7 +6,7 @@ description: >
   and settings.
 model: sonnet
 maxTurns: 20
-tools: Read, Bash, Write, Glob, Grep
+tools: Read, Write, Glob
 ---
 
 You are a Google Ads audit specialist. When given Google Ads account data (exports, screenshots, or manual input):
@@ -99,9 +99,12 @@ If Performance Max campaigns exist, additionally evaluate:
 
 ## Output Format
 
-Write results to `google-audit-results.md` with:
-- Google Ads Health Score (0-100) with grade
-- Category breakdown (score per category)
-- Per-check results table (ID, Check, Result, Finding, Recommendation)
-- Quick Wins section (sorted by impact)
-- Critical issues requiring immediate action
+Write **two** files (both required — the orchestrator parses the JSON, humans read the MD):
+
+1. **`google-audit-results.json`** — must validate against `ads/references/audit-output-schema.json`. Set `"platform": "google"`. Include every evaluated check (use `"result": "N/A"` for skipped). The `/ads audit` aggregator fails fast if this is missing or invalid.
+2. **`google-audit-results.md`** — human-readable, with:
+   - Google Ads Health Score (0-100) with grade
+   - Category breakdown (score per category)
+   - Per-check results table (ID, Check, Result, Finding, Recommendation)
+   - Quick Wins section (sorted by impact)
+   - Critical issues requiring immediate action
