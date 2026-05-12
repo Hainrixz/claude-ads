@@ -69,17 +69,14 @@ Claude will ask you for your industry, monthly spend, and which platforms to inc
 ```mermaid
 flowchart LR
   U([You]) -->|/ads audit| O[Orchestrator]
-  O -.dispatches in parallel.-> G[Google audit]
-  O -.-> M[Meta audit]
-  O -.-> C[Creative audit]
-  O -.-> T[Tracking audit]
-  O -.-> B[Budget audit]
-  O -.-> X[Compliance audit]
-  G & M & C & T & B & X -->|findings| S[Scored report]
+  O -.dispatches in parallel.-> G[audit-google · 80 checks]
+  O -.-> M[audit-meta · 50 checks · MCP-wired]
+  O -.-> T[audit-tiktok · 28 checks]
+  G & M & T -->|MD + JSON findings| S[Scored report]
   S --> R([0–100 health score · prioritized fixes · optional PDF])
 ```
 
-The orchestrator (`/ads`) doesn't try to do everything itself. It dispatches six specialized agents in parallel — each with its own checklist, its own reference data loaded on-demand (RAG style), and its own severity weights. Their findings merge into a single scored report.
+The orchestrator (`/ads`) doesn't try to do everything itself. It dispatches **three deep-specialist agents in parallel** — one per platform (`audit-google`, `audit-meta`, `audit-tiktok`), each with its own checklist (G\* / M\* / T\* prefixed), its own reference data loaded on-demand (RAG style), and its own severity weights. Each agent emits both a human-readable Markdown report **and** a machine-readable JSON file validated against [`audit-output-schema.json`](ads/references/audit-output-schema.json). The orchestrator merges them into a single 0–100 Ads Health Score.
 
 ---
 
@@ -93,7 +90,7 @@ The orchestrator (`/ads`) doesn't try to do everything itself. It dispatches six
 | | `/ads tiktok` | TikTok Ads (Smart+, Shop, Symphony, GMV Max) — 28 checks |
 | **Creative** | `/ads creative` | Cross-platform creative quality + fatigue detection |
 | | `/ads landing` | Landing page conversion review |
-| **Strategy** | `/ads plan <type>` | Strategic plan from 12 industry templates |
+| **Strategy** | `/ads plan <type>` | Strategic plan from 8 industry templates |
 | | `/ads budget` | Budget allocation + bidding strategy review |
 | | `/ads competitor` | Competitor ad intelligence across all platforms |
 | **Numbers** | `/ads math` | PPC calculator: CPA, ROAS, break-even, LTV:CAC, MER |
@@ -161,7 +158,7 @@ The official **claude.ai Facebook MCP** is technically Tier 1 (free), but it's t
 Most users don't need this tier. Use only when:
 
 - You want extra Meta features the official MCP doesn't expose → **[Adspirer](https://www.adspirer.com)** (Meta MCP, commercial).
-- You want to **publish** generated creatives to 14+ social networks (the `/ads publish` command) → **[Zernio](https://zernio.com)** is the only integration here. **Zernio has nothing to do with the audit pipeline** — it's strictly post-creative publishing. **First 2 connected accounts are free forever** (no credit card); agencies pay $1–$6/mo per additional account. So `/ads publish` is Tier 1 (free) for solo users / single brands and Tier 3 (paid) only once you're managing 3+ social accounts. See [`/ads publish`](#ads-publish--push-creatives-to-socials-via-zernio-paid-optional) below.
+- You want to **publish** generated creatives to 14+ social networks (the `/ads publish` command) → **[Zernio](https://zernio.com)** is the only integration here. **Zernio has nothing to do with the audit pipeline** — it's strictly post-creative publishing. **First 2 connected accounts are free forever** (no credit card); agencies pay $1–$6/mo per additional account. So `/ads publish` is Tier 1 (free) for solo users / single brands and Tier 3 (paid) only once you're managing 3+ social accounts. See [`/ads publish`](#ads-publish--push-creatives-to-socials-via-zernio) below.
 
 ### Heads up
 
@@ -250,7 +247,7 @@ To extend the audit pipeline with a new platform (Pinterest, Reddit, X, your own
 
 ---
 
-## `/ads publish` — Push creatives to socials via Zernio (paid optional)
+## `/ads publish` — Push creatives to socials via Zernio
 
 **First 2 connected social accounts are free forever, no credit card.** Solo users posting to Instagram + Facebook = $0/mo. Agencies managing 3+ social accounts pay $1–$6/mo per additional account (see [zernio.com/pricing](https://zernio.com/pricing) for the live calculator). The only fine print: X/Twitter API costs are metered pass-through at X's rates even on the free tier; the other 13 networks are fully included.
 

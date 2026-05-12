@@ -69,17 +69,14 @@ Claude te va a preguntar tu industria, gasto mensual y qué plataformas incluir.
 ```mermaid
 flowchart LR
   U([Tú]) -->|/ads audit| O[Orquestador]
-  O -.despacha en paralelo.-> G[Auditoría Google]
-  O -.-> M[Auditoría Meta]
-  O -.-> C[Auditoría Creative]
-  O -.-> T[Auditoría Tracking]
-  O -.-> B[Auditoría Budget]
-  O -.-> X[Auditoría Compliance]
-  G & M & C & T & B & X -->|hallazgos| S[Reporte calificado]
+  O -.despacha en paralelo.-> G[audit-google · 80 checks]
+  O -.-> M[audit-meta · 50 checks · MCP-wired]
+  O -.-> T[audit-tiktok · 28 checks]
+  G & M & T -->|hallazgos MD + JSON| S[Reporte calificado]
   S --> R([health score 0–100 · fixes priorizados · PDF opcional])
 ```
 
-El orquestador (`/ads`) no intenta hacer todo solo. Despacha seis agentes especializados en paralelo — cada uno con su checklist, sus referencias cargadas on-demand (estilo RAG), y sus pesos de severidad. Sus hallazgos se fusionan en un único reporte calificado.
+El orquestador (`/ads`) no intenta hacer todo solo. Despacha **tres agentes deep-specialist en paralelo** — uno por plataforma (`audit-google`, `audit-meta`, `audit-tiktok`), cada uno con su checklist (prefijos G\* / M\* / T\*), sus referencias cargadas on-demand (estilo RAG), y sus pesos de severidad. Cada agente emite un reporte Markdown legible **y** un JSON estructurado que valida contra [`audit-output-schema.json`](ads/references/audit-output-schema.json). El orquestador los fusiona en un único Ads Health Score 0–100.
 
 ---
 
@@ -93,7 +90,7 @@ El orquestador (`/ads`) no intenta hacer todo solo. Despacha seis agentes especi
 | | `/ads tiktok` | TikTok Ads (Smart+, Shop, Symphony, GMV Max) — 28 checks |
 | **Creative** | `/ads creative` | Auditoría de calidad creativa + detección de fatiga |
 | | `/ads landing` | Revisión de landing pages para conversión |
-| **Estrategia** | `/ads plan <tipo>` | Plan estratégico desde 12 plantillas por industria |
+| **Estrategia** | `/ads plan <tipo>` | Plan estratégico desde 8 plantillas por industria |
 | | `/ads budget` | Revisión de asignación de presupuesto + estrategia de bidding |
 | | `/ads competitor` | Inteligencia de competencia entre todas las plataformas |
 | **Números** | `/ads math` | Calculadora PPC: CPA, ROAS, break-even, LTV:CAC, MER |
@@ -162,7 +159,7 @@ El **claude.ai Facebook MCP** oficial técnicamente es Tier 1 (gratis), pero es 
 La mayoría no necesita este tier. Úsalo solo cuando:
 
 - Quieras features extra de Meta que el MCP oficial no expone → **[Adspirer](https://www.adspirer.com)** (Meta MCP, comercial).
-- Quieras **publicar** los creatives generados a 14+ redes sociales (el comando `/ads publish`) → **[Zernio](https://zernio.com)** es la única integración aquí. **Zernio no tiene nada que ver con el pipeline de auditoría** — es publicación post-creativo. **Las primeras 2 cuentas conectadas son gratis para siempre** (sin tarjeta de crédito); las agencias pagan $1–$6/mes por cada cuenta adicional. Así que `/ads publish` es Tier 1 (gratis) para usuarios solo / marca única y Tier 3 (pagado) solo cuando manejas 3+ cuentas sociales. Ver [`/ads publish`](#ads-publish--publica-creatives-a-redes-sociales-via-zernio-pagado-opcional) abajo.
+- Quieras **publicar** los creatives generados a 14+ redes sociales (el comando `/ads publish`) → **[Zernio](https://zernio.com)** es la única integración aquí. **Zernio no tiene nada que ver con el pipeline de auditoría** — es publicación post-creativo. **Las primeras 2 cuentas conectadas son gratis para siempre** (sin tarjeta de crédito); las agencias pagan $1–$6/mes por cada cuenta adicional. Así que `/ads publish` es Tier 1 (gratis) para usuarios solo / marca única y Tier 3 (pagado) solo cuando manejas 3+ cuentas sociales. Ver [`/ads publish`](#ads-publish--publica-creatives-a-redes-sociales-via-zernio) abajo.
 
 ### Ojo
 
@@ -251,7 +248,7 @@ Para extender el pipeline con una nueva plataforma (Pinterest, Reddit, X, tu pro
 
 ---
 
-## `/ads publish` — Publica creatives a redes sociales via Zernio (pagado opcional)
+## `/ads publish` — Publica creatives a redes sociales via Zernio
 
 **Las primeras 2 cuentas conectadas son gratis para siempre, sin tarjeta de crédito.** Usuario solo publicando a Instagram + Facebook = $0/mes. Las agencias que manejan 3+ cuentas pagan $1–$6/mes por cada cuenta adicional (ver [zernio.com/pricing](https://zernio.com/pricing) para la calculadora en vivo). La única letra chica: los costos de X/Twitter API son pass-through a las tarifas de X aún en el tier gratis; las otras 13 redes están incluidas full.
 
