@@ -20,8 +20,9 @@ function Main {
         Remove-Item -Path $MainSkill -Recurse -Force
     }
 
-    # Remove sub-skills — v2.3.0 set PLUS legacy v2.2.x skills so upgraders don't leave stale files behind.
+    # Remove sub-skills — v2.4.0 set PLUS legacy v2.3.x / v2.2.x skills so upgraders don't leave stale files behind.
     $SubSkills = @(
+        "ads-start", "ads-next",
         "ads-audit", "ads-google", "ads-meta", "ads-tiktok",
         "ads-creative", "ads-landing", "ads-budget", "ads-plan", "ads-competitor",
         "ads-dna", "ads-create", "ads-generate", "ads-photoshoot",
@@ -51,6 +52,9 @@ function Main {
     }
 
     Write-Host "[OK] Claude Ads uninstalled." -ForegroundColor Green
+    Write-Host ""
+    Write-Host "Note: your profile + audit history at ~/.claude-ads/ was NOT touched."
+    Write-Host "      If you want a clean wipe, run:  Remove-Item -Recurse -Force `$env:USERPROFILE\.claude-ads"
 }
 
 Main

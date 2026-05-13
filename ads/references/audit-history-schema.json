@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Hainrixz/claude-ads/blob/main/ads/references/audit-history-schema.json",
+  "title": "claude-ads audit history index",
+  "description": "Shape of ~/.claude-ads/history/index.json — a summary log of every audit ever run, in chronological order. Full per-audit JSON snapshots live alongside as ~/.claude-ads/history/<platform>-<YYYYMMDDhhmmss>.json (each conforms to ads/references/audit-output-schema.json). /ads next uses this index to detect regressions, surface trends, and rank Quick Wins by recency.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "audits"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "audits": {
+      "type": "array",
+      "description": "Chronologically ordered (oldest first). Append-only — /ads start reset clears the whole file.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["platform", "timestamp", "file"],
+        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": ["meta", "google", "tiktok"]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO-8601 UTC timestamp the audit completed."
+          },
+          "health_score": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Overall health score reported by the audit-* agent."
+          },
+          "grade": {
+            "type": ["string", "null"],
+            "enum": [null, "A", "B", "C", "D", "F"]
+          },
+          "data_source": {
+            "type": ["string", "null"],
+            "enum": [null, "mcp", "direct_api", "export", "manual", "mixed"],
+            "description": "Which tier produced the data for this audit (matches audit-output-schema.json data_source field)."
+          },
+          "critical_count": {
+            "type": ["integer", "null"],
+            "minimum": 0
+          },
+          "quick_wins_count": {
+            "type": ["integer", "null"],
+            "minimum": 0
+          },
+          "file": {
+            "type": "string",
+            "pattern": "^(meta|google|tiktok)-[0-9]{14,20}\\.json$",
+            "description": "Relative filename of the full audit JSON snapshot inside ~/.claude-ads/history/. Format: <platform>-<YYYYMMDDhhmmss[ffffff]>.json (microseconds appended to disambiguate same-second saves)."
+          }
+        }
+      }
+    }
+  }
+}

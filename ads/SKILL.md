@@ -1,20 +1,25 @@
 ---
 name: ads
-description: "Free-first paid advertising audit and optimization skill, focused on the 3 platforms where 95% of advertiser spend lives: Meta, Google, TikTok. ~158 weighted checks with scoring, parallel agents, industry templates, and AI creative generation."
-argument-hint: "audit | google | meta | tiktok | creative | landing | budget | plan <type> | competitor | dna <url> | create | generate | photoshoot | update <platform|all> | publish"
+description: "Free-first paid advertising audit and optimization skill, focused on the 3 platforms where 95% of advertiser spend lives: Meta, Google, TikTok. Guided onboarding (/ads start) saves context once and step-by-step OAuth walkthroughs; continuous coach (/ads next) ranks Quick Wins after each audit. ~158 weighted checks with scoring, parallel agents, industry templates, and AI creative generation."
+argument-hint: "start | next | audit | google | meta | tiktok | creative | landing | budget | plan <type> | competitor | dna <url> | create | generate | photoshoot | update <platform|all> | publish"
 license: MIT
 ---
 
 # Ads: Free-first Paid Advertising Audit & Optimization
 
 Focused ad account analysis on the 3 base platforms where most ad spend
-lives: **Meta, Google, TikTok**. Orchestrates 17 specialized sub-skills and
-7 agents (3 audit + 4 creative).
+lives: **Meta, Google, TikTok**. Orchestrates 19 specialized sub-skills and
+7 agents (3 audit + 4 creative). First-run users should type **`/ads start`**
+— a guided wizard that captures context, walks them through OAuth setup
+step-by-step, and persists everything to `~/.claude-ads/profile.json` so no
+future command ever re-asks.
 
 ## Quick Reference
 
 | Command | What it does |
 |---------|-------------|
+| `/ads start` | **First-run wizard** — context capture, per-platform OAuth/MCP walkthroughs with live verification, optional Zernio + Meta Developers signup. Re-run as `/ads start edit/status/reset`. |
+| `/ads next` | **Continuous coach** — reads recent audit JSON + history, ranks top 3 Quick Wins by impact × ease, optionally walks you through fixing #1. Detects regressions vs your last audit. |
 | `/ads audit` | Full multi-platform audit with parallel subagent delegation (3 agents: Meta, Google, TikTok) |
 | `/ads google` | Google Ads deep analysis (Search, PMax, includes YouTube video campaigns) |
 | `/ads meta` | Meta Ads deep analysis (FB, IG, Advantage+) — MCP-wired to claude.ai Facebook |
@@ -34,10 +39,27 @@ lives: **Meta, Google, TikTok**. Orchestrates 17 specialized sub-skills and
 | `/ads update <platform\|all>` | Refresh per-platform references with last 30 days of changes (COSTLY: ~50–150k tokens/platform; gates on confirmation) |
 | `/ads publish` | Publish generated creatives to 14+ social networks via Zernio (first 2 accounts free; see `skills/ads-publish/SKILL.md`) |
 
-## Context Intake (Required: Always Do This First)
+## First-run behavior
 
-Before any audit or analysis, collect this context. Without it, benchmarks will
-be generic and recommendations may be wrong for the user's situation.
+When the user invokes any `/ads` command **other than** `/ads start`,
+`/ads math`, or `/ads test`, FIRST run:
+
+```bash
+python3 scripts/profile.py get
+```
+
+- Exit code `2` (profile missing) → gently surface a one-line tip:
+  > *Tip: run `/ads start` first — it saves ~30 sec per future command. Proceed inline instead? (Y/N)*
+  Honor `N` (proceed) by falling back to the inline Context Intake below.
+- Exit code `0` (profile present) → parse the JSON and use the saved
+  `context.industry`, `context.monthly_spend_usd`, `context.primary_goal`,
+  `context.active_platforms` directly. Do NOT re-ask. Only re-ask if a field
+  is `null`/empty.
+
+## Context Intake (fallback — only when profile is missing AND user declined `/ads start`)
+
+Without context, benchmarks will be generic and recommendations may be wrong
+for the user's situation.
 
 Ask these questions upfront (combine into one message):
 
@@ -48,8 +70,11 @@ Ask these questions upfront (combine into one message):
 3. **Primary goal**: Sales / Revenue · Leads / Demos · App Installs · Calls · Brand
 4. **Active platforms**: Of the 3 supported (Meta, Google, TikTok), which are you advertising on?
 
-If the user provides data upfront (e.g. "audit my Google Ads, I spend $5k/mo on SaaS"),
+If the user provides data upfront (e.g. "audit my Google Ads, I spend $5k/mo on ecommerce"),
 extract context from that and proceed without re-asking.
+
+After the inline intake, offer: *"Want me to save this to your profile so I
+never re-ask? (runs `/ads start` quickly with your answers prefilled)."*
 
 Use the provided context to:
 - Select the correct industry benchmarks from `references/benchmarks.md`
@@ -59,16 +84,19 @@ Use the provided context to:
 ## Orchestration Logic
 
 When the user invokes `/ads audit`, delegate to subagents in parallel:
-1. **Collect context** (see Context Intake above; do this first)
-2. Collect account data (exports, screenshots, or pasted metrics)
-3. Detect business type and identify active platforms
-4. Spawn 3 subagents via Task tool with `context: fork` — one per active platform: `audit-google`, `audit-meta`, `audit-tiktok`
+1. **Load context** — run `python3 scripts/profile.py get`. If profile exists, use it. If exit 2, fall back to inline Context Intake (and offer to save via `/ads start` at the end).
+2. Collect account data (exports, screenshots, or pasted metrics — for connected platforms use the saved tier in `connections.<p>.tier`)
+3. Detect business type and identify active platforms (from `context.active_platforms` if available)
+4. Spawn subagents via Task tool with `context: fork` — only for `context.active_platforms` (or those with `connections.<p>.tier != "skipped"`): `audit-google`, `audit-meta`, `audit-tiktok`
 5. **Validate**: each subagent writes both `<platform>-audit-results.json` and `<platform>-audit-results.md`. Parse the JSON and validate against `references/audit-output-schema.json` before aggregating. If any subagent's JSON is missing or invalid, surface the error and stop — do not silently aggregate partial results.
 6. Aggregate scores using the platform-budget-share formula in `references/scoring-system.md` and generate the unified Ads Health Score (0-100)
 7. Create prioritized action plan from the `quick_wins` and `critical_issues` arrays of each JSON
+8. **Persist to history** — for each new audit JSON: `python3 scripts/profile.py save-audit <platform>-audit-results.json`. This feeds `/ads next` regression detection.
+9. **Suggest the next step** — point the user at `/ads next` for ranked Quick Wins.
 
 For individual commands (`/ads google`, `/ads meta`, etc.), load the relevant
-sub-skill directly. Still collect context first if not already provided.
+sub-skill directly. Still load profile / collect context first if not already
+provided.
 
 For `/ads update <platform|all>`, route to `skills/ads-update/SKILL.md`. The update
 skill enforces a mandatory cost-confirmation gate before fetching — do NOT bypass
@@ -124,6 +152,10 @@ When sub-skills or agents reference `ads/references/*.md`, resolve to
 
 - `references/audit-methodology.md`: **Shared 7-step audit process** all platform skills delegate to. Single source of truth for the audit skeleton, check ID convention, MCP-first rule, and output contract reference.
 - `references/audit-output-schema.json`: **Canonical JSON schema** every audit-* agent must emit. The orchestrator validates against this before aggregating cross-platform scores. New integrations conform to this contract.
+- `references/profile-schema.json`: Schema for `~/.claude-ads/profile.json` — the persistent user context written by `/ads start` and read by every command.
+- `references/audit-history-schema.json`: Schema for `~/.claude-ads/history/index.json` — the audit log `/ads next` reads for regression detection.
+- `references/setup-meta.md` / `setup-google.md` / `setup-tiktok.md`: Step-by-step OAuth + MCP + manual connection walkthroughs loaded by `/ads start` Phase C.
+- `references/setup-zernio.md` / `setup-meta-developers.md`: Account-creation walkthroughs for optional integrations.
 - `references/scoring-system.md`: Weighted scoring algorithm and grading thresholds
 - `references/benchmarks.md`: Industry benchmarks by platform (CPC, CTR, CVR, ROAS)
 - `references/bidding-strategies.md`: Bidding decision trees per platform
@@ -180,25 +212,27 @@ Aggregate = Sum(Platform_Score x Platform_Budget_Share)
 
 ## Sub-Skills
 
-This skill orchestrates 17 specialized sub-skills:
+This skill orchestrates 19 specialized sub-skills:
 
-1. **ads-audit**: Full multi-platform audit with parallel delegation across Meta / Google / TikTok
-2. **ads-google**: Google Ads deep analysis (Search, PMax, YouTube video campaigns — they share the Google Ads API)
-3. **ads-meta**: Meta Ads deep analysis (FB, IG, Advantage+) — MCP-wired to claude.ai Facebook
-4. **ads-tiktok**: TikTok Ads deep analysis (Creative, Shop, Smart+, Symphony, GMV Max)
-5. **ads-creative**: Cross-platform creative quality audit
-6. **ads-landing**: Landing page quality for ad campaigns
-7. **ads-budget**: Budget allocation and bidding strategy
-8. **ads-plan**: Strategic ad planning with industry templates (8 templates after v2.3.0 scope-down)
-9. **ads-competitor**: Competitor ad intelligence
-10. **ads-dna**: Brand DNA extraction from website URL
-11. **ads-create**: Campaign concepts, copy decks, creative briefs
-12. **ads-generate**: AI image generation with pluggable providers
-13. **ads-photoshoot**: Product photography in 5 professional styles
-14. **ads-update**: Refresh per-platform references with last 30 days of changes
-15. **ads-math**: PPC financial calculator (CPA, ROAS, break-even, LTV:CAC, MER)
-16. **ads-test**: A/B test design (hypothesis, sample size, statistical significance)
-17. **ads-publish**: Publish creatives to 14+ social networks via Zernio (first 2 accounts free)
+1. **ads-start**: Guided first-run wizard — context capture, per-platform OAuth/MCP walkthroughs with verification, optional Zernio + Meta Developers signup, profile persistence to `~/.claude-ads/profile.json`
+2. **ads-audit**: Full multi-platform audit with parallel delegation across Meta / Google / TikTok
+3. **ads-next**: Continuous coach — ranks Quick Wins from recent audits + history, detects regressions, optionally walks user through fixing #1
+4. **ads-google**: Google Ads deep analysis (Search, PMax, YouTube video campaigns — they share the Google Ads API)
+5. **ads-meta**: Meta Ads deep analysis (FB, IG, Advantage+) — MCP-wired to claude.ai Facebook
+6. **ads-tiktok**: TikTok Ads deep analysis (Creative, Shop, Smart+, Symphony, GMV Max)
+7. **ads-creative**: Cross-platform creative quality audit
+8. **ads-landing**: Landing page quality for ad campaigns
+9. **ads-budget**: Budget allocation and bidding strategy
+10. **ads-plan**: Strategic ad planning with industry templates (8 templates after v2.3.0 scope-down)
+11. **ads-competitor**: Competitor ad intelligence
+12. **ads-dna**: Brand DNA extraction from website URL
+13. **ads-create**: Campaign concepts, copy decks, creative briefs
+14. **ads-generate**: AI image generation with pluggable providers
+15. **ads-photoshoot**: Product photography in 5 professional styles
+16. **ads-update**: Refresh per-platform references with last 30 days of changes
+17. **ads-math**: PPC financial calculator (CPA, ROAS, break-even, LTV:CAC, MER)
+18. **ads-test**: A/B test design (hypothesis, sample size, statistical significance)
+19. **ads-publish**: Publish creatives to 14+ social networks via Zernio (first 2 accounts free)
 
 Plus `/ads report` for PDF deliverable generation (implemented in `scripts/generate_report.py`, no SKILL.md).
 

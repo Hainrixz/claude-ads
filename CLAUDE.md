@@ -5,9 +5,11 @@
 This repository contains **Claude Ads**, a Tier 4 Claude Code skill focused on the
 3 base advertising platforms where 95% of ad spend lives: **Meta, Google, TikTok**.
 It follows the Agent Skills open standard and the 3-layer architecture (directive,
-orchestration, execution). After the v2.3.0 scope refocus, the skill has 17 sub-skills,
-7 agents (3 audit + 4 creative), 8 industry templates, and ~158 weighted audit checks
-+ 3 cross-platform checks.
+orchestration, execution). After the v2.4.0 guided-onboarding refactor, the skill has
+19 sub-skills, 7 agents (3 audit + 4 creative), 8 industry templates, ~158 weighted
+audit checks + 3 cross-platform checks, **plus a guided first-run wizard (`/ads start`)
+and a continuous coach (`/ads next`) backed by a persistent user profile + audit
+history at `~/.claude-ads/`**.
 
 ## Architecture
 
@@ -17,7 +19,9 @@ claude-ads/
   ads/                               # Main orchestrator skill
     SKILL.md                         # Entry point, routing table, core rules
     references/                      # On-demand knowledge files
-  skills/                            # 17 specialized sub-skills (v2.3.0)
+  skills/                            # 19 specialized sub-skills (v2.4.0)
+    ads-start/SKILL.md            # NEW v2.4.0 — guided first-run wizard
+    ads-next/SKILL.md             # NEW v2.4.0 — continuous coach
     ads-audit/SKILL.md              # Full multi-platform audit
     ads-google/SKILL.md            # Google Ads deep analysis (includes YouTube)
     ads-meta/SKILL.md              # Meta/Facebook Ads analysis — MCP-wired
@@ -45,14 +49,22 @@ claude-ads/
     format-adapter.md              # Asset dimension validation
   scripts/api/                       # Capa-2 direct-API adapters (NEW in v2.3.0)
     meta_fetch.py · google_fetch.py · tiktok_fetch.py · README.md
+  scripts/profile.py                 # NEW v2.4.0 — profile + audit history CLI (stdlib)
   install.sh / install.ps1          # Cross-platform installers
   uninstall.sh / uninstall.ps1      # Cross-platform uninstallers
+
+# User-local state (NEW in v2.4.0, never in the repo):
+  ~/.claude-ads/profile.json         # validates against ads/references/profile-schema.json
+  ~/.claude-ads/history/index.json   # validates against ads/references/audit-history-schema.json
+  ~/.claude-ads/history/<platform>-<YYYYMMDDhhmmss>.json
 ```
 
 ## Commands
 
 | Command | Purpose |
 |---------|---------|
+| `/ads start` | **First-run wizard** (NEW v2.4.0) — context capture + step-by-step OAuth/MCP setup + profile persistence |
+| `/ads next` | **Continuous coach** (NEW v2.4.0) — top 3 Quick Wins from audits + regression detection |
 | `/ads audit` | Full multi-platform audit with 3 parallel agents (Meta, Google, TikTok) |
 | `/ads google` | Google Ads deep analysis (includes YouTube video campaigns) |
 | `/ads meta` | Meta/Facebook Ads analysis (MCP-wired to claude.ai Facebook) |
@@ -97,6 +109,7 @@ Also removed: cross-platform audit agents (`audit-creative`, `audit-tracking`, `
   3. **Capa 3 — Manual exports** (always works, no setup).
   All adapters in `scripts/api/` are pure-stdlib (Python 3.10+, no external dependencies). See `scripts/api/README.md` for per-platform OAuth setup.
 - Paid integrations (Adspirer for Meta MCP; Zernio for `/ads publish`) are documented as **optional Tier 3**. Never make a paid SaaS a required dependency.
+- **Profile-first rule (NEW v2.4.0):** Any new user-facing command must check `~/.claude-ads/profile.json` for context before asking inline. Run `python3 scripts/profile.py get` first; on exit 2, surface a one-line tip to run `/ads start` but allow the user to proceed inline. Never store secrets (tokens, API keys) in the profile — only `*_present: true/false` flags. Use `scripts/profile.py set` to update fields so validation against `profile-schema.json` stays consistent.
 
 ## Quality Gates
 

@@ -13,7 +13,7 @@
 [![Sitio](https://img.shields.io/badge/web-tododeia.com-1f6feb)](https://tododeia.com)
 [![Instagram](https://img.shields.io/badge/IG-%40soyenriquerocha-E4405F?logo=instagram)](https://instagram.com/soyenriquerocha)
 [![Licencia: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Versión](https://img.shields.io/badge/version-2.3.0-blue)](https://github.com/Hainrixz/claude-ads/releases)
+[![Versión](https://img.shields.io/badge/version-2.4.0-blue)](https://github.com/Hainrixz/claude-ads/releases)
 [![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://claude.ai/claude-code)
 
 ---
@@ -22,9 +22,11 @@
 
 ¿Sabes que le puedes pedir a Claude que revise tu código? **Claude Ads es la misma idea, pero para publicidad pagada.** Lo instalas una vez y a Claude le hacen un trasplante de cerebro: ahora sabe **Meta, Google y TikTok Ads** a nivel estratega senior — las 3 plataformas donde vive el 95% del gasto en ads — con ~158 verificaciones específicas, 8 plantillas por industria, y la capacidad de entregarte un reporte de auditoría real al final. Free-first: las 3 plataformas tienen MCPs gratuitos comunitarios **y** adapters API directos gratis.
 
-Le pasas tus datos de ads (un export, un screenshot, o pegas tus números directo en el chat), escribes un comando como `/ads audit`, y Claude despacha seis analistas en paralelo — uno por cada parte de tu cuenta. Te regresa un health score de 0–100, una lista priorizada de qué arreglar, y (si quieres) un reporte PDF pulido que le puedes pasar a un cliente.
+Le pasas tus datos de ads (un export, un screenshot, o pegas tus números directo en el chat), escribes un comando como `/ads audit`, y Claude despacha **tres analistas deep-specialist en paralelo** — uno por plataforma. Te regresa un health score de 0–100, una lista priorizada de qué arreglar, y (si quieres) un reporte PDF pulido que le puedes pasar a un cliente.
 
 No es un botón mágico que te corre las campañas. Es un revisor senior que vive dentro de tu terminal, sabe qué está roto antes que tú, y nunca olvida revisar las cosas aburridas (Consent Mode V2, CAPI, reglas de learning phase, kill thresholds). Y desde la v2.0+ se actualiza solo mes con mes para no quedarse desactualizado.
+
+**Nuevo en v2.4.0** — `/ads start` lleva a usuarios nuevos de instalación fría a un pipeline de auditoría funcional (contexto, OAuth, verificación), y `/ads next` ordena los Quick Wins después de cada auditoría para que siempre sepas exactamente qué arreglar siguiente.
 
 ---
 
@@ -49,14 +51,21 @@ curl -fsSL https://raw.githubusercontent.com/Hainrixz/claude-ads/main/install.sh
 irm https://raw.githubusercontent.com/Hainrixz/claude-ads/main/install.ps1 | iex
 ```
 
-Después abre Claude Code y corre tu primera auditoría:
+Después abre Claude Code y corre el wizard de primera vez:
 
 ```shell
 claude
-> /ads audit
+> /ads start
 ```
 
-Claude te va a preguntar tu industria, gasto mensual y qué plataformas incluir. Le contestas. Él hace el resto.
+`/ads start` te pregunta tu industria, gasto mensual y objetivo — y luego te lleva paso a paso por la conexión de **Meta, Google y TikTok**, una a la vez, con una llamada de verificación en vivo después de cada paso. Opcionalmente te guía a crear una cuenta en Meta for Developers y una cuenta de Zernio para `/ads publish`. Todo queda guardado en `~/.claude-ads/profile.json` para que ningún `/ads` futuro te lo vuelva a preguntar. Al final te sugiere tu siguiente comando — normalmente `/ads audit`.
+
+¿Ya conectado? También puedes saltar directo a:
+
+```shell
+> /ads audit       # auditoría multi-plataforma completa
+> /ads next        # top 3 fixes de tu auditoría más reciente
+```
 
 ---
 
@@ -84,6 +93,8 @@ El orquestador (`/ads`) no intenta hacer todo solo. Despacha **tres agentes deep
 
 | Grupo | Comando | Qué hace |
 |---|---|---|
+| **Onboarding** | `/ads start` | **Wizard de primera vez** — captura contexto, walkthrough OAuth/MCP por plataforma con verificación en vivo, signup opcional de Zernio + Meta Developers, perfil persistente |
+| **Coach** | `/ads next` | **Coach continuo** — ranquea top 3 acciones siguientes basado en tu auditoría más reciente + historial, detecta regresiones, opcionalmente te lleva paso a paso por el fix del #1 |
 | **Auditoría** | `/ads audit` | Auditoría multi-plataforma — 3 agentes en paralelo (Meta, Google, TikTok), reporte calificado |
 | **Por plataforma** | `/ads google` | Google Ads (Search, PMax, Demand Gen, CTV, incluye YouTube video campaigns) — 80 checks |
 | | `/ads meta` | Meta Ads (FB / IG / Advantage+) — 50 checks · MCP-wired a claude.ai Facebook |
@@ -215,6 +226,31 @@ Corre `/ads report` después de cualquier auditoría para empacar los hallazgos 
 
 ---
 
+## Coaching continuo: `/ads next` (NUEVO en v2.4.0)
+
+El score es solo la línea de salida. Después de cada auditoría, escribes `/ads next` y Claude lee tu JSON más reciente (más el historial guardado en `~/.claude-ads/history/`), ranquea cada Quick Win y Critical Issue por **impacto × facilidad × tu mix de gasto**, y te muestra un punch list de top 3:
+
+```
+Acciones siguientes (rankeadas por impacto × facilidad para tus $6,000/mes a través de Meta, Google, TikTok):
+
+  1. [meta · M02 · critical] Conversions API no implementada
+     Hallazgo:       30–40% de pérdida de datos observada (EMQ 4.1).
+     Recomendación:  Deployar CAPI server-side junto al Pixel.
+     Fix estimado:   90 min · Impacto: 92
+     Referencia:     setup-meta.md (sección CAPI)
+
+  2. [google · G43 · high] Enhanced Conversions desactivadas
+     ...
+  3. [tiktok · T07 · high] Spark Ads no habilitados
+     ...
+```
+
+Luego te pregunta: *"¿Quieres que te lleve paso a paso por el fix del #1 ahora?"* — y si dices que sí, recibes el mismo walkthrough verificado que usa `/ads start` (un paso a la vez, espera tu "listo", valida con llamada API en vivo, diagnostica errores). La memoria entre sesiones también detecta regresiones: si tu health de Meta bajó de 78 → 71 desde tu última auditoría, eso se marca como Priority 0 arriba del Top 3 regular.
+
+Corre `/ads next show` para imprimir el top 10 sin el prompt de walkthrough (bueno para reportes de cliente). Corre `/ads next compare` para el diff completo entre tus dos últimas auditorías.
+
+---
+
 ## Integra los resultados en tu propio agente (NUEVO en v2.2.0)
 
 Cada agente `audit-*` ahora escribe sus resultados en **dos formatos** en paralelo:
@@ -294,6 +330,7 @@ Detalles completos: [`skills/ads-update/SKILL.md`](skills/ads-update/SKILL.md).
 
 Este es un fork comunitario de [tododeia.com](https://tododeia.com) basado en el proyecto open-source `claude-ads` (MIT). Resumen honesto de 30 segundos sobre qué es realmente diferente:
 
+- **Onboarding guiado + coaching continuo (NUEVO en v2.4.0)** — `/ads start` es un wizard de primera vez paso a paso: captura de contexto, walkthrough OAuth/MCP por plataforma con **llamadas de verificación en vivo** entre cada paso, signup opcional de Zernio + Meta Developers, perfil persistente en `~/.claude-ads/profile.json` para que ningún comando futuro vuelva a preguntar. `/ads next` ordena Quick Wins por impacto × facilidad × tu mix de gasto, detecta regresiones entre sesiones y te guía a fixear #1.
 - **Foco en 3 plataformas base (NUEVO en v2.3.0)** — Meta, Google, TikTok. El upstream cubría 7 plataformas; este fork quita Apple, LinkedIn, Microsoft y YouTube como first-class porque (a) Apple no tiene MCP, (b) LinkedIn requiere partner-program approval, (c) Microsoft tiene menor adopción, (d) los checks de YouTube ya viven dentro de `/ads google` (Google Ads API compartida). Posicionamiento más afilado, menos mantenimiento, cada plataforma sobreviviente es genuinamente gratis.
 - **Hybrid MCP + API (NUEVO en v2.3.0)** — tres tiers gratis por plataforma: MCP comunitario (Capa 1), adapter API directo en `scripts/api/` (Capa 2), exports manuales (Capa 3). Elige el que tenga menos fricción.
 - **`/ads publish` (NUEVO en v2.3.0)** — publicación opcional pagada de creatives generados a 14+ redes sociales vía Zernio. **Primeras 2 cuentas conectadas gratis para siempre**, sin tarjeta. Solo / single-brand = $0.
@@ -316,8 +353,17 @@ El proyecto upstream proveyó las checks originales, sub-skills, agentes, guía 
 
 ## Preguntas frecuentes
 
+**¿Dónde queda mi perfil guardado? ¿Lo puedo editar a mano?**
+En `~/.claude-ads/profile.json` (JSON, valida contra [`profile-schema.json`](ads/references/profile-schema.json)). El historial de auditorías vive en `~/.claude-ads/history/`. Ambos son local-only — nada sale de tu máquina. El schema excluye secretos explícitamente: tokens y API keys viven en env vars, el perfil solo guarda `api_key_present: true/false`. Re-corre `/ads start edit` para cambiar cualquier cosa por el wizard, o edita el JSON a mano.
+
+**¿Cómo reseteo todo y empiezo de cero?**
+`/ads start reset` (pide confirmación). O manual: `rm -rf ~/.claude-ads/`.
+
+**¿Puedo copiar mi perfil entre máquinas?**
+Sí — `~/.claude-ads/` es portátil. Solo copia el directorio a otra máquina. Re-exporta las mismas env vars (`META_ACCESS_TOKEN` / `GOOGLE_ADS_*` / `TIKTOK_ACCESS_TOKEN` / `ZERNIO_API_KEY`) ahí. El perfil guarda en qué tier estás por plataforma, los tokens nunca están en el perfil.
+
 **¿Claude Ads se mete a mi ad manager solito?**
-No por default — analiza la data que tú le pases. Si quieres acceso en vivo, instala el servidor MCP que corresponda (ver [Conecta tus cuentas reales de ads](#conecta-tus-cuentas-reales-de-ads)).
+No por default — analiza la data que tú le pases. Si quieres acceso en vivo, instala el servidor MCP que corresponda (ver [Conecta tus cuentas reales de ads](#conecta-tus-cuentas-reales-de-ads)) — o simplemente escribe `/ads start` y te lleva paso a paso por todo.
 
 **¿Puede crear o editar ads por mí?**
 Aún con un servidor MCP con permisos de escritura conectado, Claude Ads se posiciona como herramienta de auditoría + estrategia: encuentra issues, recomienda fixes, arma planes de campaña. Si quieres que efectivamente escriba cambios a tu cuenta es decisión tuya y se activa por MCP — no viene prendido por default.

@@ -4,15 +4,15 @@
     "name": "tododeia"
   },
   "metadata": {
-    "description": "Free-first paid advertising audit and optimization plugin for Claude Code — focused on Meta, Google, and TikTok",
-    "version": "2.3.0"
+    "description": "Free-first paid advertising audit and optimization plugin for Claude Code — focused on Meta, Google, and TikTok. Guided onboarding (/ads start) + continuous coach (/ads next) added in v2.4.0.",
+    "version": "2.4.0"
   },
   "plugins": [
     {
       "name": "claude-ads",
       "source": "./",
-      "description": "Free-first paid advertising audit and AI creative generation, focused on the 3 platforms where 95% of ad spend lives: Meta, Google, TikTok. ~158 weighted checks, parallel agents, industry templates, PPC math, A/B test design, PDF reports, and /ads update for refreshing platform references.",
-      "version": "2.3.0",
+      "description": "Free-first paid advertising audit and AI creative generation, focused on the 3 platforms where 95% of ad spend lives: Meta, Google, TikTok. Guided first-run wizard (/ads start) + continuous coach (/ads next). ~158 weighted checks, parallel agents, industry templates, PPC math, A/B test design, PDF reports, and /ads update for refreshing platform references.",
+      "version": "2.4.0",
       "author": {
         "name": "tododeia"
       },

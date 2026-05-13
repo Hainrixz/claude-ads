@@ -1,7 +1,7 @@
 {
   "name": "claude-ads",
-  "version": "2.3.0",
-  "description": "Free-first paid advertising audit and AI creative generation for Claude Code, focused on the 3 platforms where 95% of advertiser spend lives: Meta, Google, TikTok. ~158 weighted audit checks, parallel agents, industry templates, PPC math, A/B test design, PDF reports, /ads update for refreshing platform references with the last 30 days of changes, and /ads publish for posting generated creatives to 14+ social networks via Zernio (free for 2 accounts).",
+  "version": "2.4.0",
+  "description": "Free-first paid advertising audit and AI creative generation for Claude Code, focused on the 3 platforms where 95% of advertiser spend lives: Meta, Google, TikTok. Includes a guided first-run wizard (/ads start) with step-by-step OAuth verification and a continuous coach (/ads next) that ranks Quick Wins after every audit. ~158 weighted audit checks, parallel agents, industry templates, PPC math, A/B test design, PDF reports, /ads update for refreshing platform references, and /ads publish to 14+ social networks via Zernio (free for 2 accounts).",
   "author": {
     "name": "tododeia",
     "url": "https://tododeia.com"

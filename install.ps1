@@ -114,15 +114,15 @@ function Main {
         Write-Host "  Installed:"
         Write-Host "    - 1 main skill (ads orchestrator)"
         Write-Host "    - $SkillsCount sub-skills (platform + functional + creative)"
-        Write-Host "    - $AgentsCount agents (6 audit + 4 creative)"
+        Write-Host "    - $AgentsCount agents (3 audit + 4 creative)"
         Write-Host "    - $RefsCount reference files"
         Write-Host "    - $TemplatesCount industry templates"
         Write-Host ""
         Write-Host "Usage:"
-        Write-Host "  1. Start Claude Code:  claude"
-        Write-Host "  2. Run commands:       /ads audit"
-        Write-Host "                         /ads plan saas"
-        Write-Host "                         /ads google"
+        Write-Host "  1. Start Claude Code:           claude"
+        Write-Host "  2. Run the first-time wizard:   /ads start"
+        Write-Host "     (or skip to audit:            /ads audit)"
+        Write-Host "  3. After audits:                /ads next"
     }
     finally {
         # Cleanup temp directory

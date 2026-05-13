@@ -7,15 +7,17 @@ abstract: >
   focused on the 3 platforms where 95% of advertiser spend lives: Meta, Google,
   TikTok. ~158 weighted audit checks (Meta 50 + Google 80 incl YouTube video
   campaigns + TikTok 28), industry-specific templates, parallel subagent
-  delegation, hybrid MCP+API+manual data tiers, and /ads update for refreshing
-  platform references with the last 30 days of changes.
+  delegation, hybrid MCP+API+manual data tiers, /ads update for refreshing
+  platform references with the last 30 days of changes, and from v2.4.0 a
+  guided first-run wizard (/ads start) + continuous coach (/ads next) with
+  persistent profile + audit history.
 authors:
   - alias: tododeia
     website: "https://tododeia.com"
 repository-code: "https://github.com/Hainrixz/claude-ads"
 url: "https://tododeia.com"
 license: MIT
-version: "2.3.0"
+version: "2.4.0"
 date-released: "2026-05-12"
 keywords:
   - paid advertising

@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Hainrixz/claude-ads/blob/main/ads/references/profile-schema.json",
+  "title": "claude-ads user profile",
+  "description": "Shape of ~/.claude-ads/profile.json — persistent per-user context, platform connection state, and preferences. Read by every /ads command so the user never re-types their context. Written by /ads start and /ads start edit.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "created_at", "updated_at", "context", "connections", "zernio", "preferences"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "Schema version. Bumped on breaking shape changes."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp profile was first initialized."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp of the most recent write."
+    },
+    "context": {
+      "type": "object",
+      "description": "Business context. Asked once during /ads start, reused on every audit / plan / creative run.",
+      "additionalProperties": false,
+      "properties": {
+        "industry": {
+          "type": ["string", "null"],
+          "enum": [null, "ecommerce", "local-service", "real-estate", "healthcare", "finance", "agency", "other"]
+        },
+        "monthly_spend_usd": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Approximate USD monthly ad spend across all platforms combined."
+        },
+        "primary_goal": {
+          "type": ["string", "null"],
+          "enum": [null, "sales", "leads", "app-installs", "calls", "brand"]
+        },
+        "active_platforms": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["meta", "google", "tiktok"] },
+          "uniqueItems": true,
+          "default": []
+        }
+      }
+    },
+    "connections": {
+      "type": "object",
+      "description": "Per-platform connection state. Populated by /ads start's per-platform wizard.",
+      "additionalProperties": false,
+      "required": ["meta", "google", "tiktok"],
+      "properties": {
+        "meta":   { "$ref": "#/definitions/platformConnection" },
+        "google": { "$ref": "#/definitions/platformConnection" },
+        "tiktok": { "$ref": "#/definitions/platformConnection" }
+      }
+    },
+    "zernio": {
+      "type": "object",
+      "description": "Zernio publishing state (for /ads publish). Optional — only set if user opts in.",
+      "additionalProperties": false,
+      "properties": {
+        "signed_up":          { "type": "boolean", "default": false },
+        "api_key_present":    { "type": "boolean", "default": false, "description": "True if ZERNIO_API_KEY env var is set. The key itself is NEVER stored in the profile." },
+        "connected_socials":  { "type": "array", "items": { "type": "string" }, "default": [] }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "default_audit_depth": { "type": "string", "enum": ["quick", "default", "deep"], "default": "default" },
+        "report_format":       { "type": "string", "enum": ["pdf", "md"], "default": "md" },
+        "language":            { "type": "string", "enum": ["en", "es"], "default": "en" }
+      }
+    },
+    "last_command":    { "type": ["string", "null"], "description": "Last /ads command the user ran." },
+    "last_command_at": { "type": ["string", "null"], "format": "date-time" }
+  },
+  "definitions": {
+    "platformConnection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tier": {
+          "type": ["string", "null"],
+          "enum": [null, "mcp_claude_ai", "mcp_brijr", "mcp_cohnen", "mcp_adsmcp", "direct_api", "manual", "skipped"],
+          "description": "Which Capa (tier) the user is using for this platform. mcp_* values reflect the specific community MCP server picked."
+        },
+        "ad_account_id":     { "type": ["string", "null"], "description": "Platform-native account ID (e.g., act_123456789 for Meta, 123-456-7890 for Google, 7234... for TikTok)." },
+        "connected_at":      { "type": ["string", "null"], "format": "date-time" },
+        "last_verified_at":  { "type": ["string", "null"], "format": "date-time", "description": "Most recent successful test-call timestamp. /ads start sets this after each verification step." }
+      }
+    }
+  }
+}

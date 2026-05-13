@@ -5,6 +5,74 @@ All notable changes to claude-ads are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-05-12
+
+**Guided onboarding + continuous coaching.** Two new user-facing commands and a persistent local state layer that solves the cold-install UX gap. New users now have a clear entry point (`/ads start`) and an obvious recurring loop (`/ads audit` → `/ads next` → fix → re-audit). Everything else from v2.3.0 is additive and unchanged.
+
+### Added
+
+- **`/ads start` sub-skill** — first-run wizard at `skills/ads-start/SKILL.md`. Five-phase flow:
+  - **A. Detect** — checks `~/.claude-ads/profile.json` via `scripts/profile.py get`; first-run vs re-entry edit-selector for `context`, per-platform connection, `zernio`.
+  - **B. Context intake** — 4 sequential AskUserQuestion blocks (industry, monthly spend, primary goal, active platforms), each saved immediately so partial completion is recoverable.
+  - **C. Per-platform connection wizard** — for each chosen platform, tier selection (MCP / Direct API / Manual / Skip) → loads `setup-<platform>.md` → step-by-step verified walkthrough (one step at a time, wait for "done", run a live verification call, diagnose errors, cap retries at 3).
+  - **D. Optional account-creation walkthroughs** — Meta for Developers (if Direct API tier chosen) and Zernio (signup, plan selection, API key, dry-run). Both reference dedicated setup-*.md files.
+  - **E. First-action recommendation** — prints the exact next command to type (`/ads audit`, etc.), does NOT auto-invoke.
+  - Re-runnable as `/ads start edit`, `/ads start status`, `/ads start reset`.
+- **`/ads next` sub-skill** — continuous coach at `skills/ads-next/SKILL.md`:
+  - Discovers `*-audit-results.json` in cwd + `~/.claude-ads/history/`, validates against `audit-output-schema.json`.
+  - Auto-persists new cwd audits to history via `scripts/profile.py save-audit`.
+  - **Ranks every quick-win + critical-issue + FAIL/WARNING check** by `severity_weight × effort_inverse × platform_budget_share` (the user's spend mix from the profile feeds the budget share).
+  - **Regression detection** — runs `scripts/profile.py compare <platform>` per platform with ≥2 history entries; if `score_delta < -5`, emits a Priority 0 alert above the regular Top 3.
+  - Surfaces **Top 3** with platform · check_id · severity · finding · recommendation · est. fix time · reference file.
+  - Optional **step-by-step walk-through** of fixing #1 — same verified loop as `/ads start` Phase C.3.
+  - Subcommands: `show` (top 10, no walkthrough), `compare` (full diff between two most-recent audits per platform), `walk` (skip prompt, go straight to fix-walk).
+- **Persistence layer at `~/.claude-ads/`**:
+  - `profile.json` — context + per-platform connection tier + Zernio state + preferences + `last_command*`. Validates against new schema `ads/references/profile-schema.json`.
+  - `history/index.json` + `history/<platform>-<YYYYMMDDhhmmss>.json` — full audit snapshots + summary log. Validates against new schema `ads/references/audit-history-schema.json`.
+  - **Secrets are never stored** — tokens / API keys live in env vars; the profile records `api_key_present: true/false`.
+- **`scripts/profile.py`** — pure-stdlib CLI utility (no external dependencies). Subcommands: `init` (idempotent), `get [--key dot.path]` (exit 2 on missing profile = first-run signal), `set <dot.path> <value>` (JSON-coerced), `save-audit <results.json>` (copies to history + appends index), `compare <platform>` (diff most-recent vs previous audit: `score_delta` / `new_issues` / `resolved_issues` / `grade_change`), `reset [--yes]`.
+- **5 step-by-step setup references** (each ≤200 lines, consistent Goal / Do this / Expect to see / On error structure):
+  - `ads/references/setup-meta.md` — claude.ai Facebook MCP / Direct API / Manual exports.
+  - `ads/references/setup-google.md` — cohnen MCP / Direct API (dev-token + OAuth refresh-token flow) / Manual exports.
+  - `ads/references/setup-tiktok.md` — AdsMCP / Direct API (auth-code exchange) / Manual exports.
+  - `ads/references/setup-zernio.md` — signup, free tier (2 accounts), API key creation, dry-run verification.
+  - `ads/references/setup-meta-developers.md` — Meta for Developers account creation (phone verification, Business app type, Marketing API product).
+
+### Changed
+
+- **`ads/SKILL.md`** orchestrator now profile-aware:
+  - Quick Reference table leads with `/ads start` and `/ads next`.
+  - New **"First-run behavior"** section above Context Intake — every command runs `scripts/profile.py get` first; on exit 2, surfaces a one-line tip suggesting `/ads start` and honors decline.
+  - Context Intake repositioned as a **fallback** (only when profile is missing AND user declined `/ads start`). After inline answers, offers to save them to the profile.
+  - Orchestration Logic step 1 changed from "Collect context" to "Load context from profile if available; else run inline Context Intake". New step 8 saves each audit to history. New step 9 suggests `/ads next`.
+  - Sub-Skills numbered list 17 → 19 (added `ads-start` as #1 and `ads-next` as #3, after `ads-audit`).
+  - References section now lists `profile-schema.json`, `audit-history-schema.json`, and all 5 setup-*.md files.
+- **`CLAUDE.md`** new dev rule — *"Any new user-facing command must check `~/.claude-ads/profile.json` for context before asking inline. Run `scripts/profile.py get` first; on exit 2, surface a tip to run `/ads start` but allow the user to proceed. Never store secrets in the profile; only `*_present: true/false` flags."*
+- **README EN + ES** — Quick Start now leads with `/ads start`. New "Continuous coaching: `/ads next`" section after Showcase. FAQ adds Q&A about profile location, reset, multi-machine sync. "What's different in this fork" section adds the v2.4.0 entry above the v2.3.0 bullets.
+- **install.sh** + **install.ps1** — post-install message updated. Old: `/ads audit`. New:
+  ```
+  1. Start Claude Code:           claude
+  2. Run the first-time wizard:   /ads start
+     (or skip to audit:            /ads audit)
+  3. After audits:                /ads next
+  ```
+  Agent count also corrected (3 audit, not 6).
+- Version bumps: `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `CITATION.cff`, both README badges → `2.4.0`.
+
+### Architecture notes
+
+- **No external dependencies added.** `scripts/profile.py` is stdlib-only. The wizard uses only Bash + Read + Write + AskUserQuestion.
+- **JSON output contract for audits is unchanged** — `audit-output-schema.json` from v2.3.0 still applies. `/ads next` consumes exactly the same shape the v2.3.x audit agents already emit, so existing audits flow into history automatically.
+- **The 7 agents** (audit-google, audit-meta, audit-tiktok, creative-strategist, visual-designer, copy-writer, format-adapter) are unchanged. No breaking changes to any v2.3.x audit / creative pipeline.
+- **All existing commands work without a profile.** The setup is recommended-but-optional. Users can still type `/ads audit` cold and the context-intake fallback kicks in.
+
+### Out of scope (explicit for v2.4.0)
+
+- Real-time OAuth token capture from terminal — the wizard asks users to paste tokens; it does NOT sniff the terminal stream.
+- Multi-machine profile sync — profile is local. Future v2.5.0 may add `profile.py export/import`.
+- Auto-running commands after `/ads start` — the wizard always suggests but never invokes.
+- Push notifications / scheduling — users can combine `/ads next` with the existing `schedule` skill for weekly check-ins.
+
 ## [2.3.0] - 2026-05-12
 
 **Focused refactor on Meta / Google / TikTok + hybrid MCP+API + `/ads publish` (Zernio, free for 2 accounts).** Three changes folded into one release: (1) the foundations refactor from v2.2.0 (JSON contract, Meta MCP wired, tests, references split, shared methodology), (2) hybrid MCP+API+manual data tiers, and (3) a scope refocus that drops Apple, LinkedIn, Microsoft, and YouTube as first-class platforms to sharpen the product around the 3 platforms where 95% of advertiser spend lives. No upstream-compatible release of v2.2.0 or v2.3.0 ever shipped, so this is the first external v2.3.0.
