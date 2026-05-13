@@ -176,7 +176,7 @@ On `Yes`:
    | Platform | Category prefix | Reference file |
    |----------|----------------|----------------|
    | meta | Tracking / Pixel / CAPI | `tracking-meta.md` |
-   | meta | Creative | `creative-fatigue.md` |
+   | meta | Creative / fatigue | `meta-audit.md` (Creative section — covers M28 fatigue) |
    | meta | Structure / Budget | `meta-audit.md` |
    | google | Tracking / Conversion | `tracking-google.md` |
    | google | Bidding / Structure | `google-audit.md` |

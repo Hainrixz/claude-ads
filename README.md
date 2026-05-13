@@ -362,7 +362,7 @@ At `~/.claude-ads/profile.json` (JSON, validates against [`profile-schema.json`]
 Yes — `~/.claude-ads/` is portable. Just copy the directory to another machine. Re-export the same `META_ACCESS_TOKEN` / `GOOGLE_ADS_*` / `TIKTOK_ACCESS_TOKEN` / `ZERNIO_API_KEY` env vars there. The profile records which tier you're on per platform, but the tokens themselves are never in the profile.
 
 **Does Claude Ads log into my ad manager automatically?**
-Not by default — it analyzes data you provide. If you want live access, install the matching MCP server for your platform (see [Connect to your real ad accounts](#connect-to-your-real-ad-accounts)) — or just type `/ads start` and it'll walk you through the whole thing.
+Not by default — it analyzes data you provide. If you want live access, install the matching MCP server for your platform (see [Connect to your real ad accounts](#connect-to-your-real-ad-accounts--three-tiers-free-first)) — or just type `/ads start` and it'll walk you through the whole thing.
 
 **Can it create or edit ads for me?**
 Even with a write-capable MCP server connected, Claude Ads is positioned as an audit + strategy tool: find issues, recommend fixes, build campaign plans. Whether to actually write changes back to your ad account is your call to enable per-MCP — it's not on by default.

@@ -171,6 +171,65 @@ def test_reset_with_yes_wipes_dir(fake_home: dict, tmp_path: Path) -> None:
     assert not (tmp_path / ".claude-ads").exists()
 
 
+def test_save_audit_derives_counts_from_arrays(fake_home: dict, tmp_path: Path) -> None:
+    """audit-output-schema.json doesn't have top-level critical_count /
+    quick_wins_count — they should be derived from the arrays.
+    """
+    _run(["init"], fake_home)
+
+    audit = tmp_path / "schema-valid.json"
+    audit.write_text(json.dumps({
+        "platform": "meta",
+        "version": "1.0",
+        "generated_at": "2026-05-12T22:30:00Z",
+        "health_score": 71,
+        "grade": "C",
+        "data_source": "mcp",
+        "category_scores": {"pixel_capi": {"score": 58, "weight": 0.30}},
+        "checks": [{"id": "M02", "severity": "critical", "result": "FAIL"}],
+        "quick_wins": [
+            {"check_id": "M07", "action": "..."},
+            {"check_id": "M14", "action": "..."},
+        ],
+        "critical_issues": [
+            {"check_id": "M02", "blocker_reason": "..."},
+            {"check_id": "M08", "blocker_reason": "..."},
+            {"check_id": "M19", "blocker_reason": "..."},
+        ],
+    }))
+    assert _run(["save-audit", str(audit)], fake_home).returncode == 0
+
+    home = Path(fake_home["HOME"])
+    idx = json.loads((home / ".claude-ads" / "history" / "index.json").read_text())
+    entry = idx["audits"][-1]
+    assert entry["critical_count"] == 3, "should derive from critical_issues length"
+    assert entry["quick_wins_count"] == 2, "should derive from quick_wins length"
+    assert entry["timestamp"] == "2026-05-12T22:30:00Z", (
+        "should prefer audit's own generated_at over save time"
+    )
+
+
+def test_save_audit_honors_explicit_legacy_counts(fake_home: dict, tmp_path: Path) -> None:
+    """If an audit producer sets top-level critical_count, honor it instead of
+    deriving from arrays — backward-compat for older audit JSONs.
+    """
+    _run(["init"], fake_home)
+    audit = tmp_path / "legacy.json"
+    audit.write_text(json.dumps({
+        "platform": "google",
+        "health_score": 80,
+        "critical_count": 99,
+        "quick_wins_count": 0,
+        "critical_issues": [{"check_id": "G01"}],
+    }))
+    assert _run(["save-audit", str(audit)], fake_home).returncode == 0
+    home = Path(fake_home["HOME"])
+    idx = json.loads((home / ".claude-ads" / "history" / "index.json").read_text())
+    entry = idx["audits"][-1]
+    assert entry["critical_count"] == 99, "should honor explicit top-level count"
+    assert entry["quick_wins_count"] == 0
+
+
 def test_profile_shape_matches_schema_keys(fake_home: dict) -> None:
     """The profile produced by init has every required top-level key the schema declares."""
     _run(["init"], fake_home)

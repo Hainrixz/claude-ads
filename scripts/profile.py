@@ -215,15 +215,28 @@ def cmd_save_audit(args: argparse.Namespace) -> int:
     HISTORY.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(src, HISTORY / fname)
 
+    # critical_count / quick_wins_count are NOT canonical fields in
+    # audit-output-schema.json — derive them from the arrays if present, but
+    # honor an explicit top-level field if the audit producer set one
+    # (legacy compatibility).
+    def _count(field: str, array_field: str) -> int | None:
+        v = blob.get(field)
+        if isinstance(v, int):
+            return v
+        arr = blob.get(array_field)
+        return len(arr) if isinstance(arr, list) else None
+
     idx = _load_json(INDEX, _empty_index())
     idx.setdefault("audits", []).append({
         "platform": platform,
-        "timestamp": _now(),
+        # Prefer the audit's own generated_at so the history reflects when the
+        # audit actually ran, not when the user happened to save it.
+        "timestamp": blob.get("generated_at") or _now(),
         "health_score": blob.get("health_score"),
         "grade": blob.get("grade"),
         "data_source": blob.get("data_source"),
-        "critical_count": blob.get("critical_count"),
-        "quick_wins_count": blob.get("quick_wins_count"),
+        "critical_count":   _count("critical_count",   "critical_issues"),
+        "quick_wins_count": _count("quick_wins_count", "quick_wins"),
         "file": fname,
     })
     _write_json(INDEX, idx)
