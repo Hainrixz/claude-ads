@@ -43,6 +43,16 @@ Look for `ADS-AUDIT-REPORT.md` or any `*-audit-results.md` in the current direct
 - **Found**: Read them. Note the top 3 weaknesses (creative fatigue, tracking gaps, wasted spend) to address in concepts.
 - **Not found**: Continue without. Note in the brief: "No audit data found; concepts are generalized. Run `/ads audit` for weakness-targeted concepts."
 
+Also look for optional TweetClaw source packets from OpenClaw, such as
+`tweetclaw-source-packets.json` or `tweetclaw-source-packets.md`.
+
+- **Found**: Use public X/Twitter language as audience evidence for hooks,
+  pain points, objections, and proof angles.
+- **Not found**: Continue without. Do not ask the user to collect X/Twitter
+  evidence unless the brief depends on live audience language.
+- **Boundary**: Use TweetClaw context only for strategy and copy input. This
+  skill must not post, schedule, reply, DM, or monitor.
+
 ### Step 3: Collect Campaign Parameters
 
 If `--platforms` or `--objective` flags were provided in the command, use those values

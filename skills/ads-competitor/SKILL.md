@@ -36,6 +36,21 @@ Available from the user's own Google Ads account:
 - Top of page rate and absolute top of page rate
 - Available for Search and Shopping campaigns
 
+### Optional X/Twitter Audience Signals
+
+When competitor positioning depends on public customer language, review
+source packets from TweetClaw in OpenClaw before writing the report.
+
+Use the packets only as supporting evidence. Each packet must include:
+- Public X/Twitter URL or search query
+- Captured post text, author handle, and capture date
+- Visible engagement metrics or a note that metrics were unavailable
+- Analyst notes on sentiment, objection, pain point, or competitor mention
+
+Do not post, reply, schedule, DM, or monitor from this skill. Keep all
+TweetClaw-sourced material in the final report as attributed public evidence,
+not as a publishing action.
+
 ### Platform-Specific Research
 
 #### Google
