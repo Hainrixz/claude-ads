@@ -8,7 +8,7 @@ the nanobanana-mcp tools (gemini_generate_image, set_aspect_ratio).
 
 Generate ad creative images using a pluggable image generation API.
 
-Supports Gemini (default), OpenAI, Stability AI, and Replicate.
+Supports Gemini (default), OpenAI, Stability AI, Replicate, and Atlas Cloud.
 Set ADS_IMAGE_PROVIDER env var to choose a provider.
 Set the appropriate API key env var for the chosen provider.
 
@@ -21,17 +21,19 @@ Usage:
     python generate_image.py "prompt" --ratio 4:5 --reference-image ./brand-screenshots/homepage_desktop.png
 
 Environment variables:
-    ADS_IMAGE_PROVIDER   Provider to use: gemini (default), openai, stability, replicate
+    ADS_IMAGE_PROVIDER   Provider: gemini (default), openai, stability, replicate, atlas
     GOOGLE_API_KEY       Required for gemini provider
     OPENAI_API_KEY       Required for openai provider
     STABILITY_API_KEY    Required for stability provider
     REPLICATE_API_TOKEN  Required for replicate provider
+    ATLASCLOUD_API_KEY   Required for Atlas Cloud provider
 
 See ads/references/image-providers.md for pricing and capability details.
 """
 
 import argparse
 import base64
+import io
 import json
 import os
 import re
@@ -39,6 +41,8 @@ import struct
 import sys
 import time
 from pathlib import Path
+from urllib import error as url_error
+from urllib import request as url_request
 from urllib.parse import urlparse
 
 # Aspect ratio shorthand → (width, height)
@@ -72,6 +76,12 @@ DEFAULT_MODEL_GEMINI = "gemini-2.5-flash-image"
 DEFAULT_MODEL_OPENAI = "gpt-image-1"
 DEFAULT_MODEL_STABILITY = "stable-diffusion-3.5-large"
 DEFAULT_MODEL_REPLICATE = "black-forest-labs/flux-1.1-pro"
+DEFAULT_MODEL_ATLAS = "google/nano-banana-2-lite/text-to-image-developer"
+
+ATLAS_API_ROOT = "https://api.atlascloud.ai"
+ATLAS_CATALOG_URL = f"{ATLAS_API_ROOT}/api/v1/models"
+ATLAS_SUCCESS_STATUSES = {"completed", "succeeded", "success"}
+ATLAS_FAILURE_STATUSES = {"failed", "canceled", "cancelled", "error", "timeout"}
 
 MAX_RETRIES = 4
 RETRY_BACKOFF = [1, 2, 4, 8]  # seconds
@@ -126,11 +136,13 @@ def _get_api_key(provider: str) -> str:
         "openai":    ("OPENAI_API_KEY",       "platform.openai.com/api-keys"),
         "stability": ("STABILITY_API_KEY",    "platform.stability.ai"),
         "replicate": ("REPLICATE_API_TOKEN",  "replicate.com/account/api-tokens"),
+        "atlas":     ("ATLASCLOUD_API_KEY",   "atlascloud.ai"),
     }
 
     if provider not in key_map:
         print(
-            f"Error: Unknown provider '{provider}'. Valid options: gemini, openai, stability, replicate",
+            f"Error: Unknown provider '{provider}'. Valid options: "
+            "gemini, openai, stability, replicate, atlas",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -349,6 +361,237 @@ def generate_replicate(prompt: str, width: int, height: int, api_key: str, model
     return resp.content
 
 
+def _atlas_get_json(url: str, api_key: str | None = None) -> dict:
+    """Fetch one Atlas JSON document."""
+    headers = {"Accept": "application/json", "User-Agent": "claude-ads-atlas/1"}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+    req = url_request.Request(url, headers=headers, method="GET")
+    with url_request.urlopen(req, timeout=60) as response:
+        value = json.loads(response.read().decode("utf-8"))
+    if not isinstance(value, dict):
+        raise ValueError("Atlas GET returned a non-object response")
+    return value
+
+
+def _atlas_post_json_once(url: str, api_key: str, payload: dict) -> dict:
+    """Submit one Atlas generation request without automatic retries."""
+    req = url_request.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+            "User-Agent": "claude-ads-atlas/1",
+        },
+        method="POST",
+    )
+    try:
+        with url_request.urlopen(req, timeout=120) as response:
+            value = json.loads(response.read().decode("utf-8"))
+    except url_error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")[:500]
+        raise RuntimeError(f"Atlas submit failed ({exc.code}): {detail}") from exc
+    if not isinstance(value, dict):
+        raise ValueError("Atlas POST returned a non-object response")
+    return value
+
+
+def _atlas_download_once(url: str) -> bytes:
+    """Download one completed Atlas output without automatic retries."""
+    req = url_request.Request(
+        url, headers={"User-Agent": "claude-ads-atlas/1"}, method="GET"
+    )
+    with url_request.urlopen(req, timeout=300) as response:
+        return response.read()
+
+
+def _atlas_normalize_png(image_bytes: bytes) -> bytes:
+    """Keep Atlas output filenames truthful by normalizing non-PNG images."""
+    if image_bytes.startswith(b"\x89PNG\r\n\x1a\n"):
+        return image_bytes
+    try:
+        from PIL import Image
+    except ImportError as exc:
+        raise RuntimeError(
+            "Pillow is required to normalize Atlas output to PNG; "
+            "install the project requirements"
+        ) from exc
+    with Image.open(io.BytesIO(image_bytes)) as image:
+        image.load()
+        converted = image
+        if image.mode not in ("RGB", "RGBA"):
+            converted = image.convert("RGB")
+        output = io.BytesIO()
+        converted.save(output, format="PNG")
+    return output.getvalue()
+
+
+def _walk_objects(value):
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from _walk_objects(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from _walk_objects(child)
+
+
+def _atlas_find_model(catalog: dict, model: str) -> dict:
+    matches = [
+        item
+        for item in _walk_objects(catalog)
+        if item.get("model") == model
+        and item.get("type") == "Image"
+        and item.get("display_console") is True
+    ]
+    if len(matches) != 1:
+        raise ValueError(f"Atlas image model is unavailable or ambiguous: {model}")
+    return matches[0]
+
+
+def _atlas_validate_payload(schema: dict, payload: dict) -> None:
+    input_schema = schema.get("components", {}).get("schemas", {}).get("Input", {})
+    properties = input_schema.get("properties")
+    if not isinstance(properties, dict):
+        raise ValueError("Atlas model schema is missing Input.properties")
+    missing = sorted(set(input_schema.get("required", [])).difference(payload))
+    if missing:
+        raise ValueError(f"Atlas request is missing required fields: {', '.join(missing)}")
+    unknown = sorted(set(payload).difference(properties))
+    if unknown:
+        raise ValueError(f"Atlas request contains unsupported fields: {', '.join(unknown)}")
+    for name, value in payload.items():
+        choices = properties.get(name, {}).get("enum")
+        if choices and value not in choices:
+            raise ValueError(f"Atlas {name} must be one of: {', '.join(map(str, choices))}")
+
+
+def _atlas_unwrap(response: dict) -> dict:
+    if "code" in response and str(response.get("code")) != "200":
+        raise RuntimeError(
+            f"Atlas API returned code {response.get('code')}: {response.get('message')}"
+        )
+    payload = response.get("data", response)
+    if not isinstance(payload, dict):
+        raise ValueError("Atlas response is missing an object payload")
+    return payload
+
+
+def _atlas_result_path(schema: dict) -> str:
+    for path, operations in schema.get("paths", {}).items():
+        if "{request_id}" in path and isinstance(operations, dict) and "get" in operations:
+            return path
+    return "/api/v1/model/prediction/{request_id}"
+
+
+def _nearest_atlas_ratio(width: int, height: int) -> str:
+    ratio = width / height
+    atlas_ratios = {
+        "1:1": 1,
+        "3:2": 3 / 2,
+        "2:3": 2 / 3,
+        "3:4": 3 / 4,
+        "4:3": 4 / 3,
+        "4:5": 4 / 5,
+        "9:16": 9 / 16,
+        "16:9": 16 / 9,
+        "21:9": 21 / 9,
+        "4:1": 4,
+    }
+    return min(atlas_ratios, key=lambda name: abs(atlas_ratios[name] - ratio))
+
+
+def generate_atlas(
+    prompt: str,
+    width: int,
+    height: int,
+    api_key: str,
+    model: str,
+    *,
+    poll_attempts: int = 45,
+    get_json=_atlas_get_json,
+    post_json=_atlas_post_json_once,
+    get_bytes=_atlas_download_once,
+    sleep_fn=time.sleep,
+) -> bytes:
+    """Generate through Atlas Cloud with one POST and bounded result GET retries."""
+    catalog = get_json(ATLAS_CATALOG_URL, api_key)
+    model_entry = _atlas_find_model(catalog, model)
+    schema_url = model_entry.get("schema")
+    if not isinstance(schema_url, str) or urlparse(schema_url).scheme != "https":
+        raise ValueError("Atlas model catalog is missing an HTTPS schema URL")
+    schema = get_json(schema_url)
+    payload = {
+        "model": model,
+        "prompt": prompt,
+        "aspect_ratio": _nearest_atlas_ratio(width, height),
+        "resolution": "1k",
+    }
+    _atlas_validate_payload(schema, payload)
+
+    price = model_entry.get("price", {}).get("actual", {}).get("base_price", "unknown")
+    print(
+        f"Atlas plan: model={model} ratio={payload['aspect_ratio']} "
+        f"resolution=1k unit_price={price}",
+        file=sys.stderr,
+    )
+    submitted = _atlas_unwrap(
+        post_json(
+            f"{ATLAS_API_ROOT}/api/v1/model/generateImage",
+            api_key,
+            payload,
+        )
+    )
+    prediction_id = submitted.get("id") or submitted.get("prediction_id")
+    if not isinstance(prediction_id, str) or not prediction_id:
+        raise ValueError("Atlas submit response is missing a prediction id")
+
+    path = _atlas_result_path(schema).replace("{request_id}", prediction_id)
+    result_url = f"{ATLAS_API_ROOT}{path}"
+    completed = None
+    for poll_index in range(poll_attempts):
+        last_error = None
+        for retry_index in range(4):
+            try:
+                prediction = _atlas_unwrap(get_json(result_url, api_key))
+                last_error = None
+                break
+            except (OSError, RuntimeError, ValueError, url_error.URLError) as exc:
+                last_error = exc
+                if retry_index < 3:
+                    sleep_fn(float(2**retry_index))
+        if last_error is not None:
+            raise RuntimeError(
+                f"Atlas prediction GET failed after 4 attempts: {last_error}"
+            )
+        status = str(prediction.get("status", "")).lower()
+        if status in ATLAS_SUCCESS_STATUSES:
+            completed = prediction
+            break
+        if status in ATLAS_FAILURE_STATUSES:
+            raise RuntimeError(
+                f"Atlas prediction {status}: {prediction.get('error', 'no detail')}"
+            )
+        if poll_index + 1 < poll_attempts:
+            sleep_fn(float(min(2**poll_index, 8)))
+    if completed is None:
+        raise TimeoutError(f"Atlas prediction did not finish after {poll_attempts} polls")
+
+    outputs = completed.get("outputs") or completed.get("output")
+    if isinstance(outputs, str):
+        outputs = [outputs]
+    if not isinstance(outputs, list) or not outputs or not isinstance(outputs[0], str):
+        raise ValueError("Atlas prediction completed without an image URL")
+    output_url = outputs[0]
+    if urlparse(output_url).scheme != "https":
+        raise ValueError("Atlas output URL must use HTTPS")
+    image_bytes = get_bytes(output_url)
+    if len(image_bytes) < 24:
+        raise ValueError("Atlas image output is unexpectedly small")
+    return _atlas_normalize_png(image_bytes)
+
+
 def generate_image(
     prompt: str,
     ratio: str,
@@ -394,6 +637,11 @@ def generate_image(
     elif provider == "replicate":
         model = model or DEFAULT_MODEL_REPLICATE
         image_bytes = generate_replicate(prompt, width, height, api_key, model)
+    elif provider == "atlas":
+        if reference_image_path:
+            raise ValueError("The Atlas text-to-image provider does not accept --reference-image")
+        model = model or DEFAULT_MODEL_ATLAS
+        image_bytes = generate_atlas(prompt, width, height, api_key, model)
     else:
         print(f"Error: Unknown provider '{provider}'", file=sys.stderr)
         sys.exit(1)
@@ -489,7 +737,7 @@ Examples:
 Supported ratios: 1:1  9:16  16:9  4:5  4:3  3:4  1.91:1  4:1  21:9
 Or use --size WxH for exact dimensions (e.g. --size 1200x628)
 
-Set ADS_IMAGE_PROVIDER to switch providers: gemini (default), openai, stability, replicate
+Set ADS_IMAGE_PROVIDER to switch providers: gemini (default), openai, stability, replicate, atlas
 """,
     )
 
@@ -519,7 +767,8 @@ Set ADS_IMAGE_PROVIDER to switch providers: gemini (default), openai, stability,
     parser.add_argument(
         "--provider", "-p",
         default=None,
-        help="Image provider: gemini (default), openai, stability, replicate. Overrides ADS_IMAGE_PROVIDER env var.",
+        help="Image provider: gemini (default), openai, stability, replicate, atlas. "
+             "Overrides ADS_IMAGE_PROVIDER env var.",
     )
     parser.add_argument(
         "--model", "-m",

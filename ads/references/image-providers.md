@@ -113,6 +113,17 @@ If banana is not installed, these providers can be used directly via generate_im
 - Price: ~$0.055/image
 - Package: `replicate>=1.0.4`
 
+### Atlas Cloud (optional text-to-image)
+- Env: `ATLASCLOUD_API_KEY`
+- Provider value: `ADS_IMAGE_PROVIDER=atlas`
+- Default model: `google/nano-banana-2-lite/text-to-image-developer`
+- Package: Pillow from the project requirements (only used when Atlas returns
+  a non-PNG image that must be normalized to the script's PNG output contract)
+- Behavior: verifies the live model catalog and schema before submission,
+  prints the catalog unit price, sends one generation POST without retrying,
+  then uses bounded retries for result GET requests only
+- Scope: text-to-image only; use banana-claude for reference-image editing
+
 ---
 
 ## Error Reference

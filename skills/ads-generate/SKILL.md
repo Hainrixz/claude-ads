@@ -28,7 +28,26 @@ profile. Uses banana-claude as the image generation provider.
 If banana-claude is not installed, this skill will display setup instructions
 and stop. It will never fail silently.
 
-If banana-claude is unavailable, alternatives include: OpenAI gpt-image-1 ($0.040/image), Stability SD 3.5 ($0.065), or Replicate FLUX.1 Pro ($0.055). Configure via ADS_IMAGE_PROVIDER env var.
+If banana-claude is unavailable, the fallback script also supports OpenAI,
+Stability, Replicate, and Atlas Cloud. Configure it with
+`ADS_IMAGE_PROVIDER`; banana-claude remains the default workflow.
+
+For the optional Atlas text-to-image provider:
+
+```bash
+export ADS_IMAGE_PROVIDER=atlas
+export ATLASCLOUD_API_KEY="your-api-key"
+python3 scripts/generate_image.py \
+  "Professional studio photograph of a ceramic bottle" \
+  --ratio 4:5 \
+  --output ad.png \
+  --json
+```
+
+The adapter verifies the live Atlas model catalog and schema, prints the
+current unit price, submits exactly one generation POST, and uses bounded
+retries only while polling the result. It currently supports text-to-image;
+keep banana-claude for reference-image editing.
 
 ## Process
 
