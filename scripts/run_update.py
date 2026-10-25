@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """CLI helper for /ads update.
 
 Two modes:
@@ -142,7 +145,7 @@ def cmd_prep(platform_arg: str, depth: str, out_dir: Path) -> None:
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="Plan and scaffold /ads update runs.")
+    p = argparse.ArgumentParser(epilog='Hecho por Enrique Rocha (@soyenriquerocha) · tododeia.com', description="Plan and scaffold /ads update runs.")
     p.add_argument(
         "--platform",
         required=True,

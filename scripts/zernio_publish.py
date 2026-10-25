@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """Publish generated creatives to 14+ social networks via Zernio.
 
 This is the runtime for `/ads publish`. It takes the output of `/ads generate`
@@ -178,7 +181,7 @@ def _discover_assets(assets_dir: Path) -> list[Path]:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Publish creatives via Zernio (paid).")
+    ap = argparse.ArgumentParser(epilog='Hecho por Enrique Rocha (@soyenriquerocha) · tododeia.com', description="Publish creatives via Zernio (paid).")
     ap.add_argument("--assets", required=True, type=Path,
                     help="Directory with creatives to publish (output of /ads generate or /ads photoshoot).")
     ap.add_argument("--brief", type=Path, default=Path("campaign-brief.md"),

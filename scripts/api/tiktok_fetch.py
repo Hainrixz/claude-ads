@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """Fetch TikTok Business API data for claude-ads audits.
 
 Capa-2 (direct API) adapter. The output JSON is consumed by the
@@ -121,7 +124,7 @@ def _default_dates() -> tuple[str, str]:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Fetch TikTok Business API data (Capa 2).")
+    ap = argparse.ArgumentParser(epilog='Hecho por Enrique Rocha (@soyenriquerocha) · tododeia.com', description="Fetch TikTok Business API data (Capa 2).")
     ap.add_argument("--account-id", required=True, help="TikTok advertiser_id (numeric).")
     since_default, until_default = _default_dates()
     ap.add_argument("--since", default=since_default)

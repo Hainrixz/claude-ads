@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """Fetch Meta (Facebook + Instagram) Marketing API data for claude-ads audits.
 
 Capa-2 (direct API) adapter. The output JSON is consumed by the ``audit-meta``
@@ -165,7 +168,7 @@ def _default_dates() -> tuple[str, str]:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(
+    ap = argparse.ArgumentParser(epilog='Hecho por Enrique Rocha (@soyenriquerocha) · tododeia.com', 
         description="Fetch Meta Marketing API data for claude-ads audits (Capa 2)."
     )
     ap.add_argument("--account-id", required=True, help="Ad account ID in ``act_<digits>`` form.")

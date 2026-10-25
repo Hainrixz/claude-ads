@@ -5,6 +5,7 @@ user-invokable: false
 argument-hint: "meta | google | tiktok | all"
 allowed-tools: Bash, Read, Write, Edit, WebFetch, WebSearch, AskUserQuestion
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-fd4fa55b -->
 
 # `/ads update <platform|all>` — Self-Refreshing Platform References
 

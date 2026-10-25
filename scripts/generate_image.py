@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """
 DEPRECATED: Use banana-claude MCP tools instead. This script is a fallback
 for environments where banana-claude is not installed.

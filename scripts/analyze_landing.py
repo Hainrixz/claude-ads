@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """
 Analyze landing page quality for ad campaigns using Playwright.
 
@@ -297,7 +300,7 @@ def grade_landing(result: dict) -> dict:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Analyze landing page quality for ad campaigns")
+    parser = argparse.ArgumentParser(epilog='Hecho por Enrique Rocha (@soyenriquerocha) · tododeia.com', description="Analyze landing page quality for ad campaigns")
     parser.add_argument("url", help="URL to analyze")
     parser.add_argument("--timeout", "-t", type=int, default=30000, help="Timeout in ms")
     parser.add_argument("--json", "-j", action="store_true", help="Output as JSON")

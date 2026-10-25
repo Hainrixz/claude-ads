@@ -1,3 +1,6 @@
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 # Vendored from last30days-skill (https://github.com/mvanhorn/last30days-skill)
 # Original author: Matt Van Horn
 # License: MIT

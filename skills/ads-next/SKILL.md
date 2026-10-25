@@ -5,6 +5,7 @@ user-invokable: false
 argument-hint: "[show | compare | walk]"
 allowed-tools: Bash, Read, Write, AskUserQuestion
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-fd4fa55b -->
 
 # Continuous coaching: what to fix next
 

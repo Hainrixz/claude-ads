@@ -1,3 +1,6 @@
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """Pytest configuration — ensure the repo root is importable for ``tests._helpers``."""
 import sys
 from pathlib import Path

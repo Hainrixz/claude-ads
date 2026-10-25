@@ -1,3 +1,6 @@
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """Script smoke tests.
 
 Each ``scripts/*.py`` that exposes a CLI (``if __name__ == "__main__":``)

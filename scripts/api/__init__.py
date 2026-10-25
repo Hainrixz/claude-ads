@@ -1,3 +1,6 @@
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """Direct-API adapters for claude-ads.
 
 Each ``<platform>_fetch.py`` in this package is a standalone CLI that pulls

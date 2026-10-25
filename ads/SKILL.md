@@ -4,6 +4,7 @@ description: "Free-first paid advertising audit and optimization skill, focused 
 argument-hint: "start | next | audit | google | meta | tiktok | creative | landing | budget | plan <type> | competitor | dna <url> | create | generate | photoshoot | update <platform|all> | publish"
 license: MIT
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-fd4fa55b -->
 
 # Ads: Free-first Paid Advertising Audit & Optimization
 

@@ -5,6 +5,7 @@ user-invokable: false
 argument-hint: "[<platforms>] [--schedule <ISO-8601>] [--dry-run]"
 allowed-tools: Bash, Read, Write, AskUserQuestion
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-fd4fa55b -->
 
 # `/ads publish` — Push creatives to socials via Zernio
 

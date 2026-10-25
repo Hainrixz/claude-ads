@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """
 Capture screenshots of ad landing pages for creative audit.
 
@@ -85,7 +88,7 @@ def capture_screenshot(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Capture ad landing page screenshots")
+    parser = argparse.ArgumentParser(epilog='Hecho por Enrique Rocha (@soyenriquerocha) · tododeia.com', description="Capture ad landing page screenshots")
     parser.add_argument("url", help="URL to capture")
     parser.add_argument("--output", "-o", default="screenshots", help="Output directory")
     parser.add_argument("--viewport", "-v", default="desktop", choices=VIEWPORTS.keys())

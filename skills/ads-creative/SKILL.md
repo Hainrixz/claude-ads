@@ -3,6 +3,7 @@ name: ads-creative
 description: "Cross-platform creative quality audit covering ad copy, video, image, and format diversity across all platforms. Detects creative fatigue, evaluates platform-native compliance, and provides production priorities. Use when user says creative audit, ad creative, creative fatigue, ad copy, ad design, or creative review."
 user-invokable: false
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-fd4fa55b -->
 
 # Cross-Platform Creative Quality Audit
 

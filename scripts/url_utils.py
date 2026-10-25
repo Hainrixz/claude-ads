@@ -1,3 +1,6 @@
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """Shared URL validation utilities with SSRF protection.
 
 Used by fetch_page.py, analyze_landing.py, and capture_screenshot.py to

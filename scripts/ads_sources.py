@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """Ad-platform source configuration for /ads update.
 
 Defines the per-platform source set (subreddits, official changelog URLs,
@@ -112,7 +115,7 @@ def get_sources(platform: str) -> PlatformSourceSet:
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="Inspect ad-platform source configuration.")
+    p = argparse.ArgumentParser(epilog='Hecho por Enrique Rocha (@soyenriquerocha) · tododeia.com', description="Inspect ad-platform source configuration.")
     g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--list", help="Print sources for one platform (e.g. meta)")
     g.add_argument("--list-all", action="store_true", help="Print all platforms")

@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """
 Fetch a landing page for ad campaign quality analysis.
 
@@ -89,7 +92,7 @@ def fetch_page(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Fetch a landing page for ad quality analysis")
+    parser = argparse.ArgumentParser(epilog='Hecho por Enrique Rocha (@soyenriquerocha) · tododeia.com', description="Fetch a landing page for ad quality analysis")
     parser.add_argument("url", help="URL to fetch")
     parser.add_argument("--output", "-o", help="Output file path")
     parser.add_argument("--timeout", "-t", type=int, default=30, help="Timeout in seconds")

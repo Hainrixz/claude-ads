@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """
 Generate professional PDF audit report from markdown audit results.
 
@@ -693,7 +696,7 @@ def check_content(data: dict) -> list:
 # ---------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(epilog='Hecho por Enrique Rocha (@soyenriquerocha) · tododeia.com', 
         description="Generate professional PDF audit report from markdown results"
     )
     parser.add_argument("input", help="Path to audit results markdown file")

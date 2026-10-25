@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+# SPDX-License-Identifier: MIT
+# id: er-fd4fa55b
 """claude-ads profile utility — pure-stdlib CLI for ~/.claude-ads/profile.json
 and ~/.claude-ads/history/.
 
@@ -322,7 +325,7 @@ def cmd_reset(args: argparse.Namespace) -> int:
 # --------------------------------------------------------------------------- #
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(
+    p = argparse.ArgumentParser(epilog='Hecho por Enrique Rocha (@soyenriquerocha) · tododeia.com', 
         prog="profile.py",
         description="claude-ads profile + audit-history utility (pure stdlib).",
     )

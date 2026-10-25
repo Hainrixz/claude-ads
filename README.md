@@ -413,3 +413,10 @@ Originally based on the open-source `claude-ads` project (MIT). The vendored tim
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+<!-- marca-agua:inicio -->
+
+---
+
+<sub>Hecho por **Enrique Rocha (@soyenriquerocha)** · [tododeia.com](https://www.tododeia.com)⁠​‌‌​​‌​‌​‌‌‌​​‌​​​‌​‌‌​‌​‌‌​​‌‌​​‌‌​​‌​​​​‌‌​‌​​​‌‌​​‌‌​​‌‌​​​​‌​​‌‌​‌​‌​​‌‌​‌​‌​‌‌​​​‌​⁠</sub>
+<!-- marca-agua:fin -->
