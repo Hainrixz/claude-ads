@@ -13,7 +13,7 @@
 [![Website](https://img.shields.io/badge/web-tododeia.com-1f6feb)](https://tododeia.com)
 [![Instagram](https://img.shields.io/badge/IG-%40soyenriquerocha-E4405F?logo=instagram)](https://instagram.com/soyenriquerocha)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.4.0-blue)](https://github.com/Hainrixz/claude-ads/releases)
+[![Version](https://img.shields.io/badge/version-2.5.0-blue)](https://github.com/Hainrixz/claude-ads/releases)
 [![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://claude.ai/claude-code)
 
 ---
@@ -25,6 +25,8 @@ You know how you can ask Claude to review your code? **Claude Ads is the same id
 You drop in your ad data (an export, a screenshot, or just paste your numbers), type a command like `/ads audit`, and Claude runs **three deep-specialist analysts in parallel** — one per platform. You get back a 0–100 health score, a prioritized punch list of what to fix, and (optionally) a polished PDF report you can hand a client.
 
 It's not a magic button that runs your ads for you. It's a senior-level reviewer that lives inside your terminal, knows what's broken before you do, and never forgets to check the boring things (Consent Mode V2, CAPI, learning-phase rules, kill thresholds). And in v2.0+, it can update its own knowledge base monthly so it doesn't go stale.
+
+**New in v2.5.0** — `/ads conciencia` gives Claude awareness of what it does and doesn't know about your real results: for WhatsApp / form / call campaigns it asks you on a schedule how many customers you actually closed and how many leads were junk, then cross-references that with clicks and messages to compute the real close rate and cost per customer.
 
 **New in v2.4.0** — `/ads start` walks first-time users from cold install to a working audit pipeline (context, OAuth, verification), and `/ads next` ranks Quick Wins after every audit so you always know exactly what to fix next.
 

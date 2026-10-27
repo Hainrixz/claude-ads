@@ -52,7 +52,10 @@ Validate each file:
 If a file fails validation, skip it and print a single `WARNING:
 skipped <path> (<reason>)` line. Don't abort the run.
 
-If **zero** valid audits found:
+If **zero** valid audits found but `python3 scripts/conciencia.py list`
+returns active campaigns, skip to Phase 3 with only the `CON-*` items.
+
+If **zero** valid audits found and no awareness files:
 
 ```
 No audits yet. Run one first:
@@ -105,6 +108,24 @@ impact          = severity_weight × effort_inverse × budget_share × 100
   the rough prior; if the user has set per-platform spend in the future,
   use that instead) by +0.1 (cap at 0.8).
 - If profile is empty, fall back to equal weight.
+
+**Business-outcome items (from `/ads conciencia`).** Run
+`python3 scripts/conciencia.py list`, then `show <key>` for each active
+offline campaign, and add these items to the pool (platform = the campaign's
+platform, `check_id` = `CON-<rule>`; rules and wording in
+`ads/references/conciencia.md`):
+
+| Rule | Condition (cumulative metrics) | severity | fix_time |
+|------|--------------------------------|----------|----------|
+| `CON-LOSS` | `cost_per_close` > campaign `ticket_value` | critical | 30 |
+| `CON-JUNK` | `junk_rate` > 0.5 | high | 30 |
+| `CON-DROP` | `trend.close_rate` < 0 and latest `close_rate` < half the previous | high | 30 |
+| `CON-GAP`  | `platform_vs_real` < 0.6 | medium | 30 |
+| `CON-BLIND` | campaign registered with 0 check-ins, or a lead/message campaign in an audit with no awareness file | low | 5 |
+
+Each finding cites the numbers and the check-in count, e.g. *"% basura 62 %
+(31 / 50 conversaciones, 2 check-ins)"*. Never create a `CON-*` item from a
+`null` metric other than `CON-BLIND`.
 
 Sort all items by `impact` descending.
 
@@ -185,6 +206,7 @@ On `Yes`:
    | tiktok | Tracking / Events API | `tracking-tiktok.md` |
    | tiktok | Creative / Spark | `tiktok-audit.md` |
    | tiktok | Structure | `tiktok-audit.md` |
+   | any | `CON-*` (business outcome) | `conciencia.md` (reading table) — `CON-BLIND` walks through `/ads conciencia registrar` |
 
    If no reference matches, use the check's own `recommendation` field as
    the only source.
@@ -250,4 +272,5 @@ audit changelog view.
 
 `/ads next` produces NO files. It is purely interactive coaching plus
 side-effects on `~/.claude-ads/history/` (via `save-audit`) and the profile's
-`last_command*` fields.
+`last_command*` fields. It reads `~/.claude-ads/conciencia/` but never writes
+check-ins — that is `/ads conciencia`'s job.

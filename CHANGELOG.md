@@ -5,6 +5,26 @@ All notable changes to claude-ads are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2026-10-27
+
+**Campaign awareness (conciencia de campaña).** Platforms see clicks and messages; whether a WhatsApp / form / call campaign closed customers is known only by the user. Claude now tracks explicitly what it knows and doesn't know about each campaign's business outcome, asks on a schedule, and cross-references the answers with platform metrics. Additive — no changes to the audit JSON contract.
+
+### Added
+
+- **`/ads conciencia` sub-skill** at `skills/ads-conciencia/SKILL.md` — subcommands `registrar`, `checkin`, `ver`, `lista`. Skips e-commerce campaigns with a purchase pixel.
+- **`scripts/conciencia.py`** — pure-stdlib CLI: `register / checkin / due / show / list / render / know / snooze / close`. Stores `~/.claude-ads/conciencia/<platform>-<campaign_id>.json` and renders `conciencia-de-campana.md` with "Lo que sé" / "Lo que no sé" sections.
+- Derived metrics: click→message, platform vs real conversations, qualification rate, **close rate**, close rate over qualified, junk rate, cost per real conversation, **cost per closed customer**, real and estimated ROAS, and trend vs the previous check-in. Ratios use only check-ins where both sides were reported; each metric states how many check-ins it rests on. Unreported values stay `null`.
+- **`ads/references/conciencia-schema.json`** and **`ads/references/conciencia.md`** (formulas + platform-vs-business reading table + threshold rules).
+- `tests/test_conciencia.py`.
+
+### Changed
+
+- **`ads/SKILL.md`** — after the profile check, runs `conciencia.py due`; overdue campaigns get one check-in prompt (now / later → snooze 1 day). `/ads audit` adds close rate / cost per close / junk rate next to platform CPL when an awareness file exists, otherwise reports the business outcome as N/A and offers to register. Sub-skills 19 → 20.
+- **`skills/ads-next/SKILL.md`** — ranks business-outcome items `CON-LOSS`, `CON-JUNK`, `CON-DROP`, `CON-GAP`, `CON-BLIND`.
+- **`audit-methodology.md`** — business outcomes are N/A unless reported, never assumed.
+- `uninstall.sh` / `uninstall.ps1` remove `ads-conciencia`. `CLAUDE.md` adds the awareness rule.
+- Version bumps: `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `CITATION.cff`, both README badges → `2.5.0`.
+
 ## [2.4.0] - 2026-05-12
 
 **Guided onboarding + continuous coaching.** Two new user-facing commands and a persistent local state layer that solves the cold-install UX gap. New users now have a clear entry point (`/ads start`) and an obvious recurring loop (`/ads audit` → `/ads next` → fix → re-audit). Everything else from v2.3.0 is additive and unchanged.

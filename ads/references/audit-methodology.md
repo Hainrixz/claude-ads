@@ -48,6 +48,8 @@ See `scoring-system.md` for:
 - Grading thresholds (A 90+, B 75+, C 60+, D 40+, F <40).
 - Cross-platform aggregation by budget share.
 
+Business outcomes the platform can't see (closed customers, lead quality on WhatsApp / form / call campaigns) are `N/A` unless the user reported them via `/ads conciencia` — never assumed. See `conciencia.md`.
+
 Platform SKILL.md files MUST NOT redefine these formulas. They MAY restate weight percentages alongside category names for readability — but those are presentation duplicates, not the source of truth.
 
 ## MCP-First Rule

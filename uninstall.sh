@@ -10,9 +10,9 @@ main() {
     # Remove main skill (orchestrator + references)
     rm -rf "${HOME}/.claude/skills/ads"
 
-    # Remove sub-skills — v2.4.0 set PLUS legacy v2.3.x / v2.2.x skills so upgraders don't leave stale files behind.
+    # Remove sub-skills — v2.5.0 set PLUS legacy v2.3.x / v2.2.x skills so upgraders don't leave stale files behind.
     for skill in \
-        ads-start ads-next \
+        ads-start ads-next ads-conciencia \
         ads-audit ads-google ads-meta ads-tiktok ads-creative ads-landing ads-budget ads-plan \
         ads-competitor ads-dna ads-create ads-generate ads-photoshoot ads-math ads-test ads-update ads-publish \
         ads-apple ads-linkedin ads-microsoft ads-youtube; do

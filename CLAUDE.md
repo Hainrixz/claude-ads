@@ -5,11 +5,14 @@
 This repository contains **Claude Ads**, a Tier 4 Claude Code skill focused on the
 3 base advertising platforms where 95% of ad spend lives: **Meta, Google, TikTok**.
 It follows the Agent Skills open standard and the 3-layer architecture (directive,
-orchestration, execution). After the v2.4.0 guided-onboarding refactor, the skill has
-19 sub-skills, 7 agents (3 audit + 4 creative), 8 industry templates, ~158 weighted
+orchestration, execution). After the v2.4.0 guided-onboarding refactor and the v2.5.0
+campaign-awareness layer, the skill has
+20 sub-skills, 7 agents (3 audit + 4 creative), 8 industry templates, ~158 weighted
 audit checks + 3 cross-platform checks, **plus a guided first-run wizard (`/ads start`)
 and a continuous coach (`/ads next`) backed by a persistent user profile + audit
-history at `~/.claude-ads/`**.
+history at `~/.claude-ads/`**, and **campaign awareness (`/ads conciencia`)** that
+stores dated business outcomes (closed customers, lead quality) the pixel can't see
+and cross-references them with platform metrics.
 
 ## Architecture
 
@@ -19,9 +22,10 @@ claude-ads/
   ads/                               # Main orchestrator skill
     SKILL.md                         # Entry point, routing table, core rules
     references/                      # On-demand knowledge files
-  skills/                            # 19 specialized sub-skills (v2.4.0)
+  skills/                            # 20 specialized sub-skills (v2.5.0)
     ads-start/SKILL.md            # NEW v2.4.0 — guided first-run wizard
     ads-next/SKILL.md             # NEW v2.4.0 — continuous coach
+    ads-conciencia/SKILL.md       # NEW v2.5.0 — campaign awareness (business outcomes)
     ads-audit/SKILL.md              # Full multi-platform audit
     ads-google/SKILL.md            # Google Ads deep analysis (includes YouTube)
     ads-meta/SKILL.md              # Meta/Facebook Ads analysis — MCP-wired
@@ -50,6 +54,7 @@ claude-ads/
   scripts/api/                       # Capa-2 direct-API adapters (NEW in v2.3.0)
     meta_fetch.py · google_fetch.py · tiktok_fetch.py · README.md
   scripts/profile.py                 # NEW v2.4.0 — profile + audit history CLI (stdlib)
+  scripts/conciencia.py              # NEW v2.5.0 — campaign awareness CLI (stdlib)
   install.sh / install.ps1          # Cross-platform installers
   uninstall.sh / uninstall.ps1      # Cross-platform uninstallers
 
@@ -57,6 +62,7 @@ claude-ads/
   ~/.claude-ads/profile.json         # validates against ads/references/profile-schema.json
   ~/.claude-ads/history/index.json   # validates against ads/references/audit-history-schema.json
   ~/.claude-ads/history/<platform>-<YYYYMMDDhhmmss>.json
+  ~/.claude-ads/conciencia/<platform>-<campaign_id>.json   # validates against ads/references/conciencia-schema.json (v2.5.0)
 ```
 
 ## Commands
@@ -65,6 +71,7 @@ claude-ads/
 |---------|---------|
 | `/ads start` | **First-run wizard** (NEW v2.4.0) — context capture + step-by-step OAuth/MCP setup + profile persistence |
 | `/ads next` | **Continuous coach** (NEW v2.4.0) — top 3 Quick Wins from audits + regression detection |
+| `/ads conciencia` | **Campaign awareness** (NEW v2.5.0) — dated check-ins of real business results (conversations, qualified, closed, revenue, junk) for WhatsApp / form / call campaigns → real close rate |
 | `/ads audit` | Full multi-platform audit with 3 parallel agents (Meta, Google, TikTok) |
 | `/ads google` | Google Ads deep analysis (includes YouTube video campaigns) |
 | `/ads meta` | Meta/Facebook Ads analysis (MCP-wired to claude.ai Facebook) |
@@ -110,6 +117,7 @@ Also removed: cross-platform audit agents (`audit-creative`, `audit-tracking`, `
   All adapters in `scripts/api/` are pure-stdlib (Python 3.10+, no external dependencies). See `scripts/api/README.md` for per-platform OAuth setup.
 - Paid integrations (Adspirer for Meta MCP; Zernio for `/ads publish`) are documented as **optional Tier 3**. Never make a paid SaaS a required dependency.
 - **Profile-first rule (NEW v2.4.0):** Any new user-facing command must check `~/.claude-ads/profile.json` for context before asking inline. Run `python3 scripts/profile.py get` first; on exit 2, surface a one-line tip to run `/ads start` but allow the user to proceed inline. Never store secrets (tokens, API keys) in the profile — only `*_present: true/false` flags. Use `scripts/profile.py set` to update fields so validation against `profile-schema.json` stays consistent.
+- **Awareness rule (NEW v2.5.0):** Business outcomes the platform can't see (closed customers, lead quality) are `N/A` unless the user reported them through `/ads conciencia`. Never assume them, never write 0 for "not reported". Read and write them only via `scripts/conciencia.py`; ratios come from its `show` output, which only uses check-ins where both sides were reported.
 
 ## Quality Gates
 

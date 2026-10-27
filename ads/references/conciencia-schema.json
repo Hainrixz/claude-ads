@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Hainrixz/claude-ads/blob/main/ads/references/conciencia-schema.json",
+  "title": "claude-ads campaign awareness (conciencia de campaña)",
+  "description": "Shape of ~/.claude-ads/conciencia/<platform>-<campaign_id>.json — what Claude knows and does NOT know about the real business outcome of one campaign. Platform metrics come from audits / MCP / API / exports; business outcomes (conversations, qualified leads, closed deals, revenue, junk) come only from the user via dated check-ins. Unreported values stay null, never 0. Written by scripts/conciencia.py; read by /ads conciencia, /ads audit and /ads next.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "created_at", "updated_at", "campaign", "knowns", "unknowns", "checkins", "checkin_every_days", "next_checkin_at", "status"],
+  "properties": {
+    "version": { "type": "string", "const": "1.0" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "campaign": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "campaign_id", "name", "objective", "conversion_channel", "tracking_mode"],
+      "properties": {
+        "platform":           { "type": "string", "enum": ["meta", "google", "tiktok"] },
+        "campaign_id":        { "type": "string", "pattern": "^[A-Za-z0-9_.-]+$", "description": "Platform-native campaign ID, or a slug if the user has none at hand." },
+        "name":               { "type": "string" },
+        "objective":          { "type": "string", "enum": ["leads", "messages", "calls", "forms", "sales"] },
+        "conversion_channel": { "type": "string", "enum": ["whatsapp", "messenger", "instagram_dm", "form", "call", "landing", "pixel_purchase"] },
+        "tracking_mode":      { "type": "string", "enum": ["offline", "pixel"], "description": "offline = the close happens outside the platform and needs user check-ins. pixel = the platform sees the sale (e-commerce); awareness is optional." },
+        "ticket_value":       { "type": ["number", "null"], "minimum": 0, "description": "Average value of one closed customer. Used for estimated real ROAS when revenue is not reported." },
+        "currency":           { "type": ["string", "null"] },
+        "started_at":         { "type": ["string", "null"], "format": "date" }
+      }
+    },
+    "knowns": {
+      "type": "array",
+      "description": "Facts Claude holds about this campaign, each with its source.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fact", "source", "date"],
+        "properties": {
+          "fact":   { "type": "string" },
+          "source": { "type": "string", "enum": ["audit", "user", "api", "mcp", "export"] },
+          "date":   { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "description": "Open questions Claude must not assume an answer to (e.g. 'tasa de cierre', 'calidad de leads').",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "checkins": {
+      "type": "array",
+      "description": "Dated reports, oldest first. Append-only.",
+      "items": { "$ref": "#/definitions/checkin" }
+    },
+    "checkin_every_days": { "type": "integer", "minimum": 1, "default": 7 },
+    "next_checkin_at":    { "type": ["string", "null"], "format": "date-time" },
+    "status":             { "type": "string", "enum": ["active", "paused", "closed"] }
+  },
+  "definitions": {
+    "checkin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "platform_metrics", "user_reported"],
+      "properties": {
+        "date":        { "type": "string", "format": "date-time" },
+        "period_from": { "type": ["string", "null"], "format": "date" },
+        "period_to":   { "type": ["string", "null"], "format": "date" },
+        "source_of_platform_metrics": { "type": ["string", "null"], "enum": [null, "mcp", "api", "export", "audit", "user"] },
+        "platform_metrics": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "spend":    { "type": ["number", "null"], "minimum": 0 },
+            "clicks":   { "type": ["integer", "null"], "minimum": 0 },
+            "messages": { "type": ["integer", "null"], "minimum": 0, "description": "Conversations started / leads as counted by the platform." },
+            "leads":    { "type": ["integer", "null"], "minimum": 0 }
+          }
+        },
+        "user_reported": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "conversations": { "type": ["integer", "null"], "minimum": 0, "description": "Real conversations / contacts the user actually received." },
+            "qualified":     { "type": ["integer", "null"], "minimum": 0 },
+            "closed":        { "type": ["integer", "null"], "minimum": 0 },
+            "revenue":       { "type": ["number", "null"], "minimum": 0 },
+            "junk":          { "type": ["integer", "null"], "minimum": 0, "description": "Contacts the user considers garbage (spam, wrong audience, no reply)." },
+            "notes":         { "type": ["string", "null"] }
+          }
+        }
+      }
+    }
+  }
+}
