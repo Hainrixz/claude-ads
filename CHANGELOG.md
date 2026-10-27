@@ -5,13 +5,6 @@ All notable changes to claude-ads are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.5.1] - 2026-10-27
-
-### Fixed
-
-- **CI dependency audit** — bumped `Pillow` to `>=13.0.0,<14.0.0` in `requirements.txt`. Pillow 12.3.0 has ~40 published CVEs fixed in 13.0.0; `pip-audit` was failing the CI "Audit dependencies" step (and skipping the test suite) since `2b42e55`. Pillow is only used by `agents/format-adapter.md` (`Image.open().size`), unchanged in 13. Note: Pillow 13 requires Python 3.11+.
-- Version bumps: `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `CITATION.cff`, both README badges → `2.5.1`.
-
 ## [2.5.0] - 2026-10-27
 
 **Campaign awareness (conciencia de campaña).** Platforms see clicks and messages; whether a WhatsApp / form / call campaign closed customers is known only by the user. Claude now tracks explicitly what it knows and doesn't know about each campaign's business outcome, asks on a schedule, and cross-references the answers with platform metrics. Additive — no changes to the audit JSON contract.
@@ -31,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`audit-methodology.md`** — business outcomes are N/A unless reported, never assumed.
 - `uninstall.sh` / `uninstall.ps1` remove `ads-conciencia`. `CLAUDE.md` adds the awareness rule.
 - Version bumps: `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `CITATION.cff`, both README badges → `2.5.0`.
+
+### Fixed (on `main` after the v2.5.0 tag)
+
+- **CI dependency audit** — bumped `Pillow` to `>=13.0.0,<14.0.0` in `requirements.txt`. Pillow 12.3.0 has ~40 published CVEs fixed in 13.0.0; `pip-audit` was failing CI and skipping the test suite. Only `agents/format-adapter.md` uses Pillow. Pillow 13 requires Python 3.11+.
 
 ## [2.4.0] - 2026-05-12
 
