@@ -25,6 +25,10 @@ and 9:16 (TikTok/Reels/Stories).
 Requires banana-claude (v1.4.1+) with nanobanana-mcp configured.
 Run `/banana setup` to configure API key and MCP.
 
+For a product supplied as a text description, Atlas Cloud is available as an
+optional fallback through `scripts/generate_image.py --provider atlas`. It does
+not replace banana-claude for product-image editing or reference-guided shots.
+
 ## Process
 
 ### Step 1: Collect Product Information
